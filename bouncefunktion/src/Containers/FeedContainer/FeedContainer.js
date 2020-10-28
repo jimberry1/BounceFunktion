@@ -25,7 +25,7 @@ const FeedContainer = (props) => {
   useEffect(() => {
     console.log('idToken= ' + idToken);
     if (idToken) {
-      var docRef = db.collection('users').doc(idToken.substring(0, 10));
+      var docRef = db.collection('users').doc(idToken);
 
       docRef
         .get()
@@ -66,6 +66,7 @@ const FeedContainer = (props) => {
           postIsLiked={postHasBeenLiked}
           totalLikes={post.data.likes}
           idToken={idToken}
+          commentNumber={post.data.commentNumber}
         />
       );
     });

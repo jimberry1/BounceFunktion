@@ -29,6 +29,7 @@ const PostCreator = (props) => {
       username: user.displayName,
       musicLink: musicUrl,
       likes: 0,
+      commentNumber: 0,
     });
 
     setInput('');

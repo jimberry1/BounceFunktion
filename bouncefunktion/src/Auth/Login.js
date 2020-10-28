@@ -19,7 +19,7 @@ const Login = (props) => {
         });
         dispatch({
           type: actionTypes.SET_IDTOKEN,
-          idToken: result.credential.idToken,
+          idToken: result.user.uid,
         });
       })
       .catch((error) => {
@@ -32,11 +32,8 @@ const Login = (props) => {
       <div className="login__logo">
         <img
           src="https://images.unsplash.com/photo-1551081831-02459886c4c6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60"
-          //   src="https://images.unsplash.com/photo-1555086156-e6c7353d283f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=60"
           alt=""
-          //   style={{ height: '100px', width: '100px' }}
         />
-        {/* <img src="" alt="" /> */}
         <h1 className="login__title">The Bounce Funktion</h1>
       </div>
       <Button type="submit" onClick={signIn}>

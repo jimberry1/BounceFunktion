@@ -21,27 +21,10 @@ const Post = ({
   postIsLiked,
   totalLikes,
   idToken,
-  likeButtonClicked,
+  commentNumber,
 }) => {
-  const [likes, setLikes] = useState(0);
+  const [likes, setLikes] = useState(totalLikes);
   const [liked, setLiked] = useState(postIsLiked);
-  console.log(postIsLiked);
-  console.log(liked);
-
-  //   useEffect(() => {
-  //     db.collection('users').doc(idToken.substring(0, 10));
-  //   });
-
-  useEffect(() => {
-    // I need to do two clear things in this useEffect call -- 1) Count the number of children of the likes > postID node 2) Check for a match on username, if it's there, set liked post state to be true
-
-    let likeCount = likes;
-    db.collection('posts')
-      .doc(postID)
-      .onSnapshot(function (doc) {
-        setLikes(doc.data().likes);
-      });
-  }, [postID, liked]);
 
   let musicWidgetDefaultSpotify = (
     <Spinner animation="border" variant="danger" />
@@ -75,7 +58,7 @@ const Post = ({
   }
 
   const likeButtonClickedHandler = () => {
-    var usersLikeRef = db.collection('users').doc(idToken.substring(0, 10));
+    var usersLikeRef = db.collection('users').doc(idToken);
     var postRef = db.collection('posts').doc(postID);
     if (liked) {
       //Get the value for the users liked post
@@ -104,8 +87,10 @@ const Post = ({
           }
           postRef.set({ likes: postLikes }, { merge: true });
         }
+        // I think this code could cause problems as if people have liked the post between you rendering it and you liking it then your like count will jump by more than one
+        // setLikes(postLikes);
+        setLikes((likes) => likes - 1);
       });
-      setLikes(postLikes);
     } else {
       usersLikeRef
         .get()
@@ -129,8 +114,10 @@ const Post = ({
           postLikes = postLikes + 1;
           postRef.set({ likes: postLikes }, { merge: true });
         }
+        // I think this code could cause problems as if people have liked the post between you rendering it and you liking it then your like count will jump by more than one
+        // setLikes(postLikes);
+        setLikes((likes) => likes + 1);
       });
-      setLikes(postLikes);
     }
 
     setLiked(!liked);
@@ -148,7 +135,7 @@ const Post = ({
       <div className="post__option" onClick={likeButtonClickedHandler}>
         {/* //   <div className="post__option" onClick={() => likeButtonClicked(true)}> */}
         <ThumbUpIcon color="primary" />
-        <p>Liked</p>
+        <p style={{ color: 'blue' }}>Liked</p>
       </div>
     );
   }
@@ -189,8 +176,11 @@ const Post = ({
         </div>
         {thumbIcon}
         <div className="post__option">
+          <p>
+            <strong style={{ padding: '10px' }}>{commentNumber}</strong>
+          </p>
           <ChatBubbleOutlineIcon />
-          <p>Comment</p>
+          <p>Comments</p>
         </div>
         <div className="post__option">
           <NearMeIcon />
