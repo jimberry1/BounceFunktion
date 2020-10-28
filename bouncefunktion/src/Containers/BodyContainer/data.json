@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "direction": "row",
+    "title": "Share music.",
+    "subTitle": "Share your music with the community and add tags to make it easy to find later",
+    "image": "assets/Decks.jpg"
+  },
+  {
+    "id": 2,
+    "direction": "row-reverse",
+    "title": "Organise events.",
+    "subTitle": "Share events that you're interested in and friends can register their interest or show they've bought tickets",
+    "image": "assets/phoneAtConcert.jpg"
+  },
+  {
+    "id": 3,
+    "direction": "row",
+    "title": "Personalise your profile.",
+    "subTitle": "Cement your status as a sonical connoisseur by gaining points on your profile for community engagement",
+    "image": "assets/DJs.jpg"
+  }
+]
