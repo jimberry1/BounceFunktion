@@ -14,12 +14,33 @@ const PostCreator = (props) => {
   const [input, setInput] = useState('');
   const [musicUrl, setMusicUrl] = useState('');
   const [tags, setTags] = useState([]);
+  const [technoTag, setTechnoTag] = useState(false);
+  const [HouseTag, setHouseTag] = useState(false);
+  const [DiscoTag, setDiscoTag] = useState(false);
+  const [FunkTag, setFunkTag] = useState(false);
+
+  console.log('this is tags array=' + tags);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (musicUrl === '' || input === '') {
       return;
+    }
+
+    let genreTags = [];
+
+    if (technoTag) {
+      genreTags.push('Techno');
+    }
+    if (HouseTag) {
+      genreTags.push('House');
+    }
+    if (DiscoTag) {
+      genreTags.push('Disco');
+    }
+    if (FunkTag) {
+      genreTags.push('Funk');
     }
 
     db.collection('posts').add({
@@ -30,6 +51,7 @@ const PostCreator = (props) => {
       musicLink: musicUrl,
       likes: 0,
       commentNumber: 0,
+      tags: genreTags,
     });
 
     setInput('');
@@ -38,6 +60,25 @@ const PostCreator = (props) => {
 
   const alert = () => {
     console.log('alert triggered');
+  };
+
+  const addTagHandler = (tag) => {
+    console.log('addTagHandler invoked with ' + tag);
+    console.log('is it contained? =' + tags.includes(tag));
+    if (tags.includes(tag)) {
+      const updatedTags = tags.filter((t) => t !== tag);
+      console.log(updatedTags);
+
+      setTags(updatedTags);
+      return;
+    } else {
+      const updatedTags = tags;
+      if (!updatedTags) {
+        updatedTags = [];
+      }
+      updatedTags.push(tag);
+      setTags(updatedTags);
+    }
   };
 
   return (
@@ -69,16 +110,52 @@ const PostCreator = (props) => {
           <h3 style={{ padding: '0 10px' }}>Tags</h3>
           <div className="messageSender__tagContainer">
             <div className="messageSender__tags">
-              <button>Techno</button>
+              <button
+                className={
+                  technoTag
+                    ? 'messageSender__buttonClicked'
+                    : 'messageSender__buttonNotClicked'
+                }
+                onClick={() => setTechnoTag((curVal) => !curVal)}
+              >
+                Techno
+              </button>
             </div>
             <div className="messageSender__tags">
-              <button>Disco</button>
+              <button
+                className={
+                  DiscoTag
+                    ? 'messageSender__buttonClicked'
+                    : 'messageSender__buttonNotClicked'
+                }
+                onClick={() => setDiscoTag((curVal) => !curVal)}
+              >
+                Disco
+              </button>
             </div>
             <div className="messageSender__tags">
-              <button>Funk</button>
+              <button
+                className={
+                  FunkTag
+                    ? 'messageSender__buttonClicked'
+                    : 'messageSender__buttonNotClicked'
+                }
+                onClick={() => setFunkTag((curVal) => !curVal)}
+              >
+                Funk
+              </button>
             </div>
             <div className="messageSender__tags">
-              <button>Other</button>
+              <button
+                className={
+                  HouseTag
+                    ? 'messageSender__buttonClicked'
+                    : 'messageSender__buttonNotClicked'
+                }
+                onClick={() => setHouseTag((curVal) => !curVal)}
+              >
+                House
+              </button>
             </div>
           </div>
         </div>

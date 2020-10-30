@@ -1,0 +1,7 @@
+.feedContainer__filter {
+  width: 35%;
+  background-color: whitesmoke;
+  padding: 15px 15px;
+  border-radius: 5px;
+  border: 2px solid gray;
+}

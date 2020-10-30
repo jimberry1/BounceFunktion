@@ -5,11 +5,13 @@ import Post from '../../Components/Post/Post';
 import PostFilter from '../../Components/Post/PostFilter/PostFilter';
 import { useStateValue } from '../../Store/StateProvider';
 import { Spinner } from 'react-bootstrap';
+import './FeedContainer.css';
 
 const FeedContainer = (props) => {
   const [{ idToken }, dispatch] = useStateValue();
   const [posts, setPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState(null);
+  const [genreFilter, setGenreFilter] = useState('');
 
   useEffect(() => {
     db.collection('posts')
@@ -44,11 +46,31 @@ const FeedContainer = (props) => {
     }
   }, [idToken]);
 
+  const filterChangedHandler = (event) => {
+    console.log(event.target.value);
+    setGenreFilter(event.target.value);
+  };
+
+  const filterFunktion = (postsToFilter) => {
+    let filteredPosts = postsToFilter;
+
+    if (genreFilter === '') {
+      return posts;
+    } else {
+      filteredPosts = postsToFilter.filter((post) =>
+        post.data.tags.includes(genreFilter)
+      );
+    }
+    return filteredPosts;
+  };
+
   let postsFeed = <Spinner animation="border" variant="danger" />;
 
   if (likedPosts) {
     console.log(likedPosts);
-    postsFeed = posts.map((post) => {
+    // console.log(posts.filter(filterFunktion()));
+    const filteredPosts = filterFunktion(posts);
+    postsFeed = filteredPosts.map((post) => {
       let postHasBeenLiked = false;
       if (likedPosts.includes(post.id)) {
         console.log("we're in the true bit now");
@@ -74,16 +96,24 @@ const FeedContainer = (props) => {
 
   return (
     <div>
-      <PostFilter />
+      {/* <PostFilter className="feedContainer__filter" /> */}
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          height: '1000px',
           maxHeight: '1000px',
           overflow: 'auto',
+          paddingBottom: '100px',
         }}
       >
+        <div className="feedContainer__filter">
+          <PostFilter
+            filterValue={genreFilter}
+            filterChanged={(event) => filterChangedHandler(event)}
+          />
+        </div>
         {postsFeed}
       </div>
     </div>

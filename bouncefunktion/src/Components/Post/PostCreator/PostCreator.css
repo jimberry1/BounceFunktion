@@ -58,10 +58,10 @@
   cursor: pointer;
 }
 
-.messagesender__option:hover {
+/* .messageSender__option:hover {
   background-color: #eff2f5;
   border-radius: 20px;
-}
+} */
 
 .messageSender__tags {
   display: flex;
@@ -85,4 +85,13 @@
   align-content: center;
   justify-content: space-evenly;
   width: 100%;
+}
+
+.messageSender__buttonNotClicked {
+  outline: none;
+}
+
+.messageSender__buttonClicked {
+  outline: none;
+  color: blue;
 }

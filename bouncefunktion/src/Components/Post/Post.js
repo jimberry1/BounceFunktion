@@ -10,6 +10,8 @@ import Iframe from 'react-iframe';
 import './Post.css';
 import ReactPlayer from 'react-player';
 import db from '../../firebase';
+import firebase from 'firebase';
+import PostComments from './PostComments/PostComments';
 
 const Post = ({
   postID,
@@ -23,8 +25,13 @@ const Post = ({
   idToken,
   commentNumber,
 }) => {
-  const [likes, setLikes] = useState(totalLikes);
+  const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(postIsLiked);
+  const [openComments, setOpenComments] = useState(false);
+
+  useEffect(() => {
+    setLikes(totalLikes);
+  }, [totalLikes]);
 
   let musicWidgetDefaultSpotify = (
     <Spinner animation="border" variant="danger" />
@@ -57,6 +64,11 @@ const Post = ({
     );
   }
 
+  const openCommentsHandler = () => {
+    console.log('open comments was previously set to = ' + openComments);
+    setOpenComments((current) => !current);
+  };
+
   const likeButtonClickedHandler = () => {
     var usersLikeRef = db.collection('users').doc(idToken);
     var postRef = db.collection('posts').doc(postID);
@@ -78,19 +90,11 @@ const Post = ({
         });
 
       //Now update the number of likes on the post
-      let postLikes = likes;
-      postRef.get().then(function (doc) {
-        if (doc.exists) {
-          postLikes = doc.data().likes;
-          if (postLikes > 0) {
-            postLikes = postLikes - 1;
-          }
-          postRef.set({ likes: postLikes }, { merge: true });
-        }
-        // I think this code could cause problems as if people have liked the post between you rendering it and you liking it then your like count will jump by more than one
-        // setLikes(postLikes);
-        setLikes((likes) => likes - 1);
-      });
+      postRef.set(
+        { likes: firebase.firestore.FieldValue.increment(-1) },
+        { merge: true }
+      );
+      setLikes((likes) => likes - 1);
     } else {
       usersLikeRef
         .get()
@@ -107,17 +111,11 @@ const Post = ({
           console.log('Error getting document:', error);
         });
 
-      let postLikes = likes;
-      postRef.get().then(function (doc) {
-        if (doc.exists) {
-          postLikes = doc.data().likes;
-          postLikes = postLikes + 1;
-          postRef.set({ likes: postLikes }, { merge: true });
-        }
-        // I think this code could cause problems as if people have liked the post between you rendering it and you liking it then your like count will jump by more than one
-        // setLikes(postLikes);
-        setLikes((likes) => likes + 1);
-      });
+      postRef.set(
+        { likes: firebase.firestore.FieldValue.increment(+1) },
+        { merge: true }
+      );
+      setLikes((likes) => likes + 1);
     }
 
     setLiked(!liked);
@@ -138,6 +136,12 @@ const Post = ({
         <p style={{ color: 'blue' }}>Liked</p>
       </div>
     );
+  }
+
+  let postComments = null;
+
+  if (openComments) {
+    postComments = <PostComments postID={postID} />;
   }
 
   return (
@@ -175,7 +179,7 @@ const Post = ({
           </p>
         </div>
         {thumbIcon}
-        <div className="post__option">
+        <div className="post__option" onClick={openCommentsHandler}>
           <p>
             <strong style={{ padding: '10px' }}>{commentNumber}</strong>
           </p>
@@ -191,6 +195,7 @@ const Post = ({
           <ExpandMoreOutlined />
         </div>
       </div>
+      {postComments}
     </div>
   );
 };

@@ -1,0 +1,40 @@
+.addComment {
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.addComment__top {
+  display: flex;
+  border-bottom: 1px solid #eff2f5;
+  padding: 15px;
+  border-top: 1px solid lightgray;
+}
+
+.addComment__top > form {
+  flex: 1;
+  display: flex;
+}
+
+.addComment__top > form > input {
+  outline-width: 0;
+  border: none;
+  padding: 5px 20px;
+  margin: 0 10px;
+  border-radius: 999px;
+  /* background-color: #eff2f5; */
+}
+
+.addComment__input {
+  flex: 1;
+}
+
+.addComment__top > form > button {
+  display: none;
+}
+
+.addComment__top > form > button {
+  display: none;
+}
