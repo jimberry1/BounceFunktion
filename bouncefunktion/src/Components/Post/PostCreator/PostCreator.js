@@ -18,6 +18,7 @@ const PostCreator = (props) => {
   const [HouseTag, setHouseTag] = useState(false);
   const [DiscoTag, setDiscoTag] = useState(false);
   const [FunkTag, setFunkTag] = useState(false);
+  const [dnbTag, setDnbTag] = useState(false);
 
   console.log('this is tags array=' + tags);
 
@@ -42,6 +43,9 @@ const PostCreator = (props) => {
     if (FunkTag) {
       genreTags.push('Funk');
     }
+    if (dnbTag) {
+      genreTags.push('DnB');
+    }
 
     db.collection('posts').add({
       message: input,
@@ -56,10 +60,11 @@ const PostCreator = (props) => {
 
     setInput('');
     setMusicUrl('');
-  };
-
-  const alert = () => {
-    console.log('alert triggered');
+    setDiscoTag(false);
+    setTechnoTag(false);
+    setHouseTag(false);
+    setFunkTag(false);
+    setDnbTag(false);
   };
 
   const addTagHandler = (tag) => {
@@ -96,7 +101,7 @@ const PostCreator = (props) => {
             value={musicUrl}
             onChange={(e) => setMusicUrl(e.target.value)}
             className="messageSender__input"
-            placeholder="Paste the Spotify (Soundcloud coming soon) link here"
+            placeholder="Paste the music link here"
           />
           <button onClick={handleSubmit} type="submit">
             Hidden submit
@@ -155,6 +160,18 @@ const PostCreator = (props) => {
                 onClick={() => setHouseTag((curVal) => !curVal)}
               >
                 House
+              </button>
+            </div>
+            <div className="messageSender__tags">
+              <button
+                className={
+                  dnbTag
+                    ? 'messageSender__buttonClicked'
+                    : 'messageSender__buttonNotClicked'
+                }
+                onClick={() => setDnbTag((curVal) => !curVal)}
+              >
+                DnB
               </button>
             </div>
           </div>

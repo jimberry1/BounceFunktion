@@ -11,8 +11,11 @@ const FeedContainer = (props) => {
   const [{ idToken }, dispatch] = useStateValue();
   const [posts, setPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState(null);
+  const [favPosts, setFavPosts] = useState([]);
   const [genreFilter, setGenreFilter] = useState('');
+  const [postDateFilter, setPostDateFilter] = useState('');
 
+  // Gets all the posts and maps them to Posts state
   useEffect(() => {
     db.collection('posts')
       .orderBy('timestamp', 'desc')
@@ -33,12 +36,15 @@ const FeedContainer = (props) => {
         .get()
         .then(function (doc) {
           let likedPosts = [];
+          let favPosts = [];
           if (doc.exists) {
             likedPosts = doc.data().likedPosts;
+            favPosts = doc.data().favPosts;
           } else {
             console.log('No such document!');
           }
           setLikedPosts(likedPosts);
+          setFavPosts(favPosts);
         })
         .catch(function (error) {
           console.log('Error getting document:', error);
@@ -51,22 +57,50 @@ const FeedContainer = (props) => {
     setGenreFilter(event.target.value);
   };
 
+  const postDateFilterChangedHandler = (event) => {
+    setPostDateFilter(event.target.value);
+  };
+
+  // This function is used to filter posts by the selected choices
   const filterFunktion = (postsToFilter) => {
     let filteredPosts = postsToFilter;
 
-    if (genreFilter === '') {
+    if (genreFilter === '' && postDateFilter === '') {
       return posts;
-    } else {
+    }
+    if (genreFilter !== '') {
       filteredPosts = postsToFilter.filter((post) =>
         post.data.tags.includes(genreFilter)
       );
+    }
+    if (postDateFilter !== '') {
+      // if (postDateFilter === 'day') {
+      //   filteredPosts = filteredPosts.filter(
+      //     (post) => post.data.timestamp.seconds > new Date().getSeconds - 86400
+      //   );
+      // } else if (postDateFilter === 'week') {
+      //   filteredPosts = filteredPosts.filter(
+      //     (post) => post.data.timestamp.seconds > new Date().getSeconds - 604800
+      //   );
+      // } else if (postDateFilter === 'month') {
+      //   filteredPosts = filteredPosts.filter(
+      //     (post) =>
+      //       post.data.timestamp.seconds < new Date().getSeconds - 2592000
+      //   );
+      // } else if (postDateFilter === 'year') {
+      //   // filteredPosts = filteredPosts
+      //   // .filter
+      //   // (post) => post.data.timestamp.seconds > Date().getSeconds
+      //   // ();
+      // }
+      //  filteredPosts = filteredPosts.filter((post) => post.data.timestamp)
     }
     return filteredPosts;
   };
 
   let postsFeed = <Spinner animation="border" variant="danger" />;
 
-  if (likedPosts) {
+  if (likedPosts && favPosts) {
     console.log(likedPosts);
     // console.log(posts.filter(filterFunktion()));
     const filteredPosts = filterFunktion(posts);
@@ -76,6 +110,11 @@ const FeedContainer = (props) => {
         console.log("we're in the true bit now");
         postHasBeenLiked = true;
       }
+      let postHasBeenFavourited = false;
+      if (favPosts.includes(post.id)) {
+        postHasBeenFavourited = true;
+      }
+
       return (
         <Post
           key={post.id}
@@ -89,6 +128,7 @@ const FeedContainer = (props) => {
           totalLikes={post.data.likes}
           idToken={idToken}
           commentNumber={post.data.commentNumber}
+          postIsFavourite={postHasBeenFavourited}
         />
       );
     });
@@ -112,6 +152,10 @@ const FeedContainer = (props) => {
           <PostFilter
             filterValue={genreFilter}
             filterChanged={(event) => filterChangedHandler(event)}
+            postDateFilterChanged={(event) =>
+              postDateFilterChangedHandler(event)
+            }
+            postDateFilterValue={postDateFilter}
           />
         </div>
         {postsFeed}

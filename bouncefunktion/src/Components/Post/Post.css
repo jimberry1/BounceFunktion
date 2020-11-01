@@ -11,6 +11,7 @@
   position: relative;
   align-items: center;
   padding: 15px;
+  /* border-bottom: 1px solid lightgray; */
 }
 
 .post__avatar {
@@ -19,7 +20,8 @@
 
 .post__topInfo > h3 {
   font-size: medium;
-  color: blueviolet;
+  /* color: blueviolet; */
+  color: black;
 }
 
 .post__topInfo > p {

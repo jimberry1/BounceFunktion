@@ -2,7 +2,7 @@ import React from 'react';
 import { func, string } from 'prop-types';
 import styled from 'styled-components';
 import { RiMoonClearFill } from 'react-icons/ri';
-import { FaRegSun } from 'react-icons/fa';
+import { FiSun } from 'react-icons/fi';
 //   border: 2px solid ${({ theme }) => theme.toggleBorder};
 const Toggle = ({ theme, toggleTheme }) => {
   console.log('theme= ' + theme);
@@ -19,7 +19,7 @@ const Toggle = ({ theme, toggleTheme }) => {
 `;
   return (
     <Button onClick={toggleTheme}>
-      {theme == 'light' ? <RiMoonClearFill /> : <FaRegSun />}
+      {theme == 'light' ? <RiMoonClearFill /> : <FiSun />}
     </Button>
   );
 };

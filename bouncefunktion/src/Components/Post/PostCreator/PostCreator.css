@@ -68,15 +68,27 @@
   flex: 1;
   flex-direction: row;
   justify-content: space-evenly;
+  outline: none;
 }
 
 .messageSender__tags > button {
   border: none;
   padding: 10px;
-  background-color: lightgray;
+  border-radius: 15px;
+  width: 75%;
+  /* background-color: lightgray; */
+  /* background-color: black; */
 }
 .messageSender__tags > button:hover {
   background-color: #eff2f5;
+}
+.messageSender__tags > button:focus {
+  /* background-color: #eff2f5; */
+  outline: none;
+}
+.messageSender__tags > button:active {
+  background-color: #eff2f5;
+  /* font-size: large; */
 }
 
 .messageSender__tagContainer {
@@ -89,9 +101,12 @@
 
 .messageSender__buttonNotClicked {
   outline: none;
+  background-color: lightgray;
+  color: gray;
 }
 
 .messageSender__buttonClicked {
   outline: none;
   color: blue;
+  background-color: #eff2f5;
 }

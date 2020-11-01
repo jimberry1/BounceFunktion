@@ -4,4 +4,11 @@
   padding: 15px 15px;
   border-radius: 5px;
   border: 2px solid gray;
+  justify-content: space-between;
+}
+
+@media (max-width: 800px) {
+  .feedContainer__filter {
+    width: 60%;
+  }
 }

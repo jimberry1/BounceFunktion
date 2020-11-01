@@ -1,0 +1,12 @@
+.favouriteTrack__container {
+  padding: 10px 10px;
+  border-top: 1px solid gray;
+}
+
+.favouriteTrack__container:hover {
+  background-color: gray;
+}
+
+.favouriteTrack__container > p {
+  color: black;
+}
