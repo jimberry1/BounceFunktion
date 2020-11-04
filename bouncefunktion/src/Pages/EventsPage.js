@@ -2,6 +2,7 @@ import { useState } from 'react';
 import NavbarContainer from '../Containers/Navbar/NavbarContainer';
 import HeaderImage from '../Components/HeaderImage/HeaderImage';
 import EventsHeaderImage from '../Assets/festival2.jpg';
+import EventsContainer from '../Containers/EventsContainer/EventsContainer';
 const EventsPage = (props) => {
   return (
     <div>
@@ -15,6 +16,7 @@ const EventsPage = (props) => {
           titleFontColour="white"
           subtitleFontColour="white"
         />
+        <EventsContainer />
       </div>
     </div>
   );

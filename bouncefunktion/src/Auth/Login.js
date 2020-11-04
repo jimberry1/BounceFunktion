@@ -13,6 +13,16 @@ const Login = (props) => {
       .signInWithPopup(provider)
       .then((result) => {
         console.log(result);
+
+        const dbUserRef = db.collection('users').doc(result.user.uid);
+        dbUserRef.get().then((docSnapshot) => {
+          if (docSnapshot.exists) {
+            console.log('This user already exists');
+          } else {
+            dbUserRef.set({ likedPosts: [], favPosts: [] });
+          }
+        });
+
         dispatch({
           type: actionTypes.SET_USER,
           user: result.user,

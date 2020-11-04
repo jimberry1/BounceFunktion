@@ -40,6 +40,7 @@ const FeedContainer = (props) => {
           if (doc.exists) {
             likedPosts = doc.data().likedPosts;
             favPosts = doc.data().favPosts;
+            console.log('favposts' + favPosts);
           } else {
             console.log('No such document!');
           }
@@ -100,18 +101,22 @@ const FeedContainer = (props) => {
 
   let postsFeed = <Spinner animation="border" variant="danger" />;
 
-  if (likedPosts && favPosts) {
-    console.log(likedPosts);
-    // console.log(posts.filter(filterFunktion()));
+  if (likedPosts && favPosts[0]) {
     const filteredPosts = filterFunktion(posts);
     postsFeed = filteredPosts.map((post) => {
       let postHasBeenLiked = false;
       if (likedPosts.includes(post.id)) {
-        console.log("we're in the true bit now");
         postHasBeenLiked = true;
       }
       let postHasBeenFavourited = false;
-      if (favPosts.includes(post.id)) {
+      let urlForComparison = post.data.musicLink;
+      if (urlForComparison.includes('spotify')) {
+        urlForComparison = urlForComparison.replace(
+          'spotify.com/track',
+          'spotify.com/embed/track'
+        );
+      }
+      if (favPosts.includes(urlForComparison)) {
         postHasBeenFavourited = true;
       }
 

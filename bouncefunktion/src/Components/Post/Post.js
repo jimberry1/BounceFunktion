@@ -36,6 +36,10 @@ const Post = ({
     setLikes(totalLikes);
   }, [totalLikes]);
 
+  useEffect(() => {
+    setFavPost(postIsFavourite);
+  }, [postIsFavourite]);
+
   let musicWidgetDefaultSpotify = (
     <Spinner animation="border" variant="danger" />
   );
@@ -93,7 +97,7 @@ const Post = ({
           .then(function (doc) {
             if (doc.exists) {
               let favPosts = doc.data().favPosts;
-              favPosts = favPosts.filter((post) => post !== postID);
+              favPosts = favPosts.filter((post) => post !== musicLink);
               userFavRef.set({ favPosts: favPosts }, { merge: true });
             } else {
               console.log('No such document!');
@@ -110,7 +114,7 @@ const Post = ({
         .then(function (doc) {
           if (doc.exists) {
             const favPosts = doc.data().favPosts;
-            favPosts.push(postID);
+            favPosts.push(musicLink);
             userFavRef.set({ favPosts: favPosts }, { merge: true });
           } else {
             console.log('No such document!');
