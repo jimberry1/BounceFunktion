@@ -11,7 +11,7 @@ const FeedContainer = (props) => {
   const [{ idToken }, dispatch] = useStateValue();
   const [posts, setPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState(null);
-  const [favPosts, setFavPosts] = useState([]);
+  const [favPosts, setFavPosts] = useState(null);
   const [genreFilter, setGenreFilter] = useState('');
   const [postDateFilter, setPostDateFilter] = useState('');
 
@@ -101,7 +101,7 @@ const FeedContainer = (props) => {
 
   let postsFeed = <Spinner animation="border" variant="danger" />;
 
-  if (likedPosts && favPosts[0]) {
+  if (likedPosts && favPosts) {
     const filteredPosts = filterFunktion(posts);
     postsFeed = filteredPosts.map((post) => {
       let postHasBeenLiked = false;
@@ -150,6 +150,7 @@ const FeedContainer = (props) => {
           height: '1000px',
           maxHeight: '1000px',
           maxWidth: '90%',
+          margin: 'auto',
           overflow: 'scroll',
           paddingBottom: '100px',
         }}
