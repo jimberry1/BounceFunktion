@@ -149,7 +149,8 @@ const FeedContainer = (props) => {
           alignItems: 'center',
           height: '1000px',
           maxHeight: '1000px',
-          overflow: 'auto',
+          maxWidth: '90%',
+          overflow: 'scroll',
           paddingBottom: '100px',
         }}
       >

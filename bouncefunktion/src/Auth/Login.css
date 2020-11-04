@@ -3,6 +3,7 @@
   place-items: center;
   height: 100vh;
   background-color: darkgray;
+  width: 100vw;
 }
 
 .login > button {
@@ -32,4 +33,13 @@
   margin-top: 25px;
   display: flex;
   justify-content: center;
+}
+
+@media (max-width: 800px) {
+  .login > div > img {
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
 }
