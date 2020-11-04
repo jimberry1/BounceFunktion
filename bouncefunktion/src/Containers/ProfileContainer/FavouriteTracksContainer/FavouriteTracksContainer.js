@@ -9,7 +9,7 @@ const FavouriteTracksContainer = (props) => {
   const [{ idToken }, dispatch] = useStateValue();
 
   useEffect(() => {
-    if (idToken !== null) {
+    if (idToken) {
       const favPostRef = db.collection('users').doc(idToken);
 
       favPostRef.get().then(function (doc) {
