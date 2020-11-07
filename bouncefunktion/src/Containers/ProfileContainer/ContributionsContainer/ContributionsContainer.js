@@ -35,10 +35,7 @@ const ContributionsContainer = (props) => {
       console.log('Contributions musicUrl = ' + musicUrl);
 
       if (musicUrl.includes('spotify')) {
-        musicUrl = musicUrl.replace(
-          'spotify.com/track',
-          'spotify.com/embed/track'
-        );
+        musicUrl = musicUrl.replace('spotify.com/', 'spotify.com/embed/');
       }
 
       return <FavouriteTrack key={contribution.id} musicURL={musicUrl} />;

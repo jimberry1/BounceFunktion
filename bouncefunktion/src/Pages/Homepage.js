@@ -2,6 +2,7 @@ import NavbarContainer from '../Containers/Navbar/NavbarContainer';
 import HeaderImage from '../Components/HeaderImage/HeaderImage';
 import HomepageHeaderImage from '../Assets/TBFheader.jpg';
 import BodyContainer from '../Containers/BodyContainer/BodyContainer';
+import BounceFunktionPlaylist from '../Components/BounceFunktionPlaylist/BounceFunktionPlaylist';
 
 const Homepage = (props) => {
   return (
@@ -15,6 +16,7 @@ const Homepage = (props) => {
         titleFontColour="white"
         subtitleFontColour="lightgray"
       />
+      <BounceFunktionPlaylist />
       <BodyContainer />
     </div>
   );

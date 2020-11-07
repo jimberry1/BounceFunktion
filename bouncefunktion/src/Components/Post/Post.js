@@ -45,10 +45,7 @@ const Post = ({
   );
 
   if (musicLink && musicLink.includes('spotify')) {
-    musicLink = musicLink.replace(
-      'spotify.com/track',
-      'spotify.com/embed/track'
-    );
+    musicLink = musicLink.replace('spotify.com/', 'spotify.com/embed/');
     musicWidgetDefaultSpotify = (
       <iframe
         src={musicLink}

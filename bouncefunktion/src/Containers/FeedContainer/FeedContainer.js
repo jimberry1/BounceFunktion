@@ -112,8 +112,8 @@ const FeedContainer = (props) => {
       let urlForComparison = post.data.musicLink;
       if (urlForComparison.includes('spotify')) {
         urlForComparison = urlForComparison.replace(
-          'spotify.com/track',
-          'spotify.com/embed/track'
+          'spotify.com/',
+          'spotify.com/embed/'
         );
       }
       if (favPosts.includes(urlForComparison)) {
@@ -148,7 +148,7 @@ const FeedContainer = (props) => {
           flexDirection: 'column',
           alignItems: 'center',
           height: '1000px',
-          maxHeight: '1000px',
+          // maxHeight: '1000px',
           // maxWidth: '90%',
           margin: 'auto',
           overflowY: 'scroll',
