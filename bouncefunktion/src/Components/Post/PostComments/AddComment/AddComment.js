@@ -47,7 +47,7 @@ const AddComment = (props) => {
             placeholder="Add comment..."
           />
           <button onClick={handleSubmit} type="submit">
-            Hidden submit
+            Post
           </button>
         </form>
       </div>

@@ -240,12 +240,15 @@ const Post = ({
       />
 
       <div className="post__options">
-        <div className="post__option" style={{ flex: 0 }}>
+        <div
+          className="post__option"
+          style={{ flex: 1, marginLeft: '30px', width: '50px' }}
+        >
           <p>
             <strong>{likes}</strong>
           </p>
+          {thumbIcon}
         </div>
-        {thumbIcon}
         <div className="post__option" onClick={openCommentsHandler}>
           <p>
             <strong style={{ padding: '10px' }}>{commentNumber}</strong>
@@ -253,14 +256,15 @@ const Post = ({
           <ChatBubbleOutlineIcon />
           <p>Comments</p>
         </div>
+        <div className="post__option" onClick={favouritePostHandler}>
+          {favPost ? <AiFillStar color="gold" size={32} /> : <StarIcon />}
+        </div>
         <div className="post__option" onClick={openModalHandler}>
           <NearMeIcon />
           <p>Share</p>
         </div>
-        <div className="post__option" onClick={favouritePostHandler}>
-          {favPost ? <AiFillStar color="gold" size={32} /> : <StarIcon />}
-        </div>
       </div>
+
       {postComments}
     </div>
   );

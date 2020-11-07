@@ -16,6 +16,7 @@
 .addComment__top > form {
   flex: 1;
   display: flex;
+  max-width: 100%;
 }
 
 .addComment__top > form > input {
@@ -32,9 +33,40 @@
 }
 
 .addComment__top > form > button {
-  display: none;
+  background-color: rgb(141, 141, 204);
+  border-radius: 25px;
+  width: 100px;
+  color: white;
+  flex: 1;
 }
 
-.addComment__top > form > button {
-  display: none;
+@media (min-width: 1000px) {
+  .addComment__top > form > button {
+    display: none;
+  }
+}
+
+@media (max-width: 1000px) {
+  .addComment__top {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid gray;
+    align-items: center;
+  }
+  .addComment__top > form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+  }
+  .addComment__top > form > input {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-align: center;
+  }
 }

@@ -24,13 +24,14 @@
   outline-width: 0;
   border: none;
   padding: 5px 20px;
-  margin: 0 10px;
+  margin: 0px 10px;
   border-radius: 999px;
+
   /* background-color: #eff2f5; */
 }
 
 .messageSender__top > form > button {
-  display: none;
+  /* display: none; */
 }
 
 .messageSender__input {
@@ -50,12 +51,15 @@
   justify-content: center;
   color: gray;
   margin: 5px;
+  overflow-x: scroll;
 }
 
 .messageSender__option > h3 {
   font-size: medium;
   margin-left: 10px;
   cursor: pointer;
+  overflow-x: scroll;
+  /* padding: 20px; */
 }
 
 /* .messageSender__option:hover {
@@ -69,13 +73,14 @@
   flex-direction: row;
   justify-content: space-evenly;
   outline: none;
+  width: 200px;
 }
 
 .messageSender__tags > button {
   border: none;
   padding: 10px;
   border-radius: 15px;
-  width: 75%;
+  width: 100%;
   /* background-color: lightgray; */
   /* background-color: black; */
 }
@@ -109,4 +114,63 @@
   outline: none;
   color: blue;
   background-color: #eff2f5;
+}
+
+@media (max-width: 1000px) {
+  .messageSender__top > form {
+    flex-direction: column;
+  }
+  .messageSender__top > form > input {
+    margin: 10px 10px;
+  }
+}
+
+.bn632-hover {
+  width: 160px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  margin: 20px;
+  height: 55px;
+  text-align: center;
+  border: none;
+  background-size: 300% 100%;
+  border-radius: 50px;
+  moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.bn632-hover:hover {
+  background-position: 100% 0;
+  moz-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.bn632-hover:focus {
+  outline: none;
+}
+
+.bn632-hover.bn19 {
+  background-image: linear-gradient(
+    to right,
+    #f5ce62,
+    #e43603,
+    #fa7199,
+    #e85a19
+  );
+  box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
+}
+
+@media (min-width: 1000px) {
+  .bn19 {
+    display: none;
+  }
+  .bn632-hover {
+    display: none;
+  }
 }

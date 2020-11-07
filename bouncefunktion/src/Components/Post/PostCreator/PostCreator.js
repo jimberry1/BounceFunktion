@@ -9,6 +9,7 @@ import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import { ImPriceTag } from 'react-icons/im';
 import { Container, Row, Col } from 'react-bootstrap';
+import BlueButton from '../../../UI/Modal/Buttons/BlueButton/BlueButton';
 
 const PostCreator = (props) => {
   const [{ user }, dispatch] = useStateValue();
@@ -104,17 +105,30 @@ const PostCreator = (props) => {
             className="messageSender__input"
             placeholder="Paste the music link here"
           />
-          <button onClick={handleSubmit} type="submit">
-            Hidden submit
+          <button
+            className="bn632-hover bn19"
+            onClick={handleSubmit}
+            type="submit"
+            style={{ margin: 'auto' }}
+          >
+            Post
           </button>
         </form>
       </div>
 
       <div className="messageSender__bottom">
         <div className="messageSender__option">
-          <ImPriceTag style={{ color: 'blue' }} />
-          <h3 style={{ padding: '0 10px' }}>Tags</h3>
           <div className="messageSender__tagContainer">
+            <ImPriceTag style={{ color: 'blue' }} />
+            <h3
+              style={{
+                padding: '0 10px',
+                marginLeft: '15px',
+                position: 'relative',
+              }}
+            >
+              Tags
+            </h3>
             <div className="messageSender__tags">
               <button
                 className={
