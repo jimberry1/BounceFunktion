@@ -1,0 +1,16 @@
+.NavbarContainer__desktop {
+}
+
+.NavbarContainer__phone {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .NavbarContainer__desktop {
+    display: none;
+  }
+
+  .NavbarContainer__phone {
+    display: flex;
+  }
+}

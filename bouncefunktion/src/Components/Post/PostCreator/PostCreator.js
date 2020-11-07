@@ -8,6 +8,7 @@ import VideocamIcon from '@material-ui/icons/Videocam';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import { ImPriceTag } from 'react-icons/im';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const PostCreator = (props) => {
   const [{ user }, dispatch] = useStateValue();
@@ -177,13 +178,9 @@ const PostCreator = (props) => {
           </div>
         </div>
 
-        <div className="messageSender__option">
+        {/* <div className="messageSender__option">
           <PhotoLibraryIcon style={{ color: 'green' }} />
           <h3>Photo/Video</h3>
-        </div>
-        {/* <div className="messageSender__option">
-          <InsertEmoticonIcon style={{ color: 'orange' }} />
-          <h3>Feeling/Activity</h3>
         </div> */}
       </div>
     </div>

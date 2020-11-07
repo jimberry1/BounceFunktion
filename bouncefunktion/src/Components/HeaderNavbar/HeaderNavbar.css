@@ -1,0 +1,13 @@
+.hamburgerIcon {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .hamburgerIcon {
+    display: inherit;
+  }
+
+  .headerNavbar__contents {
+    display: none;
+  }
+}

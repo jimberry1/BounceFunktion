@@ -1,0 +1,32 @@
+.headerbarPhone__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  background-color: #343a40;
+  height: 70px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.headerbarPhone__title {
+  flex: 1;
+  color: white;
+  text-align: center;
+}
+
+.headerbarPhone__toggler {
+  flex: 0.1;
+  justify-content: center;
+  align-content: center;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.headerbarPhone__sidebar {
+  flex: 0.1;
+  align-items: flex-end;
+  align-content: flex-end;
+}

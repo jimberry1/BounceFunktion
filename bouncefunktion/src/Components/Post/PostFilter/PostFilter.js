@@ -48,7 +48,7 @@ const PostFilter = (props) => {
             </FormControl>
           </div>
         </div>
-        <div className="postFilter__rowFlex">
+        {/* <div className="postFilter__rowFlex">
           <div className="postFilter__filterType">
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-simple-select-label">Post Date</InputLabel>
@@ -66,7 +66,7 @@ const PostFilter = (props) => {
               </Select>
             </FormControl>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

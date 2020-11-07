@@ -4,6 +4,7 @@ import FeedPage from './Pages/FeedPage';
 import MixesPage from './Pages/MixesPage';
 import EventsPage from './Pages/EventsPage';
 import ProfilePage from './Pages/ProfilePage';
+import TestPage from './Pages/TestPage';
 import GlobalStyles from './Components/Theme/GlobalStyles';
 import { useDarkMode } from './Components/Theme/useDarkMode';
 import { ThemeProvider } from 'styled-components';
@@ -51,6 +52,12 @@ function App() {
                   path="/profile"
                   render={() => (
                     <ProfilePage theme={theme} themeToggler={themeToggler} />
+                  )}
+                />
+                <Route
+                  path="/test"
+                  render={() => (
+                    <TestPage theme={theme} themeToggler={themeToggler} />
                   )}
                 />
                 <Route

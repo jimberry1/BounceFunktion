@@ -1,7 +1,8 @@
 .postFilter__container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
+  /* justify-content: center; */
 }
 
 .postFilter__title {
@@ -30,11 +31,14 @@
 .postFilter__filterType {
   /* align-items: center; */
   justify-content: center;
-  margin-left: 30px;
+  /* margin-left: 30px; */
   /* margin: auto; */
+  align-items: center;
+  flex: 1;
 
   align-content: center;
-  width: 40%;
+  margin: auto;
+  /* width: 40%; */
 }
 
 .postFilter__rowFlex {
@@ -42,4 +46,5 @@
   flex: 1;
   justify-content: center;
   align-items: center;
+  margin: auto;
 }
