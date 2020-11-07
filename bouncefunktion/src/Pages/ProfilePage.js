@@ -3,11 +3,13 @@ import PersonalInfoContainer from '../Containers/ProfileContainer/PersonalInfoCo
 import AchievementsContainer from '../Containers/ProfileContainer/AchievementsContainer/AchievementsContainer';
 import FavouriteTracksContainer from '../Containers/ProfileContainer/FavouriteTracksContainer/FavouriteTracksContainer';
 import ContributionsContainer from '../Containers/ProfileContainer/ContributionsContainer/ContributionsContainer';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const ProfilePage = (props) => {
   let subcategoryStyles = {
     padding: '20px',
     display: 'flex',
+    flexDirection: 'columm',
   };
   return (
     <div>
@@ -17,17 +19,21 @@ const ProfilePage = (props) => {
       <div>
         <PersonalInfoContainer />
       </div>
-      <div style={subcategoryStyles}>
-        <div style={{ width: '50%', padding: '10px' }}>
-          <FavouriteTracksContainer />
-        </div>
-        <div style={{ width: '50%', padding: '10px' }}>
-          <ContributionsContainer />
-        </div>
-        <div style={{ width: '50%', padding: '10px' }}>
-          <AchievementsContainer />
-        </div>
-      </div>
+      <Container>
+        <Row>
+          <Col>
+            <FavouriteTracksContainer />
+          </Col>
+          <Col>
+            <ContributionsContainer />
+          </Col>
+        </Row>
+        <Row style={{ marginTop: '50px' }}>
+          <Col>
+            <AchievementsContainer />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 };
