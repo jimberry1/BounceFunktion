@@ -106,7 +106,7 @@ const PostCreator = (props) => {
             placeholder="Paste the music link here"
           />
           <button
-            className="bn632-hover bn19"
+            className="postButton-hover postButton"
             onClick={handleSubmit}
             type="submit"
             style={{ margin: 'auto' }}

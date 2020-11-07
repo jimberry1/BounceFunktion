@@ -108,6 +108,7 @@
   outline: none;
   background-color: lightgray;
   color: gray;
+  flex: 1;
 }
 
 .messageSender__buttonClicked {
@@ -125,7 +126,7 @@
   }
 }
 
-.bn632-hover {
+.postButton-hover {
   width: 160px;
   font-size: 16px;
   font-weight: 600;
@@ -143,7 +144,7 @@
   transition: all 0.4s ease-in-out;
 }
 
-.bn632-hover:hover {
+.postButton-hover:hover {
   background-position: 100% 0;
   moz-transition: all 0.4s ease-in-out;
   -o-transition: all 0.4s ease-in-out;
@@ -151,11 +152,11 @@
   transition: all 0.4s ease-in-out;
 }
 
-.bn632-hover:focus {
+.postButton-hover:focus {
   outline: none;
 }
 
-.bn632-hover.bn19 {
+.postButton-hover.postButton {
   background-image: linear-gradient(
     to right,
     #f5ce62,
@@ -167,10 +168,10 @@
 }
 
 @media (min-width: 1000px) {
-  .bn19 {
+  .postButton {
     display: none;
   }
-  .bn632-hover {
+  .postButton-hover {
     display: none;
   }
 }
