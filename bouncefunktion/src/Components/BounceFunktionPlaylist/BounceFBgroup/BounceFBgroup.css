@@ -1,0 +1,18 @@
+.BounceFBgroup__container {
+  padding: 25px;
+  padding-bottom: 50px;
+  border-bottom: 8px solid #222;
+}
+
+.BounceFBgroup__playlist {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.BounceFBgroup__title {
+  text-align: center;
+  font-size: 35px;
+  font-weight: bold;
+  font-family: Tahoma, Helvetica, Arial, Roboto, sans-serif;
+}

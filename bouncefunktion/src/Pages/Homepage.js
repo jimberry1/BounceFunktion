@@ -3,6 +3,7 @@ import HeaderImage from '../Components/HeaderImage/HeaderImage';
 import HomepageHeaderImage from '../Assets/TBFheader.jpg';
 import BodyContainer from '../Containers/BodyContainer/BodyContainer';
 import BounceFunktionPlaylist from '../Components/BounceFunktionPlaylist/BounceFunktionPlaylist';
+import BounceFBgroup from '../Components/BounceFunktionPlaylist/BounceFBgroup/BounceFBgroup';
 
 const Homepage = (props) => {
   return (
@@ -17,6 +18,7 @@ const Homepage = (props) => {
         subtitleFontColour="lightgray"
       />
       <BounceFunktionPlaylist />
+      <BounceFBgroup />
       <BodyContainer />
     </div>
   );

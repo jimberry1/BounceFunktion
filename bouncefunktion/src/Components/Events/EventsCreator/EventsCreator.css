@@ -3,7 +3,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 90%;
+  padding: 25px;
+  border: 1px solid black;
+  margin: auto;
 }
 
 .eventsCreator__title {
+  padding: 15px 15px;
+  border-bottom: 1px solid gray;
+  width: 80%;
+  text-align: center;
 }

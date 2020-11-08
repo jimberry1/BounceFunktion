@@ -8,7 +8,7 @@ const BounceFunktionPlaylist = (props) => {
           src="https://open.spotify.com/embed/playlist/5QDnn5CRDGKRMiFwcqfSGx"
           width="90%"
           height="280"
-          frameborder="0"
+          frameBorder="0"
           allowtransparency="true"
           allow="encrypted-media"
         ></iframe>
