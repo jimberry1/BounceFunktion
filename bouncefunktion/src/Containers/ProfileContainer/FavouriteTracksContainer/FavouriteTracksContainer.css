@@ -8,3 +8,9 @@
   overflow-y: scroll;
   font-size: 30px;
 }
+
+.favouriteTracks__title {
+  width: 100%;
+  padding: 10px;
+  /* position: absolute; */
+}

@@ -12,7 +12,7 @@ const ProfilePage = (props) => {
     flexDirection: 'columm',
   };
   return (
-    <div>
+    <div style={{ marginBottom: '30px' }}>
       <div>
         <NavbarContainer theme={props.theme} toggleTheme={props.themeToggler} />
       </div>

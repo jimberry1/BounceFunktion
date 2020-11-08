@@ -9,5 +9,6 @@
 
 .contributionsContainer__title {
   width: 100%;
+  padding: 10px;
   /* position: absolute; */
 }

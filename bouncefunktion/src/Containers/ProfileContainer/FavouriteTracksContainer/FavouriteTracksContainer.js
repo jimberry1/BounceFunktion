@@ -32,7 +32,10 @@ const FavouriteTracksContainer = (props) => {
 
   return (
     <div className="favouriteTracks__container">
-      <p>Favourite Tracks</p>
+      <div className="favouriteTracks__title">
+        <p>Favourite Tracks</p>
+      </div>
+
       {favouritePostsDisplay}
     </div>
   );

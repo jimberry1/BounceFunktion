@@ -147,7 +147,7 @@ const FeedContainer = (props) => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          height: '1000px',
+          // height: '1000px',
           // maxHeight: '1000px',
           // maxWidth: '90%',
           margin: 'auto',

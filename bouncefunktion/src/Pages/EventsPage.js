@@ -5,7 +5,7 @@ import EventsHeaderImage from '../Assets/festival2.jpg';
 import EventsContainer from '../Containers/EventsContainer/EventsContainer';
 const EventsPage = (props) => {
   return (
-    <div>
+    <div style={{ marginBottom: '30px' }}>
       <div>
         <NavbarContainer theme={props.theme} toggleTheme={props.themeToggler} />
         <HeaderImage
