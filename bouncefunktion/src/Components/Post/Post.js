@@ -187,7 +187,6 @@ const Post = ({
   if (liked) {
     thumbIcon = (
       <div className="post__option" onClick={likeButtonClickedHandler}>
-        {/* //   <div className="post__option" onClick={() => likeButtonClicked(true)}> */}
         <ThumbUpIcon color="primary" />
         <p style={{ color: 'blue' }}>Liked</p>
       </div>
@@ -237,13 +236,24 @@ const Post = ({
       />
 
       <div className="post__options">
-        <div
-          className="post__option"
-          style={{ flex: 1, marginLeft: '30px', width: '50px' }}
-        >
+        <Container className="post__emptyContainer">
+          <Row>
+            <Col></Col>
+          </Row>
+        </Container>
+        <div className="post__option">
           <p>
             <strong>{likes}</strong>
           </p>
+        </div>
+        <div
+          className="post__option"
+          style={{ flex: 1 }}
+          // style={{ flex: 1, marginLeft: '30px', width: '50px' }}
+        >
+          {/* <p>
+            <strong style={{ padding: '10px' }}>{likes}</strong>
+          </p> */}
           {thumbIcon}
         </div>
         <div className="post__option" onClick={openCommentsHandler}>
@@ -253,7 +263,11 @@ const Post = ({
           <ChatBubbleOutlineIcon />
           <p>Comments</p>
         </div>
-        <div className="post__option" onClick={favouritePostHandler}>
+        <div
+          className="post__option"
+          onClick={favouritePostHandler}
+          style={{ padding: '10px' }}
+        >
           {favPost ? <AiFillStar color="gold" size={32} /> : <StarIcon />}
         </div>
         <div className="post__option" onClick={openModalHandler}>

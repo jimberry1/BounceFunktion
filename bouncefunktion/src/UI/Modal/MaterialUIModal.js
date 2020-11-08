@@ -17,12 +17,18 @@ const useStyles = makeStyles((theme) => ({
     border: '2px solid #000',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
+    maxWidth: '80%',
+    overflow: 'none',
   },
 }));
 
 export default function MaterialUIModal(props) {
   const classes = useStyles();
 
+  const styles = {
+    width: '100%',
+    textAlign: 'center',
+  };
   return (
     <div>
       <Modal
@@ -40,7 +46,9 @@ export default function MaterialUIModal(props) {
         <Fade in={props.open}>
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Music Link</h2>
-            <p id="transition-modal-description">{props.musicLink}</p>
+            <p id="transition-modal-description" style={styles}>
+              {props.musicLink}
+            </p>
           </div>
         </Fade>
       </Modal>

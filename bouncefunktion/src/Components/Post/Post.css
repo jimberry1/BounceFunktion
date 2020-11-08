@@ -51,6 +51,7 @@
   padding: 15px;
   /* styling for phones */
   overflow-x: scroll;
+  margin-left: 15px;
 }
 
 .post__option {
@@ -61,9 +62,18 @@
   flex: 1;
 }
 
+.post__emptyContainer {
+  width: 70px;
+}
 .post__option > p {
   margin-top: 15px;
   margin-left: 10px;
+  width: 100%;
+}
+
+.post__option > p > strong {
+  margin-top: 15px;
+  width: 100%;
 }
 
 .post__option:hover {
@@ -75,3 +85,15 @@
   height: 300px;
   width: 300px;
 }
+
+@media (max-width: 1000px) {
+  .post {
+    width: 98%;
+  }
+}
+
+@media (min-width: 500px) {
+  .post__emptyContainer {
+    display: none;
+  }
+} ;
