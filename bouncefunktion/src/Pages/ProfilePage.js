@@ -21,10 +21,10 @@ const ProfilePage = (props) => {
       </div>
       <Container>
         <Row>
-          <Col>
+          <Col style={{ marginTop: '15px' }}>
             <FavouriteTracksContainer />
           </Col>
-          <Col>
+          <Col style={{ marginTop: '15px' }}>
             <ContributionsContainer />
           </Col>
         </Row>
