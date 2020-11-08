@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const EventsCreator = () => {
+const EventsCreator = (props) => {
   // Type of event, e.g. club, festival or live music
   // Genre of music
   // Date of event
@@ -75,21 +75,16 @@ const EventsCreator = () => {
       hostProfilePic: user.photoURL,
     });
 
-    setRedirect(true);
+    props.eventSubmitted();
   };
 
-  let redirectComponent = null;
-
-  if (redirect) {
-    redirectComponent = <Redirect to={'/'} />;
-  }
+  //
 
   return (
     <div className="eventsCreator__container">
       <div className="eventsCreator__title">
         <h2>Events Creator</h2>
       </div>
-      {redirectComponent}
 
       <Container
         style={{ display: 'flex', justifyContent: 'center', marginTop: '25px' }}

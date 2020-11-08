@@ -1,0 +1,20 @@
+.feedbackContainer__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 25px;
+}
+
+.feedbackContainer__title {
+  flex: 1;
+  text-align: center;
+  padding: 15px;
+}
+
+.feedbackContainer__subtitle {
+  text-align: center;
+  max-width: 75%;
+  margin: auto;
+  border-bottom: 1px solid;
+  padding-bottom: 15px;
+}

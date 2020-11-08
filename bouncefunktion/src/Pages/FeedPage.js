@@ -27,7 +27,12 @@ const FeedPage = (props) => {
             subtitleFontColour="lightgray"
           />
           <div style={{ margin: 'auto' }}>
-            <div style={{ width: '90%', margin: 'auto' }}>
+            <div
+              style={{
+                width: '90%',
+                margin: 'auto',
+              }}
+            >
               <PostCreator />
             </div>
             <FeedContainer />

@@ -27,6 +27,9 @@ const HeaderNavbar = (props) => {
           <Nav.Link as={Link} to="/profile">
             Profile
           </Nav.Link>
+          <Nav.Link as={Link} to="/feedback">
+            Feedback
+          </Nav.Link>
         </Nav>
         <Toggler theme={props.theme} toggleTheme={props.toggleTheme} />
       </Navbar>

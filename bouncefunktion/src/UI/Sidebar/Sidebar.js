@@ -53,6 +53,13 @@ const Sidebar = (props) => {
         >
           Profile
         </a>
+        <a
+          className="menu-item--small"
+          href="/feedback"
+          onClick={(e) => linkRedirect(e, '/feedback')}
+        >
+          Feedback
+        </a>
       </Menu>
     </div>
   );

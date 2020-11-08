@@ -12,6 +12,7 @@ import { lightTheme, darkTheme } from './Components/Theme/Themes';
 import { Switch, Route } from 'react-router';
 import Login from './Auth/Login';
 import { useStateValue } from './Store/StateProvider';
+import FeedbackPage from './Pages/FeedbackPage';
 
 function App() {
   const [theme, themeToggler, mountedComponent] = useDarkMode();
@@ -52,6 +53,12 @@ function App() {
                   path="/profile"
                   render={() => (
                     <ProfilePage theme={theme} themeToggler={themeToggler} />
+                  )}
+                />
+                <Route
+                  path="/feedback"
+                  render={() => (
+                    <FeedbackPage theme={theme} themeToggler={themeToggler} />
                   )}
                 />
                 <Route
