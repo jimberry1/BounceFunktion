@@ -51,14 +51,14 @@
   justify-content: center;
   color: gray;
   margin: 5px;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 .messageSender__option > h3 {
   font-size: medium;
   margin-left: 10px;
   cursor: pointer;
-  overflow-x: scroll;
+  overflow-x: auto;
   /* padding: 20px; */
 }
 
