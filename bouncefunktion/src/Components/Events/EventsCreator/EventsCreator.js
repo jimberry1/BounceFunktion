@@ -47,7 +47,7 @@ const EventsCreator = (props) => {
   const [typeOfEvent, setTypeOfEvent] = useState('');
   const [genreOfMusic, setGenreOfMusic] = useState('');
   const [selectedDate, setSelectedDate] = React.useState(
-    new Date('2014-08-18T21:11:54')
+    new Date('2020-01-01T00:00:00')
   );
   const [ticketLink, setTicketLink] = useState('');
   const [eventDescription, setEventDescription] = useState('');
@@ -177,10 +177,20 @@ const EventsCreator = (props) => {
                   onChange={(e) => setGenreOfMusic(e.target.value)}
                   variant="filled"
                 >
-                  <MenuItem value="techno">Techno</MenuItem>
-                  <MenuItem value="disco">Disco</MenuItem>
-                  <MenuItem value="rap">Rap</MenuItem>
-                  <MenuItem value="other">Other</MenuItem>
+                  <MenuItem value="Techno">Techno</MenuItem>
+                  <MenuItem value="House">House</MenuItem>
+                  <MenuItem value="Dnb">DnB</MenuItem>
+                  <MenuItem value="Bassline">Bassline</MenuItem>
+                  <MenuItem value="Funk">Funk</MenuItem>
+                  <MenuItem value="Jazz">Jazz</MenuItem>
+                  <MenuItem value="Indie">Indie</MenuItem>
+                  <MenuItem value="Disco">Disco</MenuItem>
+                  <MenuItem value="Rock">Rock</MenuItem>
+                  <MenuItem value="Rap">Rap</MenuItem>
+                  <MenuItem value="Grime">Grime</MenuItem>
+                  <MenuItem value="Pop">Pop</MenuItem>
+                  <MenuItem value="Alternative">Alternative</MenuItem>
+                  <MenuItem value="Other">Other</MenuItem>
                 </Select>
               </FormControl>
             </Col>
@@ -197,7 +207,7 @@ const EventsCreator = (props) => {
                   shrink: true,
                 }}
                 variant="filled"
-                onChange={(e) => setSelectedDate(e.target.value)}
+                onChange={(e) => setSelectedDate(new Date(e.target.value))}
               />
             </Col>
 

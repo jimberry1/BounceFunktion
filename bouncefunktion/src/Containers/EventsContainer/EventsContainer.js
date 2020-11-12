@@ -19,10 +19,38 @@ const EventsContainer = (props) => {
 
     eventsDbRef.get().then(function (query) {
       setEventsArray(
-        query.docs.map((record) => ({ id: record.id, data: record.data() }))
+        query.docs.map((record) => ({
+          id: record.id,
+          data: record.data(),
+          interested: false,
+          attending: false,
+        }))
       );
     });
   }, []);
+
+  const interestChangedHandler = (id) => {
+    console.log('interested handler');
+    setEventsArray(
+      eventsArray.map((event) => {
+        if (event.id == id) {
+          event.interested = !event.interested;
+        }
+        return event;
+      })
+    );
+  };
+
+  const attendingHandler = (id) => {
+    setEventsArray(
+      eventsArray.map((event) => {
+        if (event.id == id) {
+          event.attending = !event.attending;
+        }
+        return event;
+      })
+    );
+  };
 
   const createEventToggler = () => {
     console.log('Button pressed');
@@ -33,16 +61,20 @@ const EventsContainer = (props) => {
   };
 
   const eventSubmittedHandler = () => {
-    setEventSubmittedText(
-      'Thank you for submitting your event. The event displays feature is coming soon!'
-    );
+    setEventSubmittedText('Thank you for submitting your event!');
     setShowEventsCreator(false);
   };
 
   let eventsToRender = null;
 
   if (eventsArray) {
-    eventsToRender = <EventContainer eventsArray={eventsArray} />;
+    eventsToRender = (
+      <EventContainer
+        eventsArray={eventsArray}
+        clickedInterested={(id) => interestChangedHandler(id)}
+        clickedAttending={(id) => attendingHandler(id)}
+      />
+    );
     // eventsToRender = eventsArray.map((event) => {
     //   return <Event key={event.id} eventData={event.data} />;
     // });
@@ -61,7 +93,7 @@ const EventsContainer = (props) => {
       <div className="eventsContainer__submittedMessage">
         {eventSubmittedText}
       </div>
-      {/* <div>{eventsToRender}</div> */}
+      <div>{eventsToRender}</div>
     </div>
   );
 };

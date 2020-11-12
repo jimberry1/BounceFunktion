@@ -1,12 +1,17 @@
 import React from 'react';
+import { Avatar } from '@material-ui/core';
 import {
   Container,
   Item,
   Inner,
   Text,
-  //   Pane,
-  //   Title,
-  //   SubTitle,
+  Title,
+  Top,
+  Body,
+  Pane,
+  Subtitle,
+  Icon,
+  AdditionalInfo,
   Image,
 } from './styles/Event';
 
@@ -22,10 +27,41 @@ Event.Container = function EventContainer({ children, ...restProps }) {
   return <Container {...restProps}>{children}</Container>;
 };
 
+Event.Top = function EventTop({ children, ...restProps }) {
+  return <Top {...restProps}>{children}</Top>;
+};
+
+Event.Body = function EventBody({ children, ...restProps }) {
+  return <Body {...restProps}>{children}</Body>;
+};
+
+Event.Pane = function EventPane({ children, ...restProps }) {
+  return <Pane {...restProps}>{children}</Pane>;
+};
+
+Event.AdditionalInfo = function EventAdditionalInfo({
+  children,
+  ...restProps
+}) {
+  return <AdditionalInfo {...restProps}>{children}</AdditionalInfo>;
+};
+
+Event.Title = function EventTitle({ children, ...restProps }) {
+  return <Title {...restProps}>{children}</Title>;
+};
+
+Event.Subtitle = function EventSubtitle({ children, ...restProps }) {
+  return <Subtitle {...restProps}>{children}</Subtitle>;
+};
+
 Event.Text = function EventText({ children, ...restProps }) {
   return <Text {...restProps}>{children}</Text>;
 };
 
+Event.Icon = function EventIcon({ children, ...restProps }) {
+  return <Icon {...restProps}>{children}</Icon>;
+};
+
 Event.Image = function EventImage({ children, ...restProps }) {
-  return <Image {...restProps} />;
+  return <Avatar {...restProps} />;
 };
