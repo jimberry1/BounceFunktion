@@ -10,6 +10,7 @@ import EventContainer from './EventContainer/EventContainer';
 const EventsContainer = (props) => {
   // Event container should contain lots of information, I basically want a longish form for someone to fill out which details all the information you'd need for a night out
 
+  const [{ user }, dispatch] = useStateValue();
   const [showEventsCreator, setShowEventsCreator] = useState(false);
   const [eventsArray, setEventsArray] = useState(null);
   const [eventSubmittedText, setEventSubmittedText] = useState('');
@@ -22,15 +23,51 @@ const EventsContainer = (props) => {
         query.docs.map((record) => ({
           id: record.id,
           data: record.data(),
-          interested: false,
-          attending: false,
+          interested: record.data().interestedList.includes(user.displayName)
+            ? true
+            : false,
+          attending: record.data().interestedList.includes(user.displayName)
+            ? true
+            : false,
         }))
       );
     });
-  }, []);
+  }, [user]);
 
   const interestChangedHandler = (id) => {
     console.log('interested handler');
+
+    const eventRef = db.collection('events').doc(id);
+
+    eventRef.get().then(function (query) {
+      console.log(query.data().interestedList);
+
+      if (query.data() && query.data().interestedList) {
+        console.log('query.data.interested list evaluation = true');
+        const interestedArray = query.data().interestedList;
+        if (interestedArray.includes(user.displayName)) {
+          eventRef.set(
+            {
+              interestedList: query
+                .data()
+                .interestedList.filter((name) => name !== user.displayName),
+            },
+            { merge: true }
+          );
+        } else {
+          const newArrayOfNames = query.data().interestedList;
+          newArrayOfNames.push(user.displayName);
+          eventRef.set(
+            {
+              interestedList: newArrayOfNames,
+            },
+            { merge: true }
+          );
+        }
+      }
+    });
+
+    //Updating internal state
     setEventsArray(
       eventsArray.map((event) => {
         if (event.id == id) {
@@ -42,6 +79,39 @@ const EventsContainer = (props) => {
   };
 
   const attendingHandler = (id) => {
+    console.log('attending handler invoked');
+
+    const eventRef = db.collection('events').doc(id);
+
+    eventRef.get().then(function (query) {
+      console.log(query.data().attendingList);
+
+      if (query.data() && query.data().attendingList) {
+        console.log('query.data.interested list evaluation = true');
+        const attendingArray = query.data().attendingList;
+        if (attendingArray.includes(user.displayName)) {
+          eventRef.set(
+            {
+              attendingList: query
+                .data()
+                .attendingList.filter((name) => name !== user.displayName),
+            },
+            { merge: true }
+          );
+        } else {
+          const newArrayOfNames = query.data().attendingList;
+          newArrayOfNames.push(user.displayName);
+          eventRef.set(
+            {
+              attendingList: newArrayOfNames,
+            },
+            { merge: true }
+          );
+        }
+      }
+    });
+
+    //Update internal state
     setEventsArray(
       eventsArray.map((event) => {
         if (event.id == id) {

@@ -73,6 +73,8 @@ const EventsCreator = (props) => {
       hostName: user.displayName,
       hostUid: user.uid,
       hostProfilePic: user.photoURL,
+      interestedList: [user.displayName],
+      attendingList: [user.displayName],
     });
 
     props.eventSubmitted();

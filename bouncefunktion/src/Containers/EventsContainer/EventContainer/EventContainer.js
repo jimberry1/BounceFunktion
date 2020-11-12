@@ -7,7 +7,10 @@ import { GiMicrophone } from 'react-icons/gi';
 import { SiDiscogs } from 'react-icons/si';
 import { GiBarracksTent } from 'react-icons/gi';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
-
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import EventNoteIcon from '@material-ui/icons/EventNote';
+import { FaTicketAlt } from 'react-icons/fa';
+import DropDownMenu from '../../../UI/DropDownMenu/DropDownMenu';
 const EventContainer = (props) => {
   const eventIconCalculator = (eventType) => {
     'fest, club, live, other';
@@ -63,26 +66,39 @@ const EventContainer = (props) => {
             <Event key={event.id} eventData={event.data}>
               <Event.Top>
                 <Event.Title>{event.data.eventName}</Event.Title>
-                <Event.Icon onClick={() => props.clickedInterested(event.id)}>
-                  {event.interested ? (
-                    <DoneIcon style={{ color: 'green' }} />
-                  ) : (
-                    <DoneIcon />
-                  )}
-                  Interested
-                </Event.Icon>
-                <Event.Icon onClick={() => props.clickedAttending(event.id)}>
-                  {event.attending ? (
-                    <HowToRegIcon style={{ color: 'cyan' }} />
-                  ) : (
-                    <HowToRegIcon />
-                  )}
-                  Attending
-                </Event.Icon>
+                <Event.IconHolder>
+                  <Event.Icon onClick={() => props.clickedInterested(event.id)}>
+                    {event.interested ? (
+                      <DoneIcon style={{ color: 'green' }} />
+                    ) : (
+                      <DoneIcon />
+                    )}
+                    Interested
+                  </Event.Icon>
+                  <DropDownMenu
+                    listItems={
+                      event.data.interestedList ? event.data.interestedList : []
+                    }
+                  />
+                  <Event.Icon onClick={() => props.clickedAttending(event.id)}>
+                    {event.attending ? (
+                      <HowToRegIcon style={{ color: 'cyan' }} />
+                    ) : (
+                      <HowToRegIcon />
+                    )}
+                    Attending
+                  </Event.Icon>
+                  <DropDownMenu
+                    style={{ marginLeft: '0px' }}
+                    listItems={
+                      event.data.attendingList ? event.data.attendingList : []
+                    }
+                  />
+                </Event.IconHolder>
               </Event.Top>
 
               <Event.Body>
-                <Event.AdditionalInfo>
+                <Event.DescriptionInfo>
                   <Event.Image src={event.data.hostProfilePic} />
                   <Event.Text style={{ textAlign: 'left' }}>
                     Description: {event.data.eventDescription}
@@ -90,22 +106,42 @@ const EventContainer = (props) => {
                   <Event.Text>
                     Date: {getDate(event.data.eventDate.seconds)}
                   </Event.Text>
-                </Event.AdditionalInfo>
+                </Event.DescriptionInfo>
 
                 <Event.AdditionalInfo>
                   <Event.Pane>
+                    <LocationOnIcon
+                      style={{
+                        margin: 'auto',
+                        paddingBottom: '10px',
+                        fontSize: '40px',
+                      }}
+                    />
                     <Event.Subtitle>Venue</Event.Subtitle>
                     <Event.Text>{event.data.eventVenueName}</Event.Text>
                     <Event.Text>{event.data.eventLocation}</Event.Text>
                   </Event.Pane>
 
                   <Event.Pane>
+                    <EventNoteIcon
+                      style={{
+                        margin: 'auto',
+                        paddingBottom: '10px',
+                        fontSize: '40px',
+                      }}
+                    />
+
                     <Event.Subtitle>Event</Event.Subtitle>
                     {eventIconCalculator(event.data.eventType)}
                     <Event.Text>Genre: {event.data.eventGenre}</Event.Text>
                   </Event.Pane>
                   {/* <Event.Text>{event.data.eventDate}</Event.Text> */}
                   <Event.Pane>
+                    <FaTicketAlt
+                      size={40}
+                      style={{ margin: 'auto', paddingBottom: '10px' }}
+                    />
+
                     <Event.Subtitle>Tickets</Event.Subtitle>
                     <Event.Text>
                       {event.data.eventTicketLink

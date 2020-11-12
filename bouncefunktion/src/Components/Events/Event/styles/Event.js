@@ -19,11 +19,14 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-top: 8px solid #222;
 `;
 
 export const Body = styled.div`
-  padding: 25px;
   width: 100%;
+  @media (min-width: 600px) {
+    padding: 25px;
+  }
 `;
 
 export const Pane = styled.div`
@@ -37,7 +40,6 @@ export const Icon = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 20px;
-  padding-right: 20px;
   align-items: center;
 `;
 
@@ -55,9 +57,22 @@ export const Top = styled.div`
 
 export const AdditionalInfo = styled.div`
   display: flex;
+  justify-content: space-between;
+  width: 100%;
+  @media (min-width: 600px) {
+    padding: 20px;
+  }
+`;
+
+export const DescriptionInfo = styled.div`
+  display: flex;
   padding: 20px;
   justify-content: space-between;
   width: 100%;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const Item = styled.div`
@@ -92,4 +107,13 @@ export const Image = styled.img`
   border-radius: 100px;
   height: auto;
   border-radius: 10px;
+`;
+
+export const IconHolder = styled.div`
+  display: flex;
+  @media (max-width: 600px) {
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
+  }
 `;

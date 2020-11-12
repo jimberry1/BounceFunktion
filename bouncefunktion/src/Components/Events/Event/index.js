@@ -13,6 +13,8 @@ import {
   Icon,
   AdditionalInfo,
   Image,
+  DescriptionInfo,
+  IconHolder,
 } from './styles/Event';
 
 export default function Event({ children, ...restProps }) {
@@ -46,6 +48,13 @@ Event.AdditionalInfo = function EventAdditionalInfo({
   return <AdditionalInfo {...restProps}>{children}</AdditionalInfo>;
 };
 
+Event.DescriptionInfo = function EventDescriptionInfo({
+  children,
+  ...restProps
+}) {
+  return <DescriptionInfo {...restProps}>{children}</DescriptionInfo>;
+};
+
 Event.Title = function EventTitle({ children, ...restProps }) {
   return <Title {...restProps}>{children}</Title>;
 };
@@ -64,4 +73,8 @@ Event.Icon = function EventIcon({ children, ...restProps }) {
 
 Event.Image = function EventImage({ children, ...restProps }) {
   return <Avatar {...restProps} />;
+};
+
+Event.IconHolder = function EventIconHolder({ children, ...restProps }) {
+  return <IconHolder {...restProps}>{children}</IconHolder>;
 };
