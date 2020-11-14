@@ -4,6 +4,7 @@ import AchievementsContainer from '../Containers/ProfileContainer/AchievementsCo
 import FavouriteTracksContainer from '../Containers/ProfileContainer/FavouriteTracksContainer/FavouriteTracksContainer';
 import ContributionsContainer from '../Containers/ProfileContainer/ContributionsContainer/ContributionsContainer';
 import { Container, Row, Col } from 'react-bootstrap';
+import SignOutComponent from '../Components/SignOutComponent/SignOutComponent';
 
 const ProfilePage = (props) => {
   let subcategoryStyles = {
@@ -34,6 +35,7 @@ const ProfilePage = (props) => {
           </Col>
         </Row>
       </Container>
+      <SignOutComponent />
     </div>
   );
 };
