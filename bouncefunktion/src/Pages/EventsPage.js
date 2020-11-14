@@ -11,7 +11,7 @@ const EventsPage = (props) => {
         <HeaderImage
           backgroundImage={EventsHeaderImage}
           title="Events. Made simple."
-          subtitle="Post about live music, club nights and festivals"
+          subtitle="Post about live music, club nights, and festivals"
           topMargin="-100px"
           titleFontColour="white"
           subtitleFontColour="white"

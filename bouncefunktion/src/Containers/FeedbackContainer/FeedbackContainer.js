@@ -50,8 +50,8 @@ const FeedbackContainer = (props) => {
         feedbackType={feedbackType}
         screenFormLabel={
           feedbackType === 'bug'
-            ? 'Screen that is bugged'
-            : 'Area for improvement'
+            ? 'Bugged page or feature'
+            : 'Area for improvement or name of new feature'
         }
         areaForChange={areaForChange}
         areaForChangeChanged={(e) => setAreaForChange(e.target.value)}
@@ -68,10 +68,10 @@ const FeedbackContainer = (props) => {
         </div>
         <div style={{ marginBottom: '1px solid' }}>
           <div className="feedbackContainer__subtitle">
+            <p>We'd love to hear your thoughts!</p>{' '}
             <p>
-              We'd love to hear your thoughts, please use this space to report
-              bugs in the application or make suggestions for new BounceFunktion
-              features
+              Please use this space to report bugs in the application or make
+              suggestions for new BounceFunktion features
             </p>
           </div>
         </div>
