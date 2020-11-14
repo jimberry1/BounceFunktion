@@ -9,6 +9,7 @@ import FavouriteTrack from '../../../Components/Profile/FavouriteTrack/Favourite
 const ContributionsContainer = (props) => {
   const [{ user }, dispatch] = useStateValue();
   const [contributions, setContributions] = useState([]);
+  const [numberOfContributions, setNumberOfContributions] = useState(4);
 
   useEffect(() => {
     if (user) {
@@ -16,7 +17,10 @@ const ContributionsContainer = (props) => {
       const postsRef = db
         .collection('posts')
         .where('username', '==', user.displayName)
-        .onSnapshot((snapshot) => {
+        .orderBy('timestamp', 'desc')
+        .limit(numberOfContributions)
+        .get()
+        .then(function (snapshot) {
           setContributions(
             snapshot.docs.map((post) => ({
               id: post.id,
@@ -25,7 +29,7 @@ const ContributionsContainer = (props) => {
           );
         });
     }
-  }, [user]);
+  }, [user, numberOfContributions]);
 
   let contributionsArray = <Spinner />;
 
@@ -42,6 +46,22 @@ const ContributionsContainer = (props) => {
     });
   }
 
+  let button = (
+    <BlueButton
+      clicked={() => setNumberOfContributions(100)}
+      style={{
+        margin: 'auto',
+        padding: '25px',
+      }}
+    >
+      See more
+    </BlueButton>
+  );
+
+  if (numberOfContributions > 4 || contributions.length < 4) {
+    button = null;
+  }
+
   return (
     <div className="contributionsContainer__container">
       <div className="contributionsContainer__title">
@@ -49,6 +69,7 @@ const ContributionsContainer = (props) => {
       </div>
 
       {contributionsArray}
+      {button}
     </div>
   );
 };

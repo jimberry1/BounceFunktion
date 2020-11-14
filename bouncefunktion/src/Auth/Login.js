@@ -3,38 +3,71 @@ import { Button } from '@material-ui/core';
 import { auth, provider } from '../firebase';
 import { useStateValue } from '../Store/StateProvider';
 import { actionTypes } from '../Store/reducer';
-import { Avatar } from '@material-ui/core';
 import db from '../firebase';
 const Login = (props) => {
   const [state, dispatch] = useStateValue();
 
-  const signIn = () => {
-    auth
-      .signInWithPopup(provider)
-      .then((result) => {
-        console.log(result);
+  const localStorageUid = localStorage.getItem('Bounce_uid');
 
-        const dbUserRef = db.collection('users').doc(result.user.uid);
-        dbUserRef.get().then((docSnapshot) => {
-          if (docSnapshot.exists) {
-            console.log('This user already exists');
-          } else {
-            dbUserRef.set({ likedPosts: [], favPosts: [] });
-          }
-        });
+  if (localStorageUid !== null) {
+    const dbUserRef = db.collection('users').doc(localStorageUid);
+    dbUserRef.get().then((docSnapshot) => {
+      console.log(docSnapshot.data());
+      console.log(docSnapshot.id);
 
-        dispatch({
-          type: actionTypes.SET_USER,
-          user: result.user,
-        });
-        dispatch({
-          type: actionTypes.SET_IDTOKEN,
-          idToken: result.user.uid,
-        });
-      })
-      .catch((error) => {
-        alert(error.messsage);
+      const user = {
+        displayName: docSnapshot.data().name,
+        email: docSnapshot.data().email,
+        photoURL: docSnapshot.data().photoURL,
+        uid: docSnapshot.id,
+      };
+      dispatch({
+        type: actionTypes.SET_USER,
+        user: user,
       });
+      dispatch({
+        type: actionTypes.SET_IDTOKEN,
+        idToken: docSnapshot.id,
+      });
+    });
+  }
+
+  const signIn = () => {
+    if (localStorageUid == null) {
+      auth
+        .signInWithPopup(provider)
+        .then((result) => {
+          console.log(result);
+
+          const dbUserRef = db.collection('users').doc(result.user.uid);
+          dbUserRef.get().then((docSnapshot) => {
+            if (docSnapshot.exists) {
+              console.log('This user already exists');
+            } else {
+              dbUserRef.set({
+                photoURL: result.user.photoURL,
+                name: result.user.displayName,
+                email: result.user.email,
+                likedPosts: [],
+                favPosts: [],
+              });
+            }
+          });
+
+          dispatch({
+            type: actionTypes.SET_USER,
+            user: result.user,
+          });
+          dispatch({
+            type: actionTypes.SET_IDTOKEN,
+            idToken: result.user.uid,
+          });
+          localStorage.setItem('Bounce_uid', result.user.uid);
+        })
+        .catch((error) => {
+          alert(error.messsage);
+        });
+    }
   };
 
   return (

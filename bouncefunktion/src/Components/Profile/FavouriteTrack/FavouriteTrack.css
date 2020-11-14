@@ -1,6 +1,7 @@
 .favouriteTrack__container {
   padding: 10px 10px;
   border-top: 1px solid gray;
+  height: 105px;
 }
 
 .favouriteTrack__container:hover {
