@@ -210,9 +210,9 @@ const Post = ({
           <p>{new Date(timestamp?.toDate()).toUTCString()}</p>
         </div>
       </div>
-      <Container>
+      <Container fluid className="post__bodyContainerText">
         <Row>
-          <Col>
+          <Col style={{ alignItems: 'left' }}>
             <div className="post__bottom">
               <p>{message}</p>
             </div>
@@ -222,6 +222,7 @@ const Post = ({
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              // minWidth: '250px',
             }}
           >
             {musicWidgetDefaultSpotify}
