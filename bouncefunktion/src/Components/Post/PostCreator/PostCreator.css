@@ -56,7 +56,7 @@
 
 .messageSender__option > h3 {
   font-size: medium;
-  margin-left: 10px;
+  margin-left: 0px;
   cursor: pointer;
   overflow-x: auto;
   /* padding: 20px; */
@@ -81,12 +81,13 @@
   padding: 10px;
   border-radius: 15px;
   width: 100%;
+  margin-right: 5px;
   /* background-color: lightgray; */
   /* background-color: black; */
 }
-.messageSender__tags > button:hover {
+/* .messageSender__tags > button:hover {
   background-color: #eff2f5;
-}
+} */
 .messageSender__tags > button:focus {
   /* background-color: #eff2f5; */
   outline: none;
@@ -107,20 +108,34 @@
 .messageSender__buttonNotClicked {
   outline: none;
   background-color: lightgray;
-  color: gray;
+  color: midnightblue;
   flex: 1;
+}
+
+.messageSender__buttonNotClicked:hover {
+  background-color: #eff2f5;
 }
 
 .messageSender__buttonClicked {
   outline: none;
-  color: blue;
-  background-color: #eff2f5;
+  color: white;
+  background-color: midnightblue;
 }
 
 @media (max-width: 1000px) {
   .messageSender__top > form {
     flex-direction: column;
   }
+
+  .messageSender__top {
+    flex-direction: column;
+  }
+
+  .messageSender__avatarHolder {
+    flex-direction: column;
+    margin: auto;
+  }
+
   .messageSender__top > form > input {
     margin: 10px 10px;
   }

@@ -58,6 +58,7 @@ const PostCreator = (props) => {
       likes: 0,
       commentNumber: 0,
       tags: genreTags,
+      uid: user.uid,
     });
 
     setInput('');
@@ -91,7 +92,9 @@ const PostCreator = (props) => {
   return (
     <div className="messageSender">
       <div className="messageSender__top">
-        <Avatar src={user.photoURL} />
+        <div className="messageSender__avatarHolder">
+          <Avatar src={user.photoURL} />
+        </div>
         <form>
           <input
             value={input}
@@ -119,7 +122,11 @@ const PostCreator = (props) => {
       <div className="messageSender__bottom">
         <div className="messageSender__option">
           <div className="messageSender__tagContainer">
-            <ImPriceTag style={{ color: 'blue' }} />
+            <div>
+              {' '}
+              <ImPriceTag style={{ color: 'blue' }} />
+            </div>
+
             <h3
               style={{
                 padding: '0 10px',
