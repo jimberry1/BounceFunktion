@@ -153,7 +153,9 @@ const EventsContainer = (props) => {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <BlueButton clicked={createEventToggler}>Create an Event</BlueButton>
+        <BlueButton clicked={createEventToggler}>
+          {showEventsCreator ? 'Minimize' : 'Create an Event'}
+        </BlueButton>
       </div>
       <div>
         {showEventsCreator ? (
