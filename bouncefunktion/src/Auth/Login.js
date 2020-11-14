@@ -33,41 +33,42 @@ const Login = (props) => {
   }
 
   const signIn = () => {
-    if (localStorageUid == null) {
-      auth
-        .signInWithPopup(provider)
-        .then((result) => {
-          console.log(result);
+    auth
+      .signInWithPopup(provider)
+      .then((result) => {
+        console.log(result);
 
-          const dbUserRef = db.collection('users').doc(result.user.uid);
-          dbUserRef.get().then((docSnapshot) => {
-            if (docSnapshot.exists) {
-              console.log('This user already exists');
-            } else {
-              dbUserRef.set({
-                photoURL: result.user.photoURL,
-                name: result.user.displayName,
-                email: result.user.email,
-                likedPosts: [],
-                favPosts: [],
-              });
-            }
-          });
-
-          dispatch({
-            type: actionTypes.SET_USER,
-            user: result.user,
-          });
-          dispatch({
-            type: actionTypes.SET_IDTOKEN,
-            idToken: result.user.uid,
-          });
-          localStorage.setItem('Bounce_uid', result.user.uid);
-        })
-        .catch((error) => {
-          alert(error.messsage);
+        const dbUserRef = db.collection('users').doc(result.user.uid);
+        dbUserRef.get().then((docSnapshot) => {
+          if (docSnapshot.exists) {
+            console.log('This user already exists');
+          } else {
+            dbUserRef.set({
+              photoURL: result.user.photoURL,
+              name: result.user.displayName,
+              email: result.user.email,
+              likedPosts: [],
+              favPosts: [],
+              userScore: 0,
+              badges: [],
+              preferences: [],
+            });
+          }
         });
-    }
+
+        dispatch({
+          type: actionTypes.SET_USER,
+          user: result.user,
+        });
+        dispatch({
+          type: actionTypes.SET_IDTOKEN,
+          idToken: result.user.uid,
+        });
+        localStorage.setItem('Bounce_uid', result.user.uid);
+      })
+      .catch((error) => {
+        alert(error.messsage);
+      });
   };
 
   return (
