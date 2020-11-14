@@ -15,28 +15,26 @@ const FeedPage = (props) => {
   };
   return (
     <div>
-      <div>
-        <NavbarContainer theme={props.theme} toggleTheme={props.themeToggler} />
-        <div style={styles}>
-          <HeaderImage
-            backgroundImage={FeedPageHeaderImage}
-            title="The Funktion Feed"
-            subtitle="Your tracks in one space."
-            topMargin="-100px"
-            titleFontColour="white"
-            subtitleFontColour="lightgray"
-          />
-          <div style={{ margin: 'auto' }}>
-            <div
-              style={{
-                width: '90%',
-                margin: 'auto',
-              }}
-            >
-              <PostCreator />
-            </div>
-            <FeedContainer />
+      <NavbarContainer theme={props.theme} toggleTheme={props.themeToggler} />
+      <div style={styles}>
+        <HeaderImage
+          backgroundImage={FeedPageHeaderImage}
+          title="The Funktion Feed"
+          subtitle="Your tracks in one space."
+          topMargin="-100px"
+          titleFontColour="white"
+          subtitleFontColour="lightgray"
+        />
+        <div style={{ margin: 'auto' }}>
+          <div
+            style={{
+              width: '90%',
+              margin: 'auto',
+            }}
+          >
+            <PostCreator />
           </div>
+          <FeedContainer />
         </div>
       </div>
     </div>

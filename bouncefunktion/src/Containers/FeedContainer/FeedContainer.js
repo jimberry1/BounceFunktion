@@ -6,10 +6,12 @@ import PostFilter from '../../Components/Post/PostFilter/PostFilter';
 import { useStateValue } from '../../Store/StateProvider';
 import { Spinner } from 'react-bootstrap';
 import './FeedContainer.css';
+import BlueButton from '../../UI/Modal/Buttons/BlueButton/BlueButton';
 
 const FeedContainer = (props) => {
   const [{ idToken }, dispatch] = useStateValue();
   const [posts, setPosts] = useState([]);
+  const [numberOfPostsToLoad, setNumberOfPostsToLoad] = useState(10);
   const [likedPosts, setLikedPosts] = useState(null);
   const [favPosts, setFavPosts] = useState(null);
   const [genreFilter, setGenreFilter] = useState('');
@@ -19,12 +21,13 @@ const FeedContainer = (props) => {
   useEffect(() => {
     db.collection('posts')
       .orderBy('timestamp', 'desc')
+      .limit(numberOfPostsToLoad)
       .onSnapshot((snapshot) => {
         setPosts(
           snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
         );
       });
-  }, []);
+  }, [numberOfPostsToLoad]);
 
   // This useEffect logic checks to see if the user has liked a post by returning the array of their likes.
   useEffect(() => {
@@ -54,8 +57,12 @@ const FeedContainer = (props) => {
   }, [idToken]);
 
   const filterChangedHandler = (event) => {
+    console.log("I've been triggered");
     console.log(event.target.value);
     setGenreFilter(event.target.value);
+
+    // TODO This about turning this off when lots of different genres start getting added
+    setNumberOfPostsToLoad(100);
   };
 
   const postDateFilterChangedHandler = (event) => {
@@ -75,26 +82,7 @@ const FeedContainer = (props) => {
       );
     }
     if (postDateFilter !== '') {
-      // if (postDateFilter === 'day') {
-      //   filteredPosts = filteredPosts.filter(
-      //     (post) => post.data.timestamp.seconds > new Date().getSeconds - 86400
-      //   );
-      // } else if (postDateFilter === 'week') {
-      //   filteredPosts = filteredPosts.filter(
-      //     (post) => post.data.timestamp.seconds > new Date().getSeconds - 604800
-      //   );
-      // } else if (postDateFilter === 'month') {
-      //   filteredPosts = filteredPosts.filter(
-      //     (post) =>
-      //       post.data.timestamp.seconds < new Date().getSeconds - 2592000
-      //   );
-      // } else if (postDateFilter === 'year') {
-      //   // filteredPosts = filteredPosts
-      //   // .filter
-      //   // (post) => post.data.timestamp.seconds > Date().getSeconds
-      //   // ();
-      // }
-      //  filteredPosts = filteredPosts.filter((post) => post.data.timestamp)
+      // Add logic for filtering via timestamp here
     }
     return filteredPosts;
   };
@@ -103,40 +91,69 @@ const FeedContainer = (props) => {
 
   if (likedPosts && favPosts) {
     const filteredPosts = filterFunktion(posts);
-    postsFeed = filteredPosts.map((post) => {
-      let postHasBeenLiked = false;
-      if (likedPosts.includes(post.id)) {
-        postHasBeenLiked = true;
-      }
-      let postHasBeenFavourited = false;
-      let urlForComparison = post.data.musicLink;
-      if (urlForComparison.includes('spotify')) {
-        urlForComparison = urlForComparison.replace(
-          'spotify.com/',
-          'spotify.com/embed/'
-        );
-      }
-      if (favPosts.includes(urlForComparison)) {
-        postHasBeenFavourited = true;
-      }
 
-      return (
-        <Post
-          key={post.id}
-          postID={post.id}
-          profilePic={post.data.profilePic}
-          message={post.data.message}
-          timestamp={post.data.timestamp}
-          username={post.data.username}
-          musicLink={post.data.musicLink}
-          postIsLiked={postHasBeenLiked}
-          totalLikes={post.data.likes}
-          idToken={idToken}
-          commentNumber={post.data.commentNumber}
-          postIsFavourite={postHasBeenFavourited}
-        />
+    // If the array filters to nothing, i.e no posts to render
+    if (!filteredPosts[0]) {
+      postsFeed = (
+        <div className="feedContainer__noPostsFoundContainer">
+          <p>
+            I'm sorry, no posts could be found matching your search criteria
+          </p>
+        </div>
       );
-    });
+    } else {
+      postsFeed = filteredPosts.map((post) => {
+        let postHasBeenLiked = false;
+        if (likedPosts.includes(post.id)) {
+          postHasBeenLiked = true;
+        }
+        let postHasBeenFavourited = false;
+        let urlForComparison = post.data.musicLink;
+        if (urlForComparison.includes('spotify')) {
+          urlForComparison = urlForComparison.replace(
+            'spotify.com/',
+            'spotify.com/embed/'
+          );
+        }
+        if (favPosts.includes(urlForComparison)) {
+          postHasBeenFavourited = true;
+        }
+
+        return (
+          <Post
+            key={post.id}
+            postID={post.id}
+            profilePic={post.data.profilePic}
+            message={post.data.message}
+            timestamp={post.data.timestamp}
+            username={post.data.username}
+            musicLink={post.data.musicLink}
+            postIsLiked={postHasBeenLiked}
+            totalLikes={post.data.likes}
+            idToken={idToken}
+            commentNumber={post.data.commentNumber}
+            postIsFavourite={postHasBeenFavourited}
+          />
+        );
+      });
+    }
+  }
+
+  let seeMorePostsButton = (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+      }}
+    >
+      <BlueButton clicked={() => setNumberOfPostsToLoad(100)}>
+        See more
+      </BlueButton>
+    </div>
+  );
+
+  if (numberOfPostsToLoad > 10) {
+    seeMorePostsButton = null;
   }
 
   return (
@@ -167,6 +184,7 @@ const FeedContainer = (props) => {
         </div>
         {postsFeed}
       </div>
+      {seeMorePostsButton}
     </div>
   );
 };

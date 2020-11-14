@@ -7,6 +7,15 @@
   justify-content: space-between;
 }
 
+.feedContainer__noPostsFoundContainer {
+  display: flex;
+  justify-content: center;
+  padding: 55px;
+  margin-top: 125px;
+  font-size: 20px;
+  background-color: gray;
+}
+
 @media (max-width: 800px) {
   .feedContainer__filter {
     width: 60%;
