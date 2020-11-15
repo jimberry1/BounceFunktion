@@ -169,7 +169,7 @@ const FeedContainer = (props) => {
           // maxWidth: '90%',
           margin: 'auto',
           overflowY: 'scroll',
-          paddingBottom: '100px',
+          paddingBottom: numberOfPostsToLoad > 10 ? '100px' : '0px',
         }}
       >
         <div className="feedContainer__filter">
@@ -183,8 +183,8 @@ const FeedContainer = (props) => {
           />
         </div>
         {postsFeed}
+        {seeMorePostsButton}
       </div>
-      {seeMorePostsButton}
     </div>
   );
 };
