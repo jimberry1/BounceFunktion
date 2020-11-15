@@ -12,7 +12,6 @@ import {
   Subtitle,
   Icon,
   AdditionalInfo,
-  Image,
   DescriptionInfo,
   IconHolder,
 } from './styles/Event';

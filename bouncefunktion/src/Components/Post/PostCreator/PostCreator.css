@@ -190,3 +190,19 @@
     display: none;
   }
 }
+
+.messageSender__emptyContainer {
+  margin-left: 25px;
+}
+
+@media (min-width: 500px) {
+  .messageSender__emptyContainer {
+    display: none;
+  }
+}
+
+@media (max-width: 450px) {
+  .messageSender__tagsTag {
+    display: none;
+  }
+}

@@ -122,7 +122,12 @@ const PostCreator = (props) => {
       <div className="messageSender__bottom">
         <div className="messageSender__option">
           <div className="messageSender__tagContainer">
-            <div>
+            <Container className="messageSender__emptyContainer">
+              <Row>
+                <Col></Col>
+              </Row>
+            </Container>
+            <div className="messageSender__tagsTag">
               {' '}
               <ImPriceTag style={{ color: 'blue' }} />
             </div>

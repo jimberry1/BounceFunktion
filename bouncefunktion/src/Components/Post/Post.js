@@ -222,7 +222,6 @@ const Post = ({
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              // minWidth: '250px',
             }}
           >
             {musicWidgetDefaultSpotify}
@@ -247,14 +246,7 @@ const Post = ({
             <strong>{likes}</strong>
           </p>
         </div>
-        <div
-          className="post__option"
-          style={{ flex: 1 }}
-          // style={{ flex: 1, marginLeft: '30px', width: '50px' }}
-        >
-          {/* <p>
-            <strong style={{ padding: '10px' }}>{likes}</strong>
-          </p> */}
+        <div className="post__option" style={{ flex: 1 }}>
           {thumbIcon}
         </div>
         <div className="post__option" onClick={openCommentsHandler}>
