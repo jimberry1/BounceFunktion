@@ -5,7 +5,6 @@ import Post from '../../Components/Post/Post';
 import PostFilter from '../../Components/Post/PostFilter/PostFilter';
 import { useStateValue } from '../../Store/StateProvider';
 import { Spinner } from 'react-bootstrap';
-import './FeedContainer.css';
 import BlueButton from '../../UI/Modal/Buttons/BlueButton/BlueButton';
 
 const FeedContainer = (props) => {
@@ -31,7 +30,6 @@ const FeedContainer = (props) => {
 
   // This useEffect logic checks to see if the user has liked a post by returning the array of their likes.
   useEffect(() => {
-    console.log('idToken= ' + idToken);
     if (idToken) {
       var docRef = db.collection('users').doc(idToken);
 
@@ -43,7 +41,6 @@ const FeedContainer = (props) => {
           if (doc.exists) {
             likedPosts = doc.data().likedPosts;
             favPosts = doc.data().favPosts;
-            console.log('favposts' + favPosts);
           } else {
             console.log('No such document!');
           }
@@ -57,22 +54,20 @@ const FeedContainer = (props) => {
   }, [idToken]);
 
   const filterChangedHandler = (event) => {
-    console.log("I've been triggered");
-    console.log(event.target.value);
     setGenreFilter(event.target.value);
-
-    // TODO This about turning this off when lots of different genres start getting added
     setNumberOfPostsToLoad(100);
   };
 
+  // TODO get this working with proper date formatting
   const postDateFilterChangedHandler = (event) => {
     setPostDateFilter(event.target.value);
   };
 
-  // This function is used to filter posts by the selected choices
+  // This function is used to filter posts by the selected choices - I wish there was a nicer way to do this, e.g. an array, but for now this conditional will have to do
   const filterFunktion = (postsToFilter) => {
     let filteredPosts = postsToFilter;
 
+    // If no filters have been applied then return the original posts array
     if (genreFilter === '' && postDateFilter === '') {
       return posts;
     }
@@ -92,7 +87,7 @@ const FeedContainer = (props) => {
   if (likedPosts && favPosts) {
     const filteredPosts = filterFunktion(posts);
 
-    // If the array filters to nothing, i.e no posts to render
+    // If the array filtered contains nothing, inform the user
     if (!filteredPosts[0]) {
       postsFeed = (
         <div className="feedContainer__noPostsFoundContainer">
@@ -109,6 +104,8 @@ const FeedContainer = (props) => {
         }
         let postHasBeenFavourited = false;
         let urlForComparison = post.data.musicLink;
+
+        // At the moment when we post the link, we don't store it in an embedded way, potentially we should store both the embedded the non-embedded link but for now I am happy to just do this hackery
         if (urlForComparison.includes('spotify')) {
           urlForComparison = urlForComparison.replace(
             'spotify.com/',
@@ -157,34 +154,26 @@ const FeedContainer = (props) => {
   }
 
   return (
-    <div>
-      {/* <PostFilter className="feedContainer__filter" /> */}
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          // height: '1000px',
-          // maxHeight: '1000px',
-          // maxWidth: '90%',
-          margin: 'auto',
-          overflowY: 'scroll',
-          paddingBottom: numberOfPostsToLoad > 10 ? '100px' : '0px',
-        }}
-      >
-        <div className="feedContainer__filter">
-          <PostFilter
-            filterValue={genreFilter}
-            filterChanged={(event) => filterChangedHandler(event)}
-            postDateFilterChanged={(event) =>
-              postDateFilterChangedHandler(event)
-            }
-            postDateFilterValue={postDateFilter}
-          />
-        </div>
-        {postsFeed}
-        {seeMorePostsButton}
+    <div
+      // For some reason this styling isn't applying from a class???
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        margin: 'auto',
+        paddingBottom: numberOfPostsToLoad > 10 ? '100px' : '0px',
+      }}
+    >
+      <div className="feedContainer__filter">
+        <PostFilter
+          filterValue={genreFilter}
+          filterChanged={(event) => filterChangedHandler(event)}
+          postDateFilterChanged={(event) => postDateFilterChangedHandler(event)}
+          postDateFilterValue={postDateFilter}
+        />
       </div>
+      {postsFeed}
+      {seeMorePostsButton}
     </div>
   );
 };

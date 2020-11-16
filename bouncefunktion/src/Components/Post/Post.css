@@ -11,7 +11,6 @@
   position: relative;
   align-items: center;
   padding: 15px;
-  /* border-bottom: 1px solid lightgray; */
 }
 
 .post__avatar {
@@ -20,7 +19,6 @@
 
 .post__topInfo > h3 {
   font-size: medium;
-  /* color: blueviolet; */
   color: black;
 }
 
@@ -49,6 +47,7 @@
   color: gray;
   cursor: pointer;
   padding: 15px;
+
   /* styling for phones */
   overflow-x: auto;
   margin-left: 15px;

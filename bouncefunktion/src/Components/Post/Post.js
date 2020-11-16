@@ -77,16 +77,13 @@ const Post = ({
   };
 
   const openCommentsHandler = () => {
-    console.log('open comments was previously set to = ' + openComments);
     setOpenComments((current) => !current);
   };
 
   const favouritePostHandler = () => {
-    console.log('fav post handler invoked');
     var userFavRef = db.collection('users').doc(idToken);
 
     if (favPost) {
-      console.log("I'm in the favourite posts is true bit");
       var userFavRef = db.collection('users').doc(idToken);
       if (favPost) {
         userFavRef
@@ -105,7 +102,6 @@ const Post = ({
           });
       }
     } else {
-      console.log("I'm in the favourite posts is false bit");
       userFavRef
         .get()
         .then(function (doc) {
@@ -236,6 +232,7 @@ const Post = ({
       />
 
       <div className="post__options">
+        {/* This is a workaround used to stop the like button being hidden for small screens, it's a really messy solution but the best I could come up with for now */}
         <Container className="post__emptyContainer">
           <Row>
             <Col></Col>
@@ -268,7 +265,6 @@ const Post = ({
           <p>Share</p>
         </div>
       </div>
-
       {postComments}
     </div>
   );
