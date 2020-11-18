@@ -10,6 +10,7 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import { ImPriceTag } from 'react-icons/im';
 import { Container, Row, Col } from 'react-bootstrap';
 import BlueButton from '../../../UI/Modal/Buttons/BlueButton/BlueButton';
+import GenreTag from './GenreTag/GenreTag';
 
 const PostCreator = (props) => {
   const [{ user }, dispatch] = useStateValue();
@@ -70,6 +71,7 @@ const PostCreator = (props) => {
     setDnbTag(false);
   };
 
+  // This was used when I tried to implement tags an array, unfortunately it didn't work as well as I had hoped
   const addTagHandler = (tag) => {
     console.log('addTagHandler invoked with ' + tag);
     console.log('is it contained? =' + tags.includes(tag));
@@ -122,6 +124,7 @@ const PostCreator = (props) => {
       <div className="messageSender__bottom">
         <div className="messageSender__option">
           <div className="messageSender__tagContainer">
+            {/* This is a sloppy solution used to fix a problem with styling on mobile devices */}
             <Container className="messageSender__emptyContainer">
               <Row>
                 <Col></Col>
@@ -141,73 +144,34 @@ const PostCreator = (props) => {
             >
               Tags
             </h3>
-            <div className="messageSender__tags">
-              <button
-                className={
-                  technoTag
-                    ? 'messageSender__buttonClicked'
-                    : 'messageSender__buttonNotClicked'
-                }
-                onClick={() => setTechnoTag((curVal) => !curVal)}
-              >
-                Techno
-              </button>
-            </div>
-            <div className="messageSender__tags">
-              <button
-                className={
-                  DiscoTag
-                    ? 'messageSender__buttonClicked'
-                    : 'messageSender__buttonNotClicked'
-                }
-                onClick={() => setDiscoTag((curVal) => !curVal)}
-              >
-                Disco
-              </button>
-            </div>
-            <div className="messageSender__tags">
-              <button
-                className={
-                  FunkTag
-                    ? 'messageSender__buttonClicked'
-                    : 'messageSender__buttonNotClicked'
-                }
-                onClick={() => setFunkTag((curVal) => !curVal)}
-              >
-                Funk
-              </button>
-            </div>
-            <div className="messageSender__tags">
-              <button
-                className={
-                  HouseTag
-                    ? 'messageSender__buttonClicked'
-                    : 'messageSender__buttonNotClicked'
-                }
-                onClick={() => setHouseTag((curVal) => !curVal)}
-              >
-                House
-              </button>
-            </div>
-            <div className="messageSender__tags">
-              <button
-                className={
-                  dnbTag
-                    ? 'messageSender__buttonClicked'
-                    : 'messageSender__buttonNotClicked'
-                }
-                onClick={() => setDnbTag((curVal) => !curVal)}
-              >
-                DnB
-              </button>
-            </div>
+            {/* Could definitely map this from a data array instead */}
+            <GenreTag
+              clicked={() => setTechnoTag((curVal) => !curVal)}
+              genreSelected={technoTag}
+              genre="Techno"
+            />
+            <GenreTag
+              clicked={() => setDiscoTag((curVal) => !curVal)}
+              genreSelected={DiscoTag}
+              genre="Disco"
+            />
+            <GenreTag
+              clicked={() => setFunkTag((curVal) => !curVal)}
+              genreSelected={FunkTag}
+              genre="Funk"
+            />
+            <GenreTag
+              clicked={() => setHouseTag((curVal) => !curVal)}
+              genreSelected={HouseTag}
+              genre="House"
+            />
+            <GenreTag
+              clicked={() => setDnbTag((curVal) => !curVal)}
+              genreSelected={dnbTag}
+              genre="DnB"
+            />
           </div>
         </div>
-
-        {/* <div className="messageSender__option">
-          <PhotoLibraryIcon style={{ color: 'green' }} />
-          <h3>Photo/Video</h3>
-        </div> */}
       </div>
     </div>
   );

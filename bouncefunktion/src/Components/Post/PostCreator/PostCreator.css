@@ -62,64 +62,12 @@
   /* padding: 20px; */
 }
 
-/* .messageSender__option:hover {
-  background-color: #eff2f5;
-  border-radius: 20px;
-} */
-
-.messageSender__tags {
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  justify-content: space-evenly;
-  outline: none;
-  width: 200px;
-}
-
-.messageSender__tags > button {
-  border: none;
-  padding: 10px;
-  border-radius: 15px;
-  width: 100%;
-  margin-right: 5px;
-  /* background-color: lightgray; */
-  /* background-color: black; */
-}
-/* .messageSender__tags > button:hover {
-  background-color: #eff2f5;
-} */
-.messageSender__tags > button:focus {
-  /* background-color: #eff2f5; */
-  outline: none;
-}
-.messageSender__tags > button:active {
-  background-color: #eff2f5;
-  /* font-size: large; */
-}
-
 .messageSender__tagContainer {
   display: flex;
   flex-direction: row;
   align-content: center;
   justify-content: space-evenly;
   width: 100%;
-}
-
-.messageSender__buttonNotClicked {
-  outline: none;
-  background-color: lightgray;
-  color: midnightblue;
-  flex: 1;
-}
-
-.messageSender__buttonNotClicked:hover {
-  background-color: #eff2f5;
-}
-
-.messageSender__buttonClicked {
-  outline: none;
-  color: white;
-  background-color: midnightblue;
 }
 
 @media (max-width: 1000px) {
