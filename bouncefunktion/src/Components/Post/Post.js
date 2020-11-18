@@ -12,6 +12,7 @@ import PostComments from './PostComments/PostComments';
 import MaterialUIModal from '../../UI/Modal/MaterialUIModal';
 import StarIcon from '@material-ui/icons/Star';
 import { AiFillStar } from 'react-icons/ai';
+import PostMusicPlayer from './PostMusicPlayer/PostMusicPlayer';
 
 const Post = ({
   postID,
@@ -44,28 +45,8 @@ const Post = ({
     <Spinner animation="border" variant="danger" />
   );
 
-  if (musicLink && musicLink.includes('spotify')) {
-    musicLink = musicLink.replace('spotify.com/', 'spotify.com/embed/');
-    musicWidgetDefaultSpotify = (
-      <iframe
-        src={musicLink}
-        width="90%"
-        height="80"
-        frameBorder="0"
-        allowtransparency="true"
-        allow="encrypted-media"
-        style={{ marginBottom: '25px' }}
-      ></iframe>
-    );
-  } else if (musicLink) {
-    musicWidgetDefaultSpotify = (
-      <ReactPlayer
-        url={musicLink}
-        height="150px"
-        width="90%"
-        style={{ marginBottom: '25px' }}
-      />
-    );
+  if (musicLink) {
+    musicWidgetDefaultSpotify = <PostMusicPlayer musicLink={musicLink} />;
   }
 
   const openModalHandler = () => {
