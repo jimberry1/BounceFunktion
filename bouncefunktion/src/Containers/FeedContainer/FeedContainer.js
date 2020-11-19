@@ -31,7 +31,7 @@ const FeedContainer = (props) => {
   // This useEffect logic checks to see if the user has liked a post by returning the array of their likes.
   useEffect(() => {
     if (idToken) {
-      var docRef = db.collection('users').doc(idToken);
+      const docRef = db.collection('users').doc(idToken);
 
       docRef
         .get()

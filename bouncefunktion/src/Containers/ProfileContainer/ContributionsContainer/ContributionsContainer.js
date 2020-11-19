@@ -36,7 +36,6 @@ const ContributionsContainer = (props) => {
   if (contributions[0]) {
     contributionsArray = contributions.map((contribution) => {
       let musicUrl = contribution.musicLink;
-      console.log('Contributions musicUrl = ' + musicUrl);
 
       if (musicUrl.includes('spotify')) {
         musicUrl = musicUrl.replace('spotify.com/', 'spotify.com/embed/');

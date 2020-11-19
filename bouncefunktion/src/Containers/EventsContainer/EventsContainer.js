@@ -4,7 +4,6 @@ import EventsCreator from '../../Components/Events/EventsCreator/EventsCreator';
 import BlueButton from '../../UI/Modal/Buttons/BlueButton/BlueButton';
 import db from '../../firebase';
 import { useStateValue } from '../../Store/StateProvider';
-import Event from '../../Components/Events/Event/index';
 import EventContainer from './EventContainer/EventContainer';
 
 const EventsContainer = (props) => {
@@ -70,7 +69,7 @@ const EventsContainer = (props) => {
     //Updating internal state
     setEventsArray(
       eventsArray.map((event) => {
-        if (event.id == id) {
+        if (event.id === id) {
           event.interested = !event.interested;
         }
         return event;
@@ -114,7 +113,7 @@ const EventsContainer = (props) => {
     //Update internal state
     setEventsArray(
       eventsArray.map((event) => {
-        if (event.id == id) {
+        if (event.id === id) {
           event.attending = !event.attending;
         }
         return event;
@@ -123,7 +122,6 @@ const EventsContainer = (props) => {
   };
 
   const createEventToggler = () => {
-    console.log('Button pressed');
     if (eventSubmittedText) {
       setEventSubmittedText('');
     }
@@ -145,9 +143,6 @@ const EventsContainer = (props) => {
         clickedAttending={(id) => attendingHandler(id)}
       />
     );
-    // eventsToRender = eventsArray.map((event) => {
-    //   return <Event key={event.id} eventData={event.data} />;
-    // });
   }
 
   return (

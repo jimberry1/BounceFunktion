@@ -3,7 +3,6 @@ import { Spinner } from 'react-bootstrap';
 import ReactPlayer from 'react-player';
 import { Col, Row, Container } from 'react-bootstrap';
 const FavouriteTrack = (props) => {
-  console.log('musicURL=' + props.musicURL);
   let trackFrame = <Spinner />;
   if (props.musicURL && props.musicURL.includes('spotify')) {
     return (

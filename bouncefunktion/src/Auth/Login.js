@@ -12,9 +12,6 @@ const Login = (props) => {
   if (localStorageUid !== null) {
     const dbUserRef = db.collection('users').doc(localStorageUid);
     dbUserRef.get().then((docSnapshot) => {
-      console.log(docSnapshot.data());
-      console.log(docSnapshot.id);
-
       const user = {
         displayName: docSnapshot.data().name,
         email: docSnapshot.data().email,

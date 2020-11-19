@@ -5,7 +5,6 @@ import { RiMoonClearFill } from 'react-icons/ri';
 import { FiSun } from 'react-icons/fi';
 //   border: 2px solid ${({ theme }) => theme.toggleBorder};
 const Toggle = ({ theme, toggleTheme }) => {
-  console.log('theme= ' + theme);
   const Button = styled.button`
   background: ${({ theme }) => theme.background};
   color: ${(theme) => theme.text};

@@ -25,7 +25,6 @@ const FavouriteTracksContainer = (props) => {
 
   if (favTracks[0]) {
     favouritePostsDisplay = favTracks.map((post) => {
-      console.log(post);
       return <FavouriteTrack key={post} musicURL={post} />;
     });
   }

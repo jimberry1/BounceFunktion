@@ -23,8 +23,6 @@ const PostCreator = (props) => {
   const [FunkTag, setFunkTag] = useState(false);
   const [dnbTag, setDnbTag] = useState(false);
 
-  console.log('this is tags array=' + tags);
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
