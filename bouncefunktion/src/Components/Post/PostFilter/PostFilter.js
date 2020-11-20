@@ -32,6 +32,9 @@ const PostFilter = (props) => {
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-simple-select-label">Genre</InputLabel>
               <Select
+                MenuProps={{
+                  disableScrollLock: true,
+                }}
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={props.filterValue}
