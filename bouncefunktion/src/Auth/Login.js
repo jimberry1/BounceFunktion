@@ -30,6 +30,8 @@ const Login = (props) => {
   }
 
   const signIn = () => {
+    let userDetailsInFirebase = null;
+
     auth
       .signInWithPopup(provider)
       .then((result) => {
@@ -39,6 +41,12 @@ const Login = (props) => {
         dbUserRef.get().then((docSnapshot) => {
           if (docSnapshot.exists) {
             console.log('This user already exists');
+            userDetailsInFirebase = {
+              displayName: docSnapshot.data().name,
+              email: docSnapshot.data().email,
+              photoURL: docSnapshot.data().photoURL,
+              uid: docSnapshot.id,
+            };
           } else {
             dbUserRef.set({
               photoURL: result.user.photoURL,
@@ -51,17 +59,20 @@ const Login = (props) => {
               preferences: [],
             });
           }
-        });
 
-        dispatch({
-          type: actionTypes.SET_USER,
-          user: result.user,
+          dispatch({
+            type: actionTypes.SET_USER,
+            user:
+              userDetailsInFirebase !== null
+                ? userDetailsInFirebase
+                : result.user,
+          });
+          dispatch({
+            type: actionTypes.SET_IDTOKEN,
+            idToken: result.user.uid,
+          });
+          localStorage.setItem('Bounce_uid', result.user.uid);
         });
-        dispatch({
-          type: actionTypes.SET_IDTOKEN,
-          idToken: result.user.uid,
-        });
-        localStorage.setItem('Bounce_uid', result.user.uid);
       })
       .catch((error) => {
         alert(error.messsage);
