@@ -10,22 +10,29 @@ const Login = (props) => {
   const localStorageUid = localStorage.getItem('Bounce_uid');
 
   if (localStorageUid !== null) {
-    const dbUserRef = db.collection('users').doc(localStorageUid);
-    dbUserRef.get().then((docSnapshot) => {
-      const user = {
-        displayName: docSnapshot.data().name,
-        email: docSnapshot.data().email,
-        photoURL: docSnapshot.data().photoURL,
-        uid: docSnapshot.id,
-      };
-      dispatch({
-        type: actionTypes.SET_USER,
-        user: user,
-      });
-      dispatch({
-        type: actionTypes.SET_IDTOKEN,
-        idToken: docSnapshot.id,
-      });
+    auth.onAuthStateChanged(function (user) {
+      if (user) {
+        console.log('I am authenticated with user = ' + user);
+        const dbUserRef = db.collection('users').doc(localStorageUid);
+        dbUserRef.get().then((docSnapshot) => {
+          const user = {
+            displayName: docSnapshot.data().name,
+            email: docSnapshot.data().email,
+            photoURL: docSnapshot.data().photoURL,
+            uid: docSnapshot.id,
+          };
+          dispatch({
+            type: actionTypes.SET_USER,
+            user: user,
+          });
+          dispatch({
+            type: actionTypes.SET_IDTOKEN,
+            idToken: docSnapshot.id,
+          });
+        });
+      } else {
+        signIn();
+      }
     });
   }
 

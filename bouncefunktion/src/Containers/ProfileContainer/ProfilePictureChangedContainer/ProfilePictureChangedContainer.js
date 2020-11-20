@@ -3,6 +3,7 @@ import db, { storage } from '../../../firebase';
 import Firebase from 'firebase';
 import { AiFillCamera } from 'react-icons/ai';
 import { Avatar } from '@material-ui/core';
+import BlueButton from '../../../UI/Modal/Buttons/BlueButton/BlueButton';
 
 const ProfilePictureChangedContainer = (props) => {
   const [profilePicToUpload, setProfilePicToUpload] = useState(null);
@@ -63,27 +64,28 @@ const ProfilePictureChangedContainer = (props) => {
           onClick={fileSelectionHandler}
           style={{
             background: 'none',
+            justifyContent: 'center',
+            alignItems: 'center',
             border: 'none',
             outline: 'none',
-            marginTop: '150px',
+            alignContent: 'center',
+            width: '100%',
           }}
         >
           <AiFillCamera />
         </button>
-        <button
-          onClick={(e) => fileUploadHandler(e)}
+        <div
           style={{
-            display: profilePicToUpload !== null ? '' : 'none',
-            backgroundColor: 'green',
-            borderRadius: '15px',
+            display: profilePicToUpload !== null ? 'flex' : 'none',
             outline: 'none',
             border: 'none',
+            flex: '1',
             justifyContent: 'center',
             alignItems: 'center',
           }}
         >
-          Confirm
-        </button>
+          <BlueButton onClick={(e) => fileUploadHandler(e)}>Confirm</BlueButton>
+        </div>
       </div>
     </div>
   );
