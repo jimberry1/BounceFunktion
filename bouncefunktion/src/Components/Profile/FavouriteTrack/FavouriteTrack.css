@@ -2,6 +2,7 @@
   padding: 10px 10px;
   border-top: 1px solid gray;
   height: 105px;
+  margin: auto;
 }
 
 .favouriteTrack__container:hover {

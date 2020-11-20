@@ -14,7 +14,7 @@ const FavouriteTrack = (props) => {
           frameBorder="0"
           allowtransparency="true"
           allow="encrypted-media"
-          // style={{ marginBottom: '25px' }}
+          style={{ margin: 'auto' }}
         ></iframe>
       </div>
     );
@@ -26,7 +26,6 @@ const FavouriteTrack = (props) => {
           height="80px"
           width="90%"
           style={{ margin: 'auto' }}
-          // style={{ marginBottom: '25px' }}
         />
       </div>
     );
@@ -39,9 +38,10 @@ const FavouriteTrack = (props) => {
             fontSize: '15px',
             height: '100%',
             wordWrap: 'break-word',
+            flex: '1',
           }}
         >
-          <p>{props.musicURL}</p>
+          <p style={{ maxWidth: '300px', margin: 'auto' }}>{props.musicURL}</p>
         </div>
       </div>
     );
