@@ -130,6 +130,7 @@ const FeedContainer = (props) => {
             idToken={idToken}
             commentNumber={post.data.commentNumber}
             postIsFavourite={postHasBeenFavourited}
+            theme={props.theme}
           />
         );
       });

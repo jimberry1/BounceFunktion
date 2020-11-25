@@ -34,7 +34,7 @@ const FeedPage = (props) => {
           >
             <PostCreator />
           </div>
-          <FeedContainer />
+          <FeedContainer theme={props.theme} />
         </div>
       </div>
     </div>

@@ -16,7 +16,7 @@ const EventsPage = (props) => {
           titleFontColour="white"
           subtitleFontColour="white"
         />
-        <EventsContainer />
+        <EventsContainer theme={props.theme} />
       </div>
     </div>
   );
