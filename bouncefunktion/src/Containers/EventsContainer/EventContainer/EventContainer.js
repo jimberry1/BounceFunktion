@@ -63,7 +63,7 @@ const EventContainer = (props) => {
       <Event.Container>
         {props.eventsArray.map((event) => {
           return (
-            <Event key={event.id} eventData={event.data}>
+            <Event key={event.id} eventData={event.data} theme={props.theme}>
               <Event.Top>
                 <Event.Title>{event.data.eventName}</Event.Title>
                 <Event.IconHolder>

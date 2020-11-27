@@ -33,6 +33,9 @@ const EventsContainer = (props) => {
     });
   }, [user]);
 
+  //Gets the id's of the 3 most recently added events and adds them to the recentlyCreatedEvents array
+  // useEffect(() => {
+  //   const eventsDbRef = db
   const interestChangedHandler = (id) => {
     console.log('interested handler');
 

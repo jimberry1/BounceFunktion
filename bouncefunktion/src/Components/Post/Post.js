@@ -26,6 +26,7 @@ const Post = ({
   idToken,
   commentNumber,
   postIsFavourite,
+  theme,
 }) => {
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(postIsLiked);
@@ -177,7 +178,10 @@ const Post = ({
   }
 
   return (
-    <div className="post">
+    <div
+      className="post"
+      style={{ border: theme === 'light' ? '1px solid black' : 'none' }}
+    >
       <div className="post__top">
         <Avatar src={profilePic} className="post__avatar" />
         <div className="post__topInfo">
