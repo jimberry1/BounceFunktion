@@ -22,6 +22,10 @@ const PostCreator = (props) => {
   const [DiscoTag, setDiscoTag] = useState(false);
   const [FunkTag, setFunkTag] = useState(false);
   const [dnbTag, setDnbTag] = useState(false);
+  const [rapTag, setRapTag] = useState(false);
+  const [electronicTag, setElectronicTag] = useState(false);
+  const [alternativeTag, setAlternativeTag] = useState(false);
+  const [indieTag, setIndieTag] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,6 +51,18 @@ const PostCreator = (props) => {
     if (dnbTag) {
       genreTags.push('DnB');
     }
+    if (electronicTag) {
+      genreTags.push('Electronic');
+    }
+    if (rapTag) {
+      genreTags.push('Rap');
+    }
+    if (alternativeTag) {
+      genreTags.push('Alternative');
+    }
+    if (indieTag) {
+      genreTags.push('Indie');
+    }
 
     db.collection('posts').add({
       message: input,
@@ -67,6 +83,10 @@ const PostCreator = (props) => {
     setHouseTag(false);
     setFunkTag(false);
     setDnbTag(false);
+    setElectronicTag(false);
+    setRapTag(false);
+    setAlternativeTag(false);
+    setIndieTag(false);
   };
 
   // This was used when I tried to implement tags an array, unfortunately it didn't work as well as I had hoped
@@ -149,6 +169,11 @@ const PostCreator = (props) => {
               genre="Techno"
             />
             <GenreTag
+              clicked={() => setHouseTag((curVal) => !curVal)}
+              genreSelected={HouseTag}
+              genre="House"
+            />
+            <GenreTag
               clicked={() => setDiscoTag((curVal) => !curVal)}
               genreSelected={DiscoTag}
               genre="Disco"
@@ -159,14 +184,24 @@ const PostCreator = (props) => {
               genre="Funk"
             />
             <GenreTag
-              clicked={() => setHouseTag((curVal) => !curVal)}
-              genreSelected={HouseTag}
-              genre="House"
-            />
-            <GenreTag
               clicked={() => setDnbTag((curVal) => !curVal)}
               genreSelected={dnbTag}
               genre="DnB"
+            />
+            <GenreTag
+              clicked={() => setRapTag((curVal) => !curVal)}
+              genreSelected={rapTag}
+              genre="Rap"
+            />
+            <GenreTag
+              clicked={() => setIndieTag((curVal) => !curVal)}
+              genreSelected={indieTag}
+              genre="Indie"
+            />
+            <GenreTag
+              clicked={() => setAlternativeTag((curVal) => !curVal)}
+              genreSelected={alternativeTag}
+              genre="Alternative"
             />
           </div>
         </div>

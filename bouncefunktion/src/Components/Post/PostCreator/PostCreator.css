@@ -140,10 +140,16 @@
 }
 
 .messageSender__emptyContainer {
-  margin-left: 25px;
+  margin-left: 230px;
 }
 
 @media (min-width: 500px) {
+  .messageSender__emptyContainer {
+    margin-left: 100px;
+  }
+}
+
+@media (min-width: 700px) {
   .messageSender__emptyContainer {
     display: none;
   }

@@ -46,7 +46,9 @@ const PostFilter = (props) => {
                 <MenuItem value={'Disco'}>Disco</MenuItem>
                 <MenuItem value={'Funk'}>Funk</MenuItem>
                 <MenuItem value={'DnB'}>DnB</MenuItem>
-                <MenuItem value={'Meme'}>Meme</MenuItem>
+                <MenuItem value={'Rap'}>Rap</MenuItem>
+                <MenuItem value={'Indie'}>Indie</MenuItem>
+                <MenuItem value={'Alternative'}>Alternative</MenuItem>
               </Select>
             </FormControl>
           </div>
