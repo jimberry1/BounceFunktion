@@ -11,10 +11,11 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import { FaTicketAlt } from 'react-icons/fa';
 import DropDownMenu from '../../../UI/DropDownMenu/DropDownMenu';
+import Confetti from 'react-confetti';
 const EventContainer = (props) => {
-  const eventIconCalculator = (eventType) => {
-    'fest, club, live, other';
+  const [showConfetti, setShowConfetti] = useState(false);
 
+  const eventIconCalculator = (eventType) => {
     switch (eventType) {
       case 'fest':
         return (
@@ -58,16 +59,47 @@ const EventContainer = (props) => {
     return date.toLocaleDateString();
   };
 
+  const clickedInterested = (id, interestedStatus) => {
+    props.clickedInterested(id);
+
+    let confettiShowStatus = false;
+    if (!interestedStatus) {
+      confettiShowStatus = true;
+    }
+    setShowConfetti(confettiShowStatus);
+  };
+
+  const clickedAttending = (id, attendingStatus) => {
+    props.clickedAttending(id);
+
+    let confettiShowStatus = false;
+    if (!attendingStatus) {
+      confettiShowStatus = true;
+    }
+    setShowConfetti(confettiShowStatus);
+  };
+
   return (
     <div>
       <Event.Container>
         {props.eventsArray.map((event) => {
           return (
             <Event key={event.id} eventData={event.data} theme={props.theme}>
+              {showConfetti && (
+                <Confetti
+                  run={showConfetti}
+                  recycle={false}
+                  onConfettiComplete={() => setShowConfetti(false)}
+                />
+              )}
               <Event.Top>
                 <Event.Title>{event.data.eventName}</Event.Title>
                 <Event.IconHolder>
-                  <Event.Icon onClick={() => props.clickedInterested(event.id)}>
+                  <Event.Icon
+                    onClick={() =>
+                      clickedInterested(event.id, event.interested)
+                    }
+                  >
                     {event.interested ? (
                       <DoneIcon style={{ color: 'green' }} />
                     ) : (
@@ -80,7 +112,9 @@ const EventContainer = (props) => {
                       event.data.interestedList ? event.data.interestedList : []
                     }
                   />
-                  <Event.Icon onClick={() => props.clickedAttending(event.id)}>
+                  <Event.Icon
+                    onClick={() => clickedAttending(event.id, event.attending)}
+                  >
                     {event.attending ? (
                       <HowToRegIcon style={{ color: 'cyan' }} />
                     ) : (

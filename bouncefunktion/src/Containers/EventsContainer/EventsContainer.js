@@ -5,6 +5,9 @@ import BlueButton from '../../UI/Modal/Buttons/BlueButton/BlueButton';
 import db from '../../firebase';
 import { useStateValue } from '../../Store/StateProvider';
 import EventContainer from './EventContainer/EventContainer';
+import { Spinner } from 'react-bootstrap';
+import EventsFilterBar from './EventsFilterBar/EventsFilterBar';
+import Confetti from 'react-confetti';
 
 const EventsContainer = (props) => {
   // Event container should contain lots of information, I basically want a longish form for someone to fill out which details all the information you'd need for a night out
@@ -13,9 +16,11 @@ const EventsContainer = (props) => {
   const [showEventsCreator, setShowEventsCreator] = useState(false);
   const [eventsArray, setEventsArray] = useState(null);
   const [eventSubmittedText, setEventSubmittedText] = useState('');
+  // const [recentlyCreatedEvents, setRecentlyCreatedEvents] = useState(null);
 
+  // Gets the data for all of the events ordered by when they're occurring
   useEffect(() => {
-    const eventsDbRef = db.collection('events');
+    const eventsDbRef = db.collection('events').orderBy('eventDate', 'asc');
 
     eventsDbRef.get().then(function (query) {
       setEventsArray(
@@ -36,6 +41,26 @@ const EventsContainer = (props) => {
   //Gets the id's of the 3 most recently added events and adds them to the recentlyCreatedEvents array
   // useEffect(() => {
   //   const eventsDbRef = db
+  //     .collection('events')
+  //     .orderBy('timestamp', 'desc')
+  //     .limit(3);
+
+  //   eventsDbRef.get().then(function (query) {
+  //     setRecentlyCreatedEvents(
+  //       query.docs.map((record) => ({
+  //         id: record.id,
+  //         data: record.data(),
+  //         interested: record.data().interestedList.includes(user.displayName)
+  //           ? true
+  //           : false,
+  //         attending: record.data().interestedList.includes(user.displayName)
+  //           ? true
+  //           : false,
+  //       }))
+  //     );
+  //   });
+  // }, [user]);
+
   const interestChangedHandler = (id) => {
     console.log('interested handler');
 
@@ -136,17 +161,32 @@ const EventsContainer = (props) => {
     setShowEventsCreator(false);
   };
 
-  let eventsToRender = null;
+  let eventsToRender = <Spinner animation="border" role="status" />;
+  let recentlyCreatedEventsToRender = (
+    <Spinner animation="border" role="status" />
+  );
 
   if (eventsArray) {
     eventsToRender = (
       <EventContainer
+        theme={props.theme}
         eventsArray={eventsArray}
         clickedInterested={(id) => interestChangedHandler(id)}
         clickedAttending={(id) => attendingHandler(id)}
       />
     );
   }
+
+  // if (recentlyCreatedEvents) {
+  //   recentlyCreatedEventsToRender = (
+  //     <EventContainer
+  //       theme={props.theme}
+  //       eventsArray={recentlyCreatedEvents}
+  //       clickedInterested={(id) => interestChangedHandler(id)}
+  //       clickedAttending={(id) => attendingHandler(id)}
+  //     />
+  //   );
+  // }
 
   return (
     <div>
@@ -155,6 +195,7 @@ const EventsContainer = (props) => {
           {showEventsCreator ? 'Minimize' : 'Create an Event'}
         </BlueButton>
       </div>
+      {/* <EventsFilterBar /> */}
       <div>
         {showEventsCreator ? (
           <EventsCreator eventSubmitted={eventSubmittedHandler} />
@@ -163,6 +204,25 @@ const EventsContainer = (props) => {
       <div className="eventsContainer__submittedMessage">
         {eventSubmittedText}
       </div>
+      {/* <h1
+        style={{
+          textAlign: 'center',
+          marginBottom: '20px',
+        }}
+      >
+        Recently Added
+      </h1>
+      <div>{recentlyCreatedEventsToRender}</div> */}
+
+      <h1
+        style={{
+          textAlign: 'center',
+          marginTop: '50px',
+          marginBottom: '50px',
+        }}
+      >
+        Upcoming Events
+      </h1>
       <div>{eventsToRender}</div>
     </div>
   );
