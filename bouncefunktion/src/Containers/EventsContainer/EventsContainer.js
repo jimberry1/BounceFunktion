@@ -62,15 +62,10 @@ const EventsContainer = (props) => {
   // }, [user]);
 
   const interestChangedHandler = (id) => {
-    console.log('interested handler');
-
     const eventRef = db.collection('events').doc(id);
 
     eventRef.get().then(function (query) {
-      console.log(query.data().interestedList);
-
       if (query.data() && query.data().interestedList) {
-        console.log('query.data.interested list evaluation = true');
         const interestedArray = query.data().interestedList;
         if (interestedArray.includes(user.displayName)) {
           eventRef.set(
@@ -106,15 +101,10 @@ const EventsContainer = (props) => {
   };
 
   const attendingHandler = (id) => {
-    console.log('attending handler invoked');
-
     const eventRef = db.collection('events').doc(id);
 
     eventRef.get().then(function (query) {
-      console.log(query.data().attendingList);
-
       if (query.data() && query.data().attendingList) {
-        console.log('query.data.interested list evaluation = true');
         const attendingArray = query.data().attendingList;
         if (attendingArray.includes(user.displayName)) {
           eventRef.set(
