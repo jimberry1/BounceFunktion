@@ -11,6 +11,7 @@ import { ImPriceTag } from 'react-icons/im';
 import { Container, Row, Col } from 'react-bootstrap';
 import BlueButton from '../../../UI/Modal/Buttons/BlueButton/BlueButton';
 import GenreTag from './GenreTag/GenreTag';
+import MaterialUIModal from '../../../UI/Modal/MaterialUIModal';
 
 const PostCreator = (props) => {
   const [{ user }, dispatch] = useStateValue();
@@ -26,11 +27,40 @@ const PostCreator = (props) => {
   const [electronicTag, setElectronicTag] = useState(false);
   const [alternativeTag, setAlternativeTag] = useState(false);
   const [indieTag, setIndieTag] = useState(false);
+  const [postUrls, setPostUrls] = useState([]);
+  const [openMusicLinkModal, setOpenMusicLinkModal] = useState(false);
+
+  useEffect(() => {
+    db.collection('configuration')
+      .doc('postUrls')
+      .get()
+      .then(function (snapshot) {
+        if (snapshot.exists) {
+          // console.log(snapshot.data().urls);
+          setPostUrls(snapshot.data().urls);
+        } else {
+          console.log('Post url array did not exist');
+        }
+      });
+  }, []);
+
+  const openModalHandler = () => {
+    setOpenMusicLinkModal(true);
+  };
+
+  const closeModalHandler = () => {
+    setOpenMusicLinkModal(false);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (musicUrl === '' || input === '') {
+    if (musicUrl === '' && input === '') {
+      return;
+    }
+
+    if (postUrls.includes(musicUrl)) {
+      openModalHandler();
       return;
     }
 
@@ -76,6 +106,17 @@ const PostCreator = (props) => {
       uid: user.uid,
     });
 
+    const configurationRef = db.collection('configuration').doc('postUrls');
+    configurationRef.get().then(function (doc) {
+      if (doc.exists) {
+        const urlArray = doc.data().urls;
+        urlArray.push(musicUrl);
+        configurationRef.set({ urls: urlArray }, { merge: true });
+      } else {
+        console.log('Unable to retrieve postUrls');
+      }
+    });
+
     setInput('');
     setMusicUrl('');
     setDiscoTag(false);
@@ -111,6 +152,13 @@ const PostCreator = (props) => {
 
   return (
     <div className="messageSender">
+      <MaterialUIModal
+        open={openMusicLinkModal}
+        openModal={openModalHandler}
+        closeModal={closeModalHandler}
+        musicLink={musicUrl}
+        modalTitle="The following URL has already been posted"
+      />
       <div className="messageSender__top">
         <div className="messageSender__avatarHolder">
           <Avatar src={user.photoURL} />

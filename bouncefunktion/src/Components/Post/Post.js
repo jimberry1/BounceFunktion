@@ -214,6 +214,7 @@ const Post = ({
         openModal={openModalHandler}
         closeModal={closeModalHandler}
         musicLink={musicLink}
+        modalTitle="Music Link"
       />
 
       <div className="post__options">
