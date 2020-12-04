@@ -4,12 +4,8 @@ import firebase from 'firebase';
 import './PostCreator.css';
 import { Avatar } from '@material-ui/core';
 import { useStateValue } from '../../../Store/StateProvider';
-import VideocamIcon from '@material-ui/icons/Videocam';
-import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
-import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import { ImPriceTag } from 'react-icons/im';
 import { Container, Row, Col } from 'react-bootstrap';
-import BlueButton from '../../../UI/Modal/Buttons/BlueButton/BlueButton';
 import GenreTag from './GenreTag/GenreTag';
 import MaterialUIModal from '../../../UI/Modal/MaterialUIModal';
 

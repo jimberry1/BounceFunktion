@@ -58,6 +58,12 @@ const EventsCreator = (props) => {
   const submitEventFormHandler = (e) => {
     e.preventDefault();
 
+    let currentDate = new Date();
+
+    if (selectedDate.getTime() < currentDate.getTime()) {
+      return;
+    }
+
     const eventsRef = db.collection('events');
 
     eventsRef.add({
@@ -89,7 +95,11 @@ const EventsCreator = (props) => {
       </div>
 
       <Container
-        style={{ display: 'flex', justifyContent: 'center', marginTop: '25px' }}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '25px',
+        }}
       >
         <form className={classes.root} noValidate autoComplete="off">
           <Row>

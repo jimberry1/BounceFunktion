@@ -1,0 +1,17 @@
+.eventFilterBar__container {
+  display: flex;
+  width: 90%;
+  border: 1px solid black;
+  justify-content: space-between;
+  margin: auto;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+@media (max-width: 500px) {
+  .eventFilterBar__container {
+    flex-direction: column;
+    padding: 0px;
+    align-items: center;
+  }
+}

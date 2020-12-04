@@ -8,19 +8,33 @@ import EventContainer from './EventContainer/EventContainer';
 import { Spinner } from 'react-bootstrap';
 import EventsFilterBar from './EventsFilterBar/EventsFilterBar';
 import Confetti from 'react-confetti';
+import firebase from 'firebase';
 
 const EventsContainer = (props) => {
-  // Event container should contain lots of information, I basically want a longish form for someone to fill out which details all the information you'd need for a night out
-
   const [{ user }, dispatch] = useStateValue();
   const [showEventsCreator, setShowEventsCreator] = useState(false);
   const [eventsArray, setEventsArray] = useState(null);
   const [eventSubmittedText, setEventSubmittedText] = useState('');
+  const [orderByFilter, setOrderByFilter] = useState('eventDate');
+  const [eventTypeFilter, setEventTypeFilter] = useState('');
   // const [recentlyCreatedEvents, setRecentlyCreatedEvents] = useState(null);
 
   // Gets the data for all of the events ordered by when they're occurring
   useEffect(() => {
-    const eventsDbRef = db.collection('events').orderBy('eventDate', 'asc');
+    //create a Date object with yesterday's date for filtering the query
+    let start = new Date();
+    start.setDate(start.getDate() - 1);
+
+    let eventsDbRef = db
+      .collection('events')
+      .orderBy('eventDate', 'asc')
+      .where('eventDate', '>', start);
+
+    if (orderByFilter === 'timestamp') {
+      eventsDbRef = db.collection('events').orderBy('timestamp', 'desc');
+    } else if (orderByFilter === 'popularity') {
+      // I will implement this in the future but requires Atomic integer for event popularity
+    }
 
     eventsDbRef.get().then(function (query) {
       setEventsArray(
@@ -36,30 +50,7 @@ const EventsContainer = (props) => {
         }))
       );
     });
-  }, [user]);
-
-  //Gets the id's of the 3 most recently added events and adds them to the recentlyCreatedEvents array
-  // useEffect(() => {
-  //   const eventsDbRef = db
-  //     .collection('events')
-  //     .orderBy('timestamp', 'desc')
-  //     .limit(3);
-
-  //   eventsDbRef.get().then(function (query) {
-  //     setRecentlyCreatedEvents(
-  //       query.docs.map((record) => ({
-  //         id: record.id,
-  //         data: record.data(),
-  //         interested: record.data().interestedList.includes(user.displayName)
-  //           ? true
-  //           : false,
-  //         attending: record.data().interestedList.includes(user.displayName)
-  //           ? true
-  //           : false,
-  //       }))
-  //     );
-  //   });
-  // }, [user]);
+  }, [user, orderByFilter]);
 
   const interestChangedHandler = (id) => {
     const eventRef = db.collection('events').doc(id);
@@ -151,32 +142,39 @@ const EventsContainer = (props) => {
     setShowEventsCreator(false);
   };
 
+  const applyUserFilters = (eventsArray) => {
+    let newEventsArray = eventsArray;
+    if (eventTypeFilter === '') {
+      return eventsArray;
+    } else {
+      newEventsArray = eventsArray.filter(
+        (event) => event.data.eventType === eventTypeFilter
+      );
+      return newEventsArray;
+    }
+  };
+
   let eventsToRender = <Spinner animation="border" role="status" />;
-  let recentlyCreatedEventsToRender = (
-    <Spinner animation="border" role="status" />
-  );
 
   if (eventsArray) {
+    const filteredEventsArray = applyUserFilters(eventsArray);
     eventsToRender = (
       <EventContainer
         theme={props.theme}
-        eventsArray={eventsArray}
+        eventsArray={filteredEventsArray}
         clickedInterested={(id) => interestChangedHandler(id)}
         clickedAttending={(id) => attendingHandler(id)}
       />
     );
   }
 
-  // if (recentlyCreatedEvents) {
-  //   recentlyCreatedEventsToRender = (
-  //     <EventContainer
-  //       theme={props.theme}
-  //       eventsArray={recentlyCreatedEvents}
-  //       clickedInterested={(id) => interestChangedHandler(id)}
-  //       clickedAttending={(id) => attendingHandler(id)}
-  //     />
-  //   );
-  // }
+  const changeOrderByFilterHandler = (e) => {
+    setOrderByFilter(e.target.value);
+  };
+
+  const changeEventTypeFilterHandler = (e) => {
+    setEventTypeFilter(e.target.value);
+  };
 
   return (
     <div>
@@ -185,24 +183,21 @@ const EventsContainer = (props) => {
           {showEventsCreator ? 'Minimize' : 'Create an Event'}
         </BlueButton>
       </div>
-      {/* <EventsFilterBar /> */}
+
       <div>
         {showEventsCreator ? (
           <EventsCreator eventSubmitted={eventSubmittedHandler} />
         ) : null}
       </div>
+      <EventsFilterBar
+        changeOrderByFilter={(e) => changeOrderByFilterHandler(e)}
+        orderByFilterValue={orderByFilter}
+        changeEventTypeFilter={(e) => changeEventTypeFilterHandler(e)}
+        changeEventTypeFilterValue={eventTypeFilter}
+      />
       <div className="eventsContainer__submittedMessage">
         {eventSubmittedText}
       </div>
-      {/* <h1
-        style={{
-          textAlign: 'center',
-          marginBottom: '20px',
-        }}
-      >
-        Recently Added
-      </h1>
-      <div>{recentlyCreatedEventsToRender}</div> */}
 
       <h1
         style={{
@@ -211,7 +206,9 @@ const EventsContainer = (props) => {
           marginBottom: '50px',
         }}
       >
-        Upcoming Events
+        {orderByFilter === 'eventDate'
+          ? 'Upcoming Events'
+          : 'Recently Created Events'}
       </h1>
       <div>{eventsToRender}</div>
     </div>
