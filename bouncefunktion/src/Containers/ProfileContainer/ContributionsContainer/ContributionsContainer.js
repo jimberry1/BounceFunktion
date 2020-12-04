@@ -46,13 +46,7 @@ const ContributionsContainer = (props) => {
   }
 
   let button = (
-    <BlueButton
-      clicked={() => setNumberOfContributions(100)}
-      style={{
-        margin: 'auto',
-        padding: '25px',
-      }}
-    >
+    <BlueButton clicked={() => setNumberOfContributions(100)}>
       See more
     </BlueButton>
   );
