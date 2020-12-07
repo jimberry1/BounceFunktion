@@ -75,7 +75,6 @@ const MixesContainer = (props) => {
 
   return (
     <div className="MixesContainer__container">
-      {/* <MixesCardsComponent theme={props.theme} /> */}
       {mixesComponent}
       {isAddingMix ? (
         <div style={{ marginTop: '50px' }}>

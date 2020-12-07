@@ -4,6 +4,7 @@
   border: 2px solid black;
   padding: 20px;
   margin: auto;
+  color: black;
 }
 
 @media (max-width: 1000px) {

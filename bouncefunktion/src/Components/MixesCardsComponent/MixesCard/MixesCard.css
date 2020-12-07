@@ -15,3 +15,9 @@
 .mixesCard__card:hover {
   box-shadow: 5px 10px #888888;
 }
+
+@media (max-width: 1000px) {
+  .mixesCard__card {
+    margin-top: 50px;
+  }
+}
