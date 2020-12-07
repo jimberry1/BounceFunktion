@@ -1,0 +1,13 @@
+.addMixForm__container {
+  width: 60%;
+  background-color: mistyrose;
+  border: 2px solid black;
+  padding: 20px;
+  margin: auto;
+}
+
+@media (max-width: 1000px) {
+  .addMixForm__container {
+    width: 90%;
+  }
+}

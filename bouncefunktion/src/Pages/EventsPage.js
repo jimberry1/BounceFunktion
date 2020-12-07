@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import NavbarContainer from '../Containers/Navbar/NavbarContainer';
 import HeaderImage from '../Components/HeaderImage/HeaderImage';
 import EventsHeaderImage from '../Assets/festival2.jpg';

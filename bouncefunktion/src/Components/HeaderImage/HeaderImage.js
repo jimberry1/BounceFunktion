@@ -6,7 +6,7 @@ const HeaderImage = (props) => {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     // height: props.height ? props.height : '400px',
-    // borderRadius: '0px',
+    borderRadius: '0px',
     // borderBottom: '25px solid darkgray',
   };
 

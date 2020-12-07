@@ -39,6 +39,14 @@ const Sidebar = (props) => {
           Feed
         </a>
         <a
+          id="about"
+          className="menu-item"
+          href="/mixes"
+          onClick={(e) => linkRedirect(e, '/mixes')}
+        >
+          Mixes
+        </a>
+        <a
           id="contact"
           className="menu-item"
           href="/events"

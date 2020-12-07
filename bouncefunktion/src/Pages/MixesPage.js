@@ -1,5 +1,9 @@
 import NavbarContainer from '../Containers/Navbar/NavbarContainer';
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Container, Row, Col, Image, Card, Button } from 'react-bootstrap';
+import ReactPlayer from 'react-player';
+import MixesCardsComponent from '../Components/MixesCardsComponent/MixesCardsComponent';
+import MixesContainer from '../Containers/MixesContainer/MixesContainer';
+import HeaderImage from '../Components/HeaderImage/HeaderImage';
 const MixesPage = (props) => {
   const styles = {
     display: 'flex',
@@ -14,7 +18,16 @@ const MixesPage = (props) => {
   return (
     <div>
       <NavbarContainer theme={props.theme} toggleTheme={props.themeToggler} />
-      <Container style={{ marginTop: '100px', padding: 'none' }}>
+      <HeaderImage
+        backgroundImage="https://images.pexels.com/photos/681467/pexels-photo-681467.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+        title="Funktion Mixes"
+        subtitle="Explore mixes made by funktion members"
+        topMargin="-100px"
+        titleFontColour="white"
+        subtitleFontColour="lightgray"
+      />
+
+      {/* <Container style={{ marginTop: '100px', padding: 'none' }}>
         <Row>
           <Col>
             <Image
@@ -41,7 +54,8 @@ const MixesPage = (props) => {
             />
           </Col>
         </Row>
-      </Container>
+      </Container> */}
+      <MixesContainer theme={props.theme} />
     </div>
   );
 };

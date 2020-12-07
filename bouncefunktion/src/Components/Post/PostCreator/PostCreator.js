@@ -99,7 +99,7 @@ const PostCreator = (props) => {
       likes: 0,
       commentNumber: 0,
       tags: genreTags,
-      uid: user.uid,
+      // uid: user.uid,
     });
 
     const configurationRef = db.collection('configuration').doc('postUrls');

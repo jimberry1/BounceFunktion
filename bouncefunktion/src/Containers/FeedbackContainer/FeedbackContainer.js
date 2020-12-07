@@ -75,6 +75,9 @@ const FeedbackContainer = (props) => {
             </p>
           </div>
         </div>
+        <div style={{ margin: 'auto', marginTop: '50px', width: '75%' }}>
+          {feedbackForm}
+        </div>
         <Container style={{ marginTop: '100px', textAlign: 'center' }}>
           <Row>
             <Col>
@@ -94,9 +97,6 @@ const FeedbackContainer = (props) => {
             <Col>{afterSubmitMessage}</Col>
           </Row>
         </Container>
-        <div style={{ margin: 'auto', marginTop: '50px', width: '75%' }}>
-          {feedbackForm}
-        </div>
       </div>
     </div>
   );
