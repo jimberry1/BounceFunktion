@@ -21,9 +21,7 @@ const MixesCardsComponent = (props) => {
     });
   }
 
-  return (
-    <Container className="mixesCardsComponent__container">{results}</Container>
-  );
+  return <div className="mixesCardsComponent__container">{results}</div>;
 };
 
 export default MixesCardsComponent;

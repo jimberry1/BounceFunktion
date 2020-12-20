@@ -85,13 +85,13 @@ const EventContainer = (props) => {
         {props.eventsArray.map((event) => {
           return (
             <Event key={event.id} eventData={event.data} theme={props.theme}>
-              {showConfetti && (
+              {/* {showConfetti && (
                 <Confetti
                   run={showConfetti}
                   recycle={false}
                   onConfettiComplete={() => setShowConfetti(false)}
                 />
-              )}
+              )} */}
               <Event.Top>
                 <Event.Title>{event.data.eventName}</Event.Title>
                 <Event.IconHolder>

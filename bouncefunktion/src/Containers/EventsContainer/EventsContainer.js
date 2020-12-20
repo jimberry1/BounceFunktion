@@ -44,7 +44,7 @@ const EventsContainer = (props) => {
           interested: record.data().interestedList.includes(user.displayName)
             ? true
             : false,
-          attending: record.data().interestedList.includes(user.displayName)
+          attending: record.data().attendingList.includes(user.displayName)
             ? true
             : false,
         }))
