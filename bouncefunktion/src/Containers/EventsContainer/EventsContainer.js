@@ -7,8 +7,8 @@ import { useStateValue } from '../../Store/StateProvider';
 import EventContainer from './EventContainer/EventContainer';
 import { Spinner } from 'react-bootstrap';
 import EventsFilterBar from './EventsFilterBar/EventsFilterBar';
-import Confetti from 'react-confetti';
-import firebase from 'firebase';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const EventsContainer = (props) => {
   const [{ user }, dispatch] = useStateValue();
@@ -154,7 +154,12 @@ const EventsContainer = (props) => {
     }
   };
 
-  let eventsToRender = <Spinner animation="border" role="status" />;
+  // let eventsToRender = <Spinner animation="border" role="status" />;
+  let eventsToRender = (
+    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+      <Loader type="Grid" color="#00BFFF" height={280} width={100} />
+    </div>
+  );
 
   if (eventsArray) {
     const filteredEventsArray = applyUserFilters(eventsArray);

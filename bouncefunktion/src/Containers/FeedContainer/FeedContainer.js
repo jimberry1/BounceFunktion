@@ -18,7 +18,8 @@ const FeedContainer = (props) => {
 
   // Gets all the posts and maps them to Posts state
   useEffect(() => {
-    db.collection('posts')
+    const postsDBref = db
+      .collection('posts')
       .orderBy('timestamp', 'desc')
       .limit(numberOfPostsToLoad)
       .onSnapshot((snapshot) => {
@@ -26,6 +27,7 @@ const FeedContainer = (props) => {
           snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
         );
       });
+    return () => postsDBref;
   }, [numberOfPostsToLoad]);
 
   // This useEffect logic checks to see if the user has liked a post by returning the array of their likes.

@@ -8,12 +8,14 @@
   margin: auto;
   margin-left: 25px;
   margin-right: 25px;
-  margin-top: 25px;
+  margin-top: 50px;
   transition: box-shadow 0.4s;
+  transition: transform 0.5s;
 }
 
 .mixesCard__card:hover {
   box-shadow: 5px 5px 5px 5px #888888;
+  transform: translateY(-20px);
 }
 
 @media (max-width: 1300px) {

@@ -17,6 +17,10 @@ export const Inner = styled.div`
 export const Pane = styled.div`
   width: 50%;
   backgroundcolor: black;
+  transition: transform 0.5s;
+  &:hover {
+    transform: translateY(-5px);
+  }
   @media (max-width: 1000px) {
     width: 100%;
     padding: 0 45px;
@@ -48,6 +52,12 @@ export const Image = styled.img`
   max-width: 100%;
   height: auto;
   border-radius: 10px;
+  transition: transform 0.5s;
+  transition: box-shadow transform 0.4s;
+  &:hover {
+    box-shadow: 5px 5px 5px 5px #888888;
+    transform: translateY(-5px);
+  }
 `;
 
 export const Item = styled.div`
