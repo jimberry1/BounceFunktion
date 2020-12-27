@@ -1,0 +1,44 @@
+.FunktionMemberListItem__container {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  align-items: center;
+  margin: auto;
+  border: 2px solid black;
+  border-radius: 15px;
+  height: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  transition: transform 0.4s;
+  transition: box-shadhow 0.4s;
+}
+
+.FunktionMemberListItem__container:hover {
+  transform: translateY(-5px);
+  box-shadow: 4px 4px 4px 4px gray;
+}
+
+.FunktionMemberListItem__name {
+  width: 50%;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+.FunktionMemberListItem__name > p {
+  margin-bottom: 0px;
+}
+
+.FunktionMemberListItem__avatar {
+  width: 50%;
+  align-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+@media (max-width: 600px) {
+  .FunktionMemberListItem__avatar {
+    width: 20%;
+  }
+}

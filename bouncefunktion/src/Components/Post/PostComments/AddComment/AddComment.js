@@ -23,6 +23,7 @@ const AddComment = (props) => {
       profilePic: user.photoURL,
       poster: user.displayName,
       postId: props.postID,
+      userUid: user.uid,
     });
 
     db.collection('posts')

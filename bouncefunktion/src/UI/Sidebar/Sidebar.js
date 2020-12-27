@@ -8,7 +8,6 @@ const Sidebar = (props) => {
 
   const linkRedirect = (e, direct) => {
     e.preventDefault();
-    console.log('this is the ref= ' + direct);
     setRedirectLink(direct);
   };
 
@@ -55,6 +54,15 @@ const Sidebar = (props) => {
           Events
         </a>
         <a
+          id="community"
+          className="menu-item"
+          href="/community"
+          onClick={(e) => linkRedirect(e, '/community')}
+        >
+          Members
+        </a>
+        <a
+          id="profile"
           className="menu-item--small"
           href="/profile"
           onClick={(e) => linkRedirect(e, '/profile')}

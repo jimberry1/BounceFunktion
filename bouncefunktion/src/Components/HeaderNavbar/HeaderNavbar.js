@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
 import './HeaderNavbar.css';
-import { Nav, Navbar, Button, Form, FormControl } from 'react-bootstrap';
+import { Nav, Navbar } from 'react-bootstrap';
 import Toggler from '../Theme/Toggler';
 import { Link } from 'react-router-dom';
-import Sidebar from '../../UI/Sidebar/Sidebar';
 
 const HeaderNavbar = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <div>
       <Navbar bg="dark" variant="dark">
@@ -23,6 +19,9 @@ const HeaderNavbar = (props) => {
           </Nav.Link>
           <Nav.Link as={Link} to="/events">
             Events
+          </Nav.Link>
+          <Nav.Link as={Link} to="/community">
+            Members
           </Nav.Link>
           <Nav.Link as={Link} to="/profile">
             Profile

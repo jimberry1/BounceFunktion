@@ -16,7 +16,11 @@ const ContributionsContainer = (props) => {
       console.log('user= ' + user.displayName);
       const postsRef = db
         .collection('posts')
-        .where('username', '==', user.displayName)
+        .where(
+          'username',
+          '==',
+          props.nameOfUser ? props.nameOfUser : user.displayName
+        )
         .orderBy('timestamp', 'desc')
         .limit(numberOfContributions)
         .get()
@@ -56,7 +60,10 @@ const ContributionsContainer = (props) => {
   }
 
   return (
-    <div className="contributionsContainer__container">
+    <div
+      className="contributionsContainer__container"
+      style={{ width: '100%' }}
+    >
       <div className="contributionsContainer__title">
         <p>Funktion Contributions</p>
       </div>

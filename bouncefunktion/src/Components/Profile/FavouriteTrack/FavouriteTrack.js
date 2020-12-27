@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import './FavouriteTrack.css';
 import { Spinner } from 'react-bootstrap';
 import ReactPlayer from 'react-player';
 import { Col, Row, Container } from 'react-bootstrap';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 const FavouriteTrack = (props) => {
+  const [ready, setReady] = useState(false);
+
   let trackFrame = <Spinner />;
   if (props.musicURL && props.musicURL.includes('spotify')) {
     return (
@@ -15,7 +20,15 @@ const FavouriteTrack = (props) => {
           allowtransparency="true"
           allow="encrypted-media"
           style={{ margin: 'auto' }}
+          onLoad={() => setReady(true)}
         ></iframe>
+        <Loader
+          type="Rings"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          style={{ display: ready ? 'none' : '' }}
+        />
       </div>
     );
   } else if (ReactPlayer.canPlay(props.musicURL)) {
@@ -25,7 +38,15 @@ const FavouriteTrack = (props) => {
           url={props.musicURL}
           height="80px"
           width="90%"
-          style={{ margin: 'auto' }}
+          style={{ margin: 'auto', display: ready ? '' : 'none' }}
+          onReady={() => setReady(true)}
+        />
+        <Loader
+          type="Rings"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          style={{ display: ready ? 'none' : '' }}
         />
       </div>
     );

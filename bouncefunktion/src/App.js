@@ -4,6 +4,8 @@ import FeedPage from './Pages/FeedPage';
 import MixesPage from './Pages/MixesPage';
 import EventsPage from './Pages/EventsPage';
 import ProfilePage from './Pages/ProfilePage';
+import FeedbackPage from './Pages/FeedbackPage';
+import MembersPage from './Pages/MembersPage';
 import TestPage from './Pages/TestPage';
 import GlobalStyles from './Components/Theme/GlobalStyles';
 import { useDarkMode } from './Components/Theme/useDarkMode';
@@ -12,7 +14,6 @@ import { lightTheme, darkTheme } from './Components/Theme/Themes';
 import { Switch, Route } from 'react-router';
 import Login from './Auth/Login';
 import { useStateValue } from './Store/StateProvider';
-import FeedbackPage from './Pages/FeedbackPage';
 
 function App() {
   const [theme, themeToggler, mountedComponent] = useDarkMode();
@@ -53,6 +54,12 @@ function App() {
                   path="/profile"
                   render={() => (
                     <ProfilePage theme={theme} themeToggler={themeToggler} />
+                  )}
+                />
+                <Route
+                  path="/community"
+                  render={() => (
+                    <MembersPage theme={theme} themeToggler={themeToggler} />
                   )}
                 />
                 <Route
