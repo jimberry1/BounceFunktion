@@ -10,7 +10,7 @@ const StyledTitleComponent = styled.h2`
   width: 400px;
   margin: auto;
   padding-bottom: 5px;
-  @media (max-width: 800px) {
+  @media (max-width: 399px) {
     border-bottom: none;
   }
 `;
