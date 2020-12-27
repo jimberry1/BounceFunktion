@@ -13,6 +13,9 @@ const StyledTitleComponent = styled.h2`
   @media (max-width: 399px) {
     border-bottom: none;
   }
+  @media (min-width: 399px) {
+    width: 80%;
+  }
 `;
 
 const SearchMembersByName = styled.input`
