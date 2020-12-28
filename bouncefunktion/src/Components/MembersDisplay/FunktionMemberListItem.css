@@ -11,11 +11,13 @@
   margin-top: 15px;
   transition: transform 0.4s;
   transition: box-shadhow 0.4s;
+  transition: border-radius 0.4s;
 }
 
 .FunktionMemberListItem__container:hover {
   transform: translateY(-5px);
   box-shadow: 4px 4px 4px 4px gray;
+  border-radius: 25px;
 }
 
 .FunktionMemberListItem__name {

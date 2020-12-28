@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { RadialChart } from 'react-vis';
+import { DiscreteColorLegend } from 'react-vis';
 
 /**
  *
@@ -19,6 +20,7 @@ const GenreRadialChart = (props) => {
     let rapTag = 0;
     let alternativeTag = 0;
     let indieTag = 0;
+    let untagged = 0;
     if (props.posts && props.posts[0]) {
       props.posts.forEach((post) => {
         if (post.data.tags.includes('Techno')) {
@@ -48,6 +50,9 @@ const GenreRadialChart = (props) => {
         }
         if (post.data.tags.includes('Indie')) {
           indieTag++;
+        }
+        if (post.data.tags.length == 0) {
+          untagged++;
         }
       });
     }
@@ -124,6 +129,14 @@ const GenreRadialChart = (props) => {
         innerRadius: 200,
       });
     }
+    if (untagged > 0) {
+      tagsArray.push({
+        label: 'Untagged',
+        angle: untagged,
+        radius: 300,
+        innerRadius: 200,
+      });
+    }
     setTagDistribution(tagsArray);
   }, [props.posts]);
 
@@ -139,7 +152,7 @@ const GenreRadialChart = (props) => {
         innerRadius="200"
         stroke={'#ddd'}
         strokeWidth={2}
-        labelsStyle={{ fontSize: '20px' }}
+        labelsStyle={{ color: 'red', fontSize: '20px' }}
       />
     );
   } else {

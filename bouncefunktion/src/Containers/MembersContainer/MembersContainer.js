@@ -109,13 +109,14 @@ const MembersContainer = () => {
   let usersToDisplay = users;
   if (nameFilter !== '') {
     usersToDisplay = usersToDisplay.filter((user) =>
-      user.data.name.toUpperCase().startsWith(nameFilter.toUpperCase())
+      user.data.name.toUpperCase().includes(nameFilter.toUpperCase())
     );
   }
   const listOfUsers = usersToDisplay.map((user) => {
     return (
-      <div key={user.id} onClick={() => setSelectedMemberInformation(user)}>
+      <div key={user.id}>
         <FunktionMemberListItem
+          clicked={() => setSelectedMemberInformation(user)}
           name={user.data.name}
           photoURL={user.data.photoURL}
         />
@@ -146,7 +147,7 @@ const MembersContainer = () => {
       {!selectedMemberInformation && (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <SearchMembersByName
-            placeholder="Search name here..."
+            placeholder="Search names here..."
             onChange={(event) => setNameFilter(event.target.value)}
           />
         </div>

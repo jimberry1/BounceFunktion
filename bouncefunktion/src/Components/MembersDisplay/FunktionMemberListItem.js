@@ -3,7 +3,7 @@ import { Avatar } from '@material-ui/core';
 
 const FunktionMemberListItem = ({ name, photoURL, ...props }) => {
   return (
-    <div className="FunktionMemberListItem__container">
+    <div className="FunktionMemberListItem__container" onClick={props.clicked}>
       <div className="FunktionMemberListItem__avatar">
         <Avatar src={photoURL} />
       </div>

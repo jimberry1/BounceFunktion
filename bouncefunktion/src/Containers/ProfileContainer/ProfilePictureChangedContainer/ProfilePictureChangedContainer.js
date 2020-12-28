@@ -9,19 +9,34 @@ const ProfilePictureChangedContainer = (props) => {
   const [profilePicToUpload, setProfilePicToUpload] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [imageUrl, setImageUrl] = useState(null);
+  const [error, setError] = useState('');
 
   const hiddenFileInput = React.useRef(null);
 
   const fileSelectionHandler = () => {
+    setError('');
     hiddenFileInput.current.click();
   };
 
   const handleFileChange = (e) => {
-    setProfilePicToUpload(e.target.files[0]);
-    props.changedProfilePic(URL.createObjectURL(e.target.files[0]));
+    console.log(e.target.files[0].type);
+    if (
+      e.target.files[0]?.type == 'image/png' ||
+      e.target.files[0]?.type == 'image/jpeg'
+    ) {
+      setProfilePicToUpload(e.target.files[0]);
+      props.changedProfilePic(URL.createObjectURL(e.target.files[0]));
+    } else {
+      setError('Please select a file of type jpeg or png');
+    }
   };
 
-  const fileUploadHandler = (e) => {
+  if (profilePicToUpload) {
+    console.log('profile picture to upload type= ' + profilePicToUpload.type);
+  }
+
+  const fileUploadHandler = () => {
+    console.log('upload handler clicked');
     if (profilePicToUpload) {
       const storageRef = storage.ref('profilePictures/' + props.uid);
       const uploadTask = storageRef.put(profilePicToUpload);
@@ -38,11 +53,32 @@ const ProfilePictureChangedContainer = (props) => {
         },
         function complete() {
           console.log('Profile picture upload complete!');
-          storageRef.getDownloadURL().then((url) => {
-            db.collection('users')
-              .doc(props.uid)
-              .set({ photoURL: url }, { merge: true });
-          });
+          //   const batch = db.batch();
+          storageRef
+            .getDownloadURL()
+            .then((url) => {
+              const usersRef = db.collection('users').doc(props.uid);
+
+              usersRef.update({ photoURL: url });
+
+              db.collection('posts')
+                .where('uid', '==', props.uid)
+                .get()
+                .then((usersPosts) => {
+                  usersPosts.docs.forEach((userPost) => {
+                    const docRef = db.collection('posts').doc(userPost.id);
+                    // batch.update(docRef, { profilePic: url });
+                    docRef.update({ profilePic: url });
+                  });
+                });
+            })
+            .catch((err) => {
+              setError(
+                'An error occurred when uploading your new profile picture'
+              );
+              console.log(err);
+            });
+          //   batch.commit();
         }
       );
     }
@@ -74,9 +110,11 @@ const ProfilePictureChangedContainer = (props) => {
         >
           <AiFillCamera />
         </button>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>{error}</div>
+
         <div
           style={{
-            display: profilePicToUpload !== null ? 'flex' : 'none',
+            display: profilePicToUpload == null ? 'none' : 'flex',
             outline: 'none',
             border: 'none',
             flex: '1',
@@ -84,7 +122,7 @@ const ProfilePictureChangedContainer = (props) => {
             alignItems: 'center',
           }}
         >
-          <BlueButton onClick={(e) => fileUploadHandler(e)}>Confirm</BlueButton>
+          <BlueButton clicked={fileUploadHandler}>Confirm</BlueButton>
         </div>
       </div>
     </div>
