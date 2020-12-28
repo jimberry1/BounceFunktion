@@ -81,6 +81,7 @@ export const Item = styled.div`
   padding: 50px 5%;
   overflow: hidden;
   text-align: center;
+  transition: background-color 0.6s ease;
   &:hover {
     background-color: ${(props) =>
       props.theme === 'dark' ? '#343a40' : '#FFFAF0'};
