@@ -6,6 +6,8 @@ import PostFilter from '../../Components/Post/PostFilter/PostFilter';
 import { useStateValue } from '../../Store/StateProvider';
 import { Spinner } from 'react-bootstrap';
 import BlueButton from '../../UI/Modal/Buttons/BlueButton/BlueButton';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const FeedContainer = (props) => {
   const [{ idToken }, dispatch] = useStateValue();
@@ -61,7 +63,7 @@ const FeedContainer = (props) => {
         postsDbRef = postsDbRef.startAfter(lastVisibleDoc);
       }
 
-      postsDbRef
+      await postsDbRef
         .get()
         .then((collection) => {
           // Helps with pagination
@@ -126,6 +128,7 @@ const FeedContainer = (props) => {
 
   const filterChangedHandler = (event) => {
     setLastVisibleDoc(null);
+    setPosts([]);
     setGenreFilter(event.target.value);
   };
 
@@ -143,15 +146,24 @@ const FeedContainer = (props) => {
     setPostDateFilter(event.target.value);
   };
 
-  let postsFeed = <Spinner animation="border" variant="danger" />;
+  let postsFeed = (
+    <Loader
+      type="Grid"
+      color="#00BFFF"
+      height={280}
+      width={100}
+      style={{ display: posts[0] ? 'none' : '' }}
+    />
+  );
 
   if (likedPosts && favPosts) {
     // If the array filtered contains nothing, inform the user
+
     if (!posts[0]) {
       postsFeed = (
         <div className="feedContainer__noPostsFoundContainer">
           <p>
-            I'm sorry, no posts could be found matching your search criteria
+            We're sorry, no posts matching your search criteria could be found
           </p>
         </div>
       );
