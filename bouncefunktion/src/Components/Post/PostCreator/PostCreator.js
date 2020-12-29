@@ -25,6 +25,8 @@ const PostCreator = (props) => {
   const [indieTag, setIndieTag] = useState(false);
   const [postUrls, setPostUrls] = useState([]);
   const [openMusicLinkModal, setOpenMusicLinkModal] = useState(false);
+  const [modalDisplayType, setModalDisplayType] = useState('');
+  const [modalMessage, setModalMessage] = useState('');
 
   useEffect(() => {
     db.collection('configuration')
@@ -57,9 +59,29 @@ const PostCreator = (props) => {
 
     if (postUrls.includes(musicUrl)) {
       openModalHandler();
+      setModalMessage('The following URL has already been posted');
       return;
     }
+    if (!musicUrl.includes('spotify')) {
+      if (
+        musicUrl.includes('bandcamp.com/') &&
+        !musicUrl.includes('EmbeddedPlayer')
+      ) {
+        openModalHandler();
+        setModalMessage(
+          'Please use the embedded link for bandcamp music. See the help page for more information on how to do this. Apologies for the inconvenience'
+        );
+        return;
+      }
 
+      if (musicUrl.substring(0, 30).includes('soundcloud.app.goo.gl')) {
+        openModalHandler();
+        setModalMessage(
+          "We don't support the '.app.goo.gl' music link type. Please paste the link into google, hit search and copy the resulting url. Apologies for the inconvenience"
+        );
+        return;
+      }
+    }
     let genreTags = [];
 
     if (technoTag) {
@@ -90,40 +112,53 @@ const PostCreator = (props) => {
       genreTags.push('Indie');
     }
 
-    db.collection('posts').add({
-      message: input,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      profilePic: user.photoURL,
-      username: user.displayName,
-      musicLink: musicUrl,
-      likes: 0,
-      commentNumber: 0,
-      tags: genreTags,
-      uid: user.uid,
-    });
+    db.collection('posts')
+      .add({
+        message: input,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        profilePic: user.photoURL,
+        username: user.displayName,
+        musicLink: musicUrl,
+        likes: 0,
+        commentNumber: 0,
+        tags: genreTags,
+        uid: user.uid,
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     const configurationRef = db.collection('configuration').doc('postUrls');
-    configurationRef.get().then(function (doc) {
-      if (doc.exists) {
-        const urlArray = doc.data().urls;
-        urlArray.push(musicUrl);
-        configurationRef.set({ urls: urlArray }, { merge: true });
-      } else {
-        console.log('Unable to retrieve postUrls');
-      }
-    });
-
-    setInput('');
-    setMusicUrl('');
-    setDiscoTag(false);
-    setTechnoTag(false);
-    setHouseTag(false);
-    setFunkTag(false);
-    setDnbTag(false);
-    setElectronicTag(false);
-    setRapTag(false);
-    setAlternativeTag(false);
-    setIndieTag(false);
+    configurationRef
+      .get()
+      .then(function (doc) {
+        if (doc.exists) {
+          const urlArray = doc.data().urls;
+          urlArray.push(musicUrl);
+          configurationRef.set({ urls: urlArray }, { merge: true });
+        } else {
+          console.log('Unable to retrieve postUrls');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .then(() => {
+        setInput('');
+        setMusicUrl('');
+        setDiscoTag(false);
+        setTechnoTag(false);
+        setHouseTag(false);
+        setFunkTag(false);
+        setDnbTag(false);
+        setElectronicTag(false);
+        setRapTag(false);
+        setAlternativeTag(false);
+        setIndieTag(false);
+      })
+      .then(() => {
+        window.location.reload(false);
+      });
   };
 
   // This was used when I tried to implement tags an array, unfortunately it didn't work as well as I had hoped
@@ -152,8 +187,8 @@ const PostCreator = (props) => {
         open={openMusicLinkModal}
         openModal={openModalHandler}
         closeModal={closeModalHandler}
-        musicLink={musicUrl}
-        modalTitle="The following URL has already been posted"
+        musicLink={modalDisplayType === 'duplicate' ? musicUrl : ''}
+        modalTitle={modalMessage}
       />
       <div className="messageSender__top">
         <div className="messageSender__avatarHolder">
