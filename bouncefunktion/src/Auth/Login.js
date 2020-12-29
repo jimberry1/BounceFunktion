@@ -12,7 +12,6 @@ const Login = (props) => {
   if (localStorageUid !== null) {
     auth.onAuthStateChanged(function (user) {
       if (user) {
-        console.log('I am authenticated with user = ' + user);
         const dbUserRef = db.collection('users').doc(localStorageUid);
         dbUserRef.get().then((docSnapshot) => {
           const user = {

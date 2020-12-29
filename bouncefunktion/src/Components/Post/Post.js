@@ -13,6 +13,9 @@ import MaterialUIModal from '../../UI/Modal/MaterialUIModal';
 import StarIcon from '@material-ui/icons/Star';
 import { AiFillStar } from 'react-icons/ai';
 import PostMusicPlayer from './PostMusicPlayer/PostMusicPlayer';
+import UseAnimations from 'react-useanimations';
+import star from 'react-useanimations/lib/star';
+import { IconContext } from 'react-icons';
 
 const Post = ({
   postID,
@@ -128,6 +131,7 @@ const Post = ({
         { likes: firebase.firestore.FieldValue.increment(-1) },
         { merge: true }
       );
+
       setLikes((likes) => likes - 1);
     } else {
       usersLikeRef
@@ -193,7 +197,7 @@ const Post = ({
       </div>
       <Container fluid className="post__bodyContainerText">
         <Row>
-          <Col style={{ alignItems: 'left' }}>
+          <Col style={{ alignItems: 'left', display: message ? '' : 'none' }}>
             <div className="post__bottom">
               <p>{message}</p>
             </div>
@@ -244,7 +248,11 @@ const Post = ({
           onClick={favouritePostHandler}
           style={{ padding: '10px' }}
         >
-          {favPost ? <AiFillStar color="gold" size={32} /> : <StarIcon />}
+          {favPost ? (
+            <AiFillStar color="gold" size={32} />
+          ) : (
+            <StarIcon size={32} />
+          )}
         </div>
         <div className="post__option" onClick={openModalHandler}>
           <NearMeIcon />

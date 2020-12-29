@@ -1,26 +1,81 @@
+import { useState } from 'react';
 import ReactPlayer from 'react-player';
+import Loader from 'react-loader-spinner';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 const PostMusicPlayer = (props) => {
+  const [ready, setReady] = useState(false);
   if (ReactPlayer.canPlay(props.musicLink)) {
     return (
-      <ReactPlayer
-        url={props.musicLink}
-        height="150px"
-        width="90%"
-        style={{ marginBottom: '25px' }}
-      />
+      <div style={{ width: '100%' }}>
+        <ReactPlayer
+          url={props.musicLink}
+          height="150px"
+          width="90%"
+          style={{
+            marginBottom: '25px',
+            display: ready ? '' : 'none',
+          }}
+          onReady={() => setReady(true)}
+        />
+        <Loader
+          type="Rings"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          style={{ display: ready ? 'none' : '' }}
+        />
+      </div>
     );
   } else if (props.musicLink && props.musicLink.includes('spotify')) {
     return (
-      <iframe
-        src={props.musicLink.replace('spotify.com/', 'spotify.com/embed/')}
-        width="90%"
-        height="80"
-        frameBorder="0"
-        allowtransparency="true"
-        allow="encrypted-media"
-        style={{ marginBottom: '25px' }}
-      ></iframe>
+      <div style={{ width: '100%' }}>
+        <iframe
+          src={props.musicLink.replace('spotify.com/', 'spotify.com/embed/')}
+          width="90%"
+          height="80"
+          frameBorder="0"
+          allowtransparency="true"
+          allow="encrypted-media"
+          style={{ marginBottom: '25px', display: ready ? '' : 'none' }}
+          onLoad={() => setReady(true)}
+        ></iframe>
+        <Loader
+          type="Rings"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          style={{ display: ready ? 'none' : '' }}
+        />
+      </div>
+    );
+  } else if (props.musicLink && props.musicLink.includes('bandcamp')) {
+    return (
+      <div style={{ width: '100%' }}>
+        <iframe
+          style={{
+            border: '0',
+            width: '90%',
+            display: 'flex',
+            height: '120px',
+            marginBottom: '25px',
+            display: ready ? '' : 'none',
+          }}
+          onLoad={() => setReady(true)}
+          src={
+            props.musicLink +
+            '/size=large/bgcol=333333/linkcol=0f91ff/tracklist=false/artwork=small/transparent=true/'
+          }
+          seamless
+        ></iframe>
+        <Loader
+          type="Rings"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          style={{ display: ready ? 'none' : '' }}
+        />
+      </div>
     );
   } else {
     return (

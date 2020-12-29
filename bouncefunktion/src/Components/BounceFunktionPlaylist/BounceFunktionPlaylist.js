@@ -14,7 +14,7 @@ const BounceFunktionPlaylist = (props) => {
         frameBorder="0"
         allowtransparency="true"
         allow="encrypted-media"
-        style={{ display: loaded ? '' : 'none' }}
+        style={{ display: loaded ? '' : 'none', borderRadius: '10px' }}
         onLoad={() => setLoaded(true)}
       ></iframe>
       <Loader

@@ -14,6 +14,7 @@ const FeedPage = (props) => {
   var styles = {
     backgroundImage: `url(${backgroundImage})`,
   };
+
   return (
     <div>
       <NavbarContainer theme={props.theme} toggleTheme={props.themeToggler} />

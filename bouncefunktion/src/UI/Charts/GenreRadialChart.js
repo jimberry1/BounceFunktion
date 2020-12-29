@@ -145,7 +145,7 @@ const GenreRadialChart = (props) => {
     chart = (
       <RadialChart
         showLabels={true}
-        labelsRadiusMultiplier={0.6}
+        labelsRadiusMultiplier={tagDistribution.length <= 3 ? 0.6 : 1}
         data={tagDistribution}
         width={400}
         height={400}

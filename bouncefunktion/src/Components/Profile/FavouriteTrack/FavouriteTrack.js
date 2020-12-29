@@ -19,7 +19,7 @@ const FavouriteTrack = (props) => {
           frameBorder="0"
           allowtransparency="true"
           allow="encrypted-media"
-          style={{ margin: 'auto' }}
+          style={{ margin: 'auto', display: ready ? '' : 'none' }}
           onLoad={() => setReady(true)}
         ></iframe>
         <Loader

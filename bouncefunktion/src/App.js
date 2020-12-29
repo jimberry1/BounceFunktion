@@ -68,12 +68,12 @@ function App() {
                     <FeedbackPage theme={theme} themeToggler={themeToggler} />
                   )}
                 />
-                <Route
+                {/* <Route
                   path="/test"
                   render={() => (
                     <TestPage theme={theme} themeToggler={themeToggler} />
                   )}
-                />
+                /> */}
                 <Route
                   path="/"
                   exact
