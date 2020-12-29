@@ -214,6 +214,7 @@ const FeedContainer = (props) => {
         display: 'flex',
         justifyContent: 'center',
         display: allPostsRetrieved ? 'none' : '',
+        cursor: 'pointer',
       }}
     >
       <BlueButton clicked={seeMorePostsHandler}>See more</BlueButton>
