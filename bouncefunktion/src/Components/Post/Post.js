@@ -219,7 +219,10 @@ const Post = ({
         </Row>
       </Container> */}
       <div className="post__bodyContainerContainer">
-        <div className="post__bodyContainerMessageContainer">
+        <div
+          className="post__bodyContainerMessageContainer"
+          style={{ display: message ? '' : 'none' }}
+        >
           <div className="post__bottom">
             <p>{message}</p>
           </div>
