@@ -10,25 +10,94 @@ import BlueButton from '../../UI/Modal/Buttons/BlueButton/BlueButton';
 const FeedContainer = (props) => {
   const [{ idToken }, dispatch] = useStateValue();
   const [posts, setPosts] = useState([]);
-  const [numberOfPostsToLoad, setNumberOfPostsToLoad] = useState(10);
   const [likedPosts, setLikedPosts] = useState(null);
   const [favPosts, setFavPosts] = useState(null);
   const [genreFilter, setGenreFilter] = useState('');
   const [postDateFilter, setPostDateFilter] = useState('');
+  const [lastVisibleDoc, setLastVisibleDoc] = useState(null);
+  const [getMorePostsFromFirebase, setGetMorePostsFromFirebase] = useState(0);
+
+  const [allPostsRetrieved, setAllPostsRetrieved] = useState(false);
+  const [
+    isExistingDataFilteredByTag,
+    setIsExistingDataFilteredByTag,
+  ] = useState(false);
 
   // Gets all the posts and maps them to Posts state
   useEffect(() => {
-    const postsDBref = db
-      .collection('posts')
-      .orderBy('timestamp', 'desc')
-      .limit(numberOfPostsToLoad)
-      .onSnapshot((snapshot) => {
-        setPosts(
-          snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+    async function getUnfilteredPostsFromFirebase() {
+      let postsDBref = db
+        .collection('posts')
+        .orderBy('timestamp', 'desc')
+        .limit(10);
+
+      if (lastVisibleDoc) {
+        postsDBref = postsDBref.startAfter(lastVisibleDoc);
+      }
+
+      await postsDBref.get().then((snapshot) => {
+        // Helps with pagination
+        const lastVisible = snapshot.docs[snapshot.docs.length - 1];
+        setLastVisibleDoc(lastVisible);
+
+        setPosts((posts) =>
+          posts.concat(
+            snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+          )
         );
+        // If the number of posts retrieved is < 10 then set all posts received to true
+        setAllPostsRetrieved(snapshot.docs.length < 10);
       });
-    return () => postsDBref;
-  }, [numberOfPostsToLoad]);
+    }
+
+    async function getFilteredPostsFromFirebase() {
+      let postsDbRef = db
+        .collection('posts')
+        .where('tags', 'array-contains', genreFilter)
+        .orderBy('timestamp', 'desc')
+        .limit(10);
+
+      if (lastVisibleDoc) {
+        postsDbRef = postsDbRef.startAfter(lastVisibleDoc);
+      }
+
+      postsDbRef
+        .get()
+        .then((collection) => {
+          // Helps with pagination
+          const lastVisible = collection.docs[collection.docs.length - 1];
+          setLastVisibleDoc(lastVisible);
+          let allPostsFetched = false;
+          if (collection.docs.length < 10) {
+            allPostsFetched = true;
+          }
+          setAllPostsRetrieved(allPostsFetched);
+
+          let updatedPosts;
+
+          // If the data has already been filtered by tag, then add the new post results onto the pre-existing data, else wipe that data only display the new posts
+          if (isExistingDataFilteredByTag) {
+            updatedPosts = posts.concat(
+              collection.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
+            );
+          } else {
+            updatedPosts = collection.docs.map((doc) => ({
+              id: doc.id,
+              data: doc.data(),
+            }));
+          }
+          setPosts(updatedPosts);
+        })
+        .catch((err) => console.log(err));
+    }
+
+    if (genreFilter == '') {
+      // getFirstPostFromFirebaseAndEstablishListener();
+      getUnfilteredPostsFromFirebase();
+    } else {
+      getFilteredPostsFromFirebase();
+    }
+  }, [getMorePostsFromFirebase, genreFilter]);
 
   // This useEffect logic checks to see if the user has liked a post by returning the array of their likes.
   useEffect(() => {
@@ -56,8 +125,17 @@ const FeedContainer = (props) => {
   }, [idToken]);
 
   const filterChangedHandler = (event) => {
+    setLastVisibleDoc(null);
     setGenreFilter(event.target.value);
-    setNumberOfPostsToLoad(100);
+  };
+
+  const seeMorePostsHandler = () => {
+    let isFilteredAlready = true;
+    if (genreFilter == '') {
+      isFilteredAlready = false;
+    }
+    setIsExistingDataFilteredByTag(isFilteredAlready);
+    setGetMorePostsFromFirebase((curVal) => curVal + 1);
   };
 
   // TODO get this working with proper date formatting
@@ -65,32 +143,11 @@ const FeedContainer = (props) => {
     setPostDateFilter(event.target.value);
   };
 
-  // This function is used to filter posts by the selected choices - I wish there was a nicer way to do this, e.g. an array, but for now this conditional will have to do
-  const filterFunktion = (postsToFilter) => {
-    let filteredPosts = postsToFilter;
-
-    // If no filters have been applied then return the original posts array
-    if (genreFilter === '' && postDateFilter === '') {
-      return posts;
-    }
-    if (genreFilter !== '') {
-      filteredPosts = postsToFilter.filter((post) =>
-        post.data.tags.includes(genreFilter)
-      );
-    }
-    if (postDateFilter !== '') {
-      // Add logic for filtering via timestamp here
-    }
-    return filteredPosts;
-  };
-
   let postsFeed = <Spinner animation="border" variant="danger" />;
 
   if (likedPosts && favPosts) {
-    const filteredPosts = filterFunktion(posts);
-
     // If the array filtered contains nothing, inform the user
-    if (!filteredPosts[0]) {
+    if (!posts[0]) {
       postsFeed = (
         <div className="feedContainer__noPostsFoundContainer">
           <p>
@@ -99,7 +156,7 @@ const FeedContainer = (props) => {
         </div>
       );
     } else {
-      postsFeed = filteredPosts.map((post) => {
+      postsFeed = posts.map((post) => {
         let postHasBeenLiked = false;
         if (likedPosts.includes(post.id)) {
           postHasBeenLiked = true;
@@ -144,17 +201,12 @@ const FeedContainer = (props) => {
       style={{
         display: 'flex',
         justifyContent: 'center',
+        display: allPostsRetrieved ? 'none' : '',
       }}
     >
-      <BlueButton clicked={() => setNumberOfPostsToLoad(100)}>
-        See more
-      </BlueButton>
+      <BlueButton clicked={seeMorePostsHandler}>See more</BlueButton>
     </div>
   );
-
-  if (numberOfPostsToLoad > 10) {
-    seeMorePostsButton = null;
-  }
 
   return (
     <div
@@ -164,7 +216,8 @@ const FeedContainer = (props) => {
         flexDirection: 'column',
         alignItems: 'center',
         margin: 'auto',
-        paddingBottom: numberOfPostsToLoad > 10 ? '100px' : '0px',
+        paddingBottom: allPostsRetrieved ? '100px' : '0px',
+        overflowAnchor: 'none',
       }}
     >
       <div className="feedContainer__filter">
