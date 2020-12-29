@@ -11,7 +11,7 @@ const PostMusicPlayer = (props) => {
         <ReactPlayer
           url={props.musicLink}
           height="150px"
-          width="90%"
+          width="100%"
           style={{
             marginBottom: '25px',
             display: ready ? '' : 'none',
@@ -32,7 +32,7 @@ const PostMusicPlayer = (props) => {
       <div style={{ width: '100%' }}>
         <iframe
           src={props.musicLink.replace('spotify.com/', 'spotify.com/embed/')}
-          width="90%"
+          width="100%"
           height="80"
           frameBorder="0"
           allowtransparency="true"
@@ -55,7 +55,7 @@ const PostMusicPlayer = (props) => {
         <iframe
           style={{
             border: '0',
-            width: '90%',
+            width: '100%',
             display: 'flex',
             height: '120px',
             marginBottom: '25px',

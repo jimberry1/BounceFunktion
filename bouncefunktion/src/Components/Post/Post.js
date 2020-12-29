@@ -195,9 +195,14 @@ const Post = ({
           <p>{new Date(timestamp?.toDate()).toUTCString()}</p>
         </div>
       </div>
-      <Container fluid className="post__bodyContainerText">
+      {/* <Container fluid className="post__bodyContainerText">
         <Row>
-          <Col style={{ alignItems: 'left', display: message ? '' : 'none' }}>
+          <Col
+            style={{
+              alignItems: 'left',
+              display: message ? '' : 'none',
+            }}
+          >
             <div className="post__bottom">
               <p>{message}</p>
             </div>
@@ -212,7 +217,17 @@ const Post = ({
             {musicWidgetDefaultSpotify}
           </Col>
         </Row>
-      </Container>
+      </Container> */}
+      <div className="post__bodyContainerContainer">
+        <div className="post__bodyContainerMessageContainer">
+          <div className="post__bottom">
+            <p>{message}</p>
+          </div>
+        </div>
+        <div className="post__bodyContainerMusicContainer">
+          {musicWidgetDefaultSpotify}
+        </div>
+      </div>
       <MaterialUIModal
         open={openMusicLinkModal}
         openModal={openModalHandler}

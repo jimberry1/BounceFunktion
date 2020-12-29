@@ -87,6 +87,36 @@
 .post__bodyContainerText {
 }
 
+.post__bodyContainerContainer {
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  margin-left: 5px;
+}
+.post__bodyContainerMessageContainer {
+  flex: 0.8;
+  padding: 5px;
+}
+
+.post__bodyContainerMusicContainer {
+  flex: 1;
+  padding: 5px;
+  padding-right: 50px;
+}
+
+@media (max-width: 800px) {
+  .post__bodyContainerContainer {
+    flex-direction: column;
+  }
+  .post__bodyContainerMessageContainer {
+    margin-left: 10px;
+  }
+  .post__bodyContainerMusicContainer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
 @media (max-width: 1000px) {
   .post {
     width: 98%;
