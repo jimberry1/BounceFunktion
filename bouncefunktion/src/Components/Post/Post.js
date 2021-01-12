@@ -221,13 +221,13 @@ const Post = ({
       <div className="post__bodyContainerContainer">
         <div
           className="post__bodyContainerMessageContainer"
-          style={{ display: message ? '' : 'none' }}
+          style={{ display: message ? '' : 'none', }}
         >
           <div className="post__bottom">
             <p>{message}</p>
           </div>
         </div>
-        <div className="post__bodyContainerMusicContainer">
+        <div className="post__bodyContainerMusicContainer" style={{paddingLeft: message ? "" : "45px", paddingRight: message ? "" : "45px"}}>
           {musicWidgetDefaultSpotify}
         </div>
       </div>

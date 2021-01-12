@@ -4,6 +4,8 @@ import { auth, provider } from '../firebase';
 import { useStateValue } from '../Store/StateProvider';
 import { actionTypes } from '../Store/reducer';
 import db from '../firebase';
+import firebase from "firebase";
+
 const Login = (props) => {
   const [state, dispatch] = useStateValue();
 
@@ -63,6 +65,7 @@ const Login = (props) => {
               userScore: 0,
               badges: [],
               preferences: [],
+              createdDate: firebase.firestore.FieldValue.serverTimestamp()
             });
           }
 
