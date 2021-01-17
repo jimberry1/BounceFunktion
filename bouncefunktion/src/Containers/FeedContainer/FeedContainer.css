@@ -9,11 +9,16 @@
 
 .feedContainer__noPostsFoundContainer {
   display: flex;
+  flex-direction: column;
+  text-align: center;
   justify-content: center;
+  align-items: center;
   padding: 55px;
   margin-top: 125px;
   font-size: 20px;
-  background-color: gray;
+  /* background-color: gray; */
+  height: 500px;
+  margin-bottom: 125px;
 }
 
 @media (max-width: 800px) {
