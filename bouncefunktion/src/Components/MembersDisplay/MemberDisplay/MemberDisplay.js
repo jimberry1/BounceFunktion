@@ -4,6 +4,7 @@ import ContributionsContainer from '../../../Containers/ProfileContainer/Contrib
 import FavouriteTrack from '../../Profile/FavouriteTrack/FavouriteTrack';
 import BlueButton from '../../../UI/Modal/Buttons/BlueButton/BlueButton';
 import PostsInformationStatistics from './PostsInformationStatistics/PostsInformationStatistics';
+import { Avatar } from '@material-ui/core';
 
 const MemberDisplay = (props) => {
   let contributions = null;
@@ -39,6 +40,19 @@ const MemberDisplay = (props) => {
   };
   return (
     <div>
+      <div className="MemberDisplay__avatarContainer">
+        <Avatar
+          src={props.userData?.photoURL}
+          className="MemberDisplay__avatar"
+          style={{
+            height: '200px',
+            width: '200px',
+            alignSelf: 'center',
+            marginBottom: '10px',
+          }}
+        />
+        <p>{props.userData?.name}</p>
+      </div>
       <PostsInformationStatistics
         numberOfPosts={props?.posts?.length}
         totalLikes={props?.userData?.likedPosts?.length}

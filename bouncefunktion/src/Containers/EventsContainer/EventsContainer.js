@@ -5,7 +5,6 @@ import BlueButton from '../../UI/Modal/Buttons/BlueButton/BlueButton';
 import db from '../../firebase';
 import { useStateValue } from '../../Store/StateProvider';
 import EventContainer from './EventContainer/EventContainer';
-import { Spinner } from 'react-bootstrap';
 import EventsFilterBar from './EventsFilterBar/EventsFilterBar';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';

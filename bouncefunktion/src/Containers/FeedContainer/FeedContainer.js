@@ -8,8 +8,11 @@ import { Spinner } from 'react-bootstrap';
 import BlueButton from '../../UI/Modal/Buttons/BlueButton/BlueButton';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 
 const FeedContainer = (props) => {
+  console.log('Rendering FeedContainer.js');
+
   const [{ idToken }, dispatch] = useStateValue();
   const [posts, setPosts] = useState([]);
   const [likedPosts, setLikedPosts] = useState(null);
@@ -162,7 +165,9 @@ const FeedContainer = (props) => {
     if (!posts[0]) {
       postsFeed = (
         <div className="feedContainer__noPostsFoundContainer">
-          <p>
+          <SentimentVeryDissatisfiedIcon fontSize="large" />
+
+          <p style={{ color: 'white' }}>
             We're sorry, no posts matching your search criteria could be found
           </p>
         </div>

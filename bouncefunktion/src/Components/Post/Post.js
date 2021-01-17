@@ -13,8 +13,6 @@ import MaterialUIModal from '../../UI/Modal/MaterialUIModal';
 import StarIcon from '@material-ui/icons/Star';
 import { AiFillStar } from 'react-icons/ai';
 import PostMusicPlayer from './PostMusicPlayer/PostMusicPlayer';
-import UseAnimations from 'react-useanimations';
-import star from 'react-useanimations/lib/star';
 import { IconContext } from 'react-icons';
 
 const Post = ({
@@ -31,6 +29,8 @@ const Post = ({
   postIsFavourite,
   theme,
 }) => {
+  console.log('Rendering Post.js');
+
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(postIsLiked);
   const [favPost, setFavPost] = useState(postIsFavourite);
@@ -221,13 +221,19 @@ const Post = ({
       <div className="post__bodyContainerContainer">
         <div
           className="post__bodyContainerMessageContainer"
-          style={{ display: message ? '' : 'none', }}
+          style={{ display: message ? '' : 'none' }}
         >
           <div className="post__bottom">
             <p>{message}</p>
           </div>
         </div>
-        <div className="post__bodyContainerMusicContainer" style={{paddingLeft: message ? "" : "45px", paddingRight: message ? "" : "45px"}}>
+        <div
+          className="post__bodyContainerMusicContainer"
+          style={{
+            paddingLeft: message ? '' : '45px',
+            paddingRight: message ? '' : '45px',
+          }}
+        >
           {musicWidgetDefaultSpotify}
         </div>
       </div>

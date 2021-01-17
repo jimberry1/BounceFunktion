@@ -143,13 +143,16 @@ const MembersContainer = () => {
 
   return (
     <div style={{ marginBottom: '50px' }}>
-      <StyledTitleComponent>Community members</StyledTitleComponent>
+      {/* <StyledTitleComponent>Community members</StyledTitleComponent> */}
       {!selectedMemberInformation && (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <SearchMembersByName
-            placeholder="Search names here..."
-            onChange={(event) => setNameFilter(event.target.value)}
-          />
+        <div>
+          <StyledTitleComponent>Community members</StyledTitleComponent>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <SearchMembersByName
+              placeholder="Search names here..."
+              onChange={(event) => setNameFilter(event.target.value)}
+            />
+          </div>
         </div>
       )}
       {!selectedMemberInformation && listOfUsers}

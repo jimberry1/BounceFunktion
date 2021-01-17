@@ -23,6 +23,21 @@
   margin-bottom: 50px;
 }
 
+.MemberDisplay__avatar {
+  height: 300px;
+}
+
+.MemberDisplay__avatarContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  margin-top: 25px;
+  text-align: center;
+  font-size: 25px;
+}
+
 .MemberDisplay__FavouriteTracksContainer {
   width: 100%;
   border: 2px solid black;

@@ -11,7 +11,6 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import { FaTicketAlt } from 'react-icons/fa';
 import DropDownMenu from '../../../UI/DropDownMenu/DropDownMenu';
-import Confetti from 'react-confetti';
 const EventContainer = (props) => {
   const [showConfetti, setShowConfetti] = useState(false);
 
