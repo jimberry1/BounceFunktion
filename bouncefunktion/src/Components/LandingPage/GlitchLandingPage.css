@@ -18,16 +18,49 @@
 
 .grid_box1 {
   grid-column-start: 2;
+  top: 20vh;
+  position: relative;
+  animation: moveBox1 2s ease-in-out 2s 1 forwards;
+}
+
+@keyframes moveBox1 {
+  100% {
+    top: 0;
+  }
 }
 
 .grid_box2 {
   grid-column-start: 1;
   grid-row-start: 3;
+  align-self: flex-start;
+  position: relative;
+  top: -20vh;
+  left: 15vw;
+  animation: moveBox2 2s ease-in-out 2s 1 forwards;
+}
+
+@keyframes moveBox2 {
+  100% {
+    top: 0;
+    left: 0;
+  }
 }
 
 .grid_box3 {
   grid-column-start: 3;
   grid-row-start: 3;
+  align-self: flex-start;
+  position: relative;
+  top: -20vh;
+  right: 15vw;
+  animation: moveBox3 2s ease-in-out 2s 1 forwards;
+}
+
+@keyframes moveBox3 {
+  100% {
+    top: 0;
+    right: 0;
+  }
 }
 
 .grid_center_image {
@@ -41,7 +74,7 @@
   border-radius: 50%;
   opacity: 0;
   transform: rotate(-90deg);
-  animation: logoEnterance 1s ease-in-out 6s 1 forwards;
+  animation: logoEnterance 1s ease-in-out 4s 1 forwards;
 }
 
 @keyframes logoEnterance {
@@ -62,7 +95,7 @@
   grid-column-start: 2;
   font-size: 6em;
   opacity: 0;
-  animation: arrowEnterance 2s ease-in-out 7s 1 forwards;
+  animation: arrowEnterance 2s ease-in-out 5s 1 forwards;
   cursor: pointer;
   transform: translateY(-50px);
 }
@@ -77,6 +110,6 @@
   }
   100% {
     opacity: 1;
-    transform: rotate(0deg), translateY(-50px);
+    transform: rotate(0deg), translateY(-30px);
   }
 }

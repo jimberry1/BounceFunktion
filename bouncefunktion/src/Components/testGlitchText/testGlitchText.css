@@ -20,7 +20,7 @@
     -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
     0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
 
-  animation: glitch 500ms 10, fadeout 1s ease 5s 1 forwards;
+  animation: glitch 500ms 10;
 }
 
 @keyframes fadeout {
@@ -40,7 +40,6 @@
     text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
       -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
       0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
-    /* transform: skewX(2deg); */
   }
 
   14% {
@@ -52,6 +51,7 @@
     text-shadow: -0.05em -0.025 0 rgba(255, 0, 0, 0.75),
       0.025em 0.025em 0 rgba(0, 255, 0, 0.75),
       -0.05em -0.05em 0 rgba(0, 0, 255, 0.75);
+    transform: skew(1deg);
   }
   49% {
     text-shadow: -0.05em -0.025 0 rgba(255, 0, 0, 0.75),
@@ -70,7 +70,7 @@
     transform: skewX(0deg);
   }
   99% {
-    transform: skewX(2deg);
+    transform: skew(2deg);
   }
   100% {
     transform: skewX(0deg);
