@@ -37,16 +37,21 @@ function App() {
   return (
     <>
       {!user ? (
-        <Switch>
-          <Route path="/signin" component={Login} />
-          <Route
-            path="/"
-            render={() => (
-              <Homepage theme={theme} themeToggler={themeToggler} />
-            )}
-          />
-          <Redirect to="/" />
-        </Switch>
+        <ThemeProvider theme={themeMode}>
+          <>
+            <GlobalStyles />
+            <Switch>
+              <Route path="/signin" component={Login} />
+              <Route
+                path="/"
+                render={() => (
+                  <Homepage theme={theme} themeToggler={themeToggler} />
+                )}
+              />
+              <Redirect to="/" />
+            </Switch>
+          </>
+        </ThemeProvider>
       ) : (
         <ThemeProvider theme={themeMode}>
           <>

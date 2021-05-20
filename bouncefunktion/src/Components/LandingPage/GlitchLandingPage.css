@@ -30,16 +30,6 @@
   grid-row-start: 3;
 }
 
-/* .grid_center {
-    grid-column-start: 2;
-    grid-row-start: 2;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
-
 .grid_center_image {
   grid-column-start: 2;
   grid-row-start: 2;

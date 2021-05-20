@@ -5,8 +5,14 @@ import BodyContainer from '../Containers/BodyContainer/BodyContainer';
 import BounceFunktionPlaylist from '../Components/BounceFunktionPlaylist/BounceFunktionPlaylist';
 import BounceFBgroup from '../Components/BounceFunktionPlaylist/BounceFBgroup/BounceFBgroup';
 import GlitchLandingPage from '../Components/LandingPage/GlitchLandingPage';
-import * as Scroll from 'react-scroll';
 import { Element } from 'react-scroll';
+import styled from 'styled-components';
+
+const Phoneheader = styled.div`
+  @media (min-width: 1500px) {
+    display: none;
+  }
+`;
 
 const Homepage = (props) => {
   return (
@@ -15,14 +21,16 @@ const Homepage = (props) => {
 
       <GlitchLandingPage />
       <Element name="test1" className="element">
-        <HeaderImage
-          backgroundImage={HomepageHeaderImage}
-          title="The Bounce Funktion"
-          subtitle="A community dedicated to the mutual appreciation of music"
-          topMargin="-100px"
-          titleFontColour="white"
-          subtitleFontColour="lightgray"
-        />
+        <Phoneheader>
+          <HeaderImage
+            backgroundImage={HomepageHeaderImage}
+            title="The Bounce Funktion"
+            subtitle="A community dedicated to the mutual appreciation of music"
+            topMargin="-100px"
+            titleFontColour="white"
+            subtitleFontColour="lightgray"
+          />
+        </Phoneheader>
       </Element>
       <BounceFunktionPlaylist />
       <BounceFBgroup />
