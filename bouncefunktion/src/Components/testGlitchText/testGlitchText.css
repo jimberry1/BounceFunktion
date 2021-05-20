@@ -97,7 +97,7 @@
 
 .glitch span:first-child {
   animation: glitch 650ms 7.7, removeSecondarySpan 1s ease 5s 1 forwards;
-  clip-path: polygon(0 0, 100% 0, 100% 45%, 0% 45%);
+  clip-path: polygon(0 0, 100% 0, 100% 55%, 0% 45%);
   transform: translate(-0.05em, -0.025em);
   opacity: 0.8;
 }

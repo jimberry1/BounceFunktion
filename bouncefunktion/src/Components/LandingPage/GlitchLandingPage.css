@@ -64,6 +64,7 @@
   opacity: 0;
   animation: arrowEnterance 2s ease-in-out 7s 1 forwards;
   cursor: pointer;
+  transform: translateY(-50px);
 }
 
 @keyframes arrowEnterance {
@@ -76,6 +77,6 @@
   }
   100% {
     opacity: 1;
-    transform: rotate(0deg);
+    transform: rotate(0deg), translateY(-50px);
   }
 }
