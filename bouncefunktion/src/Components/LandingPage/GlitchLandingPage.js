@@ -16,17 +16,17 @@ const GlitchLandingPage = () => {
   return (
     <div className="testGlitchContainer">
       <div className="grid_box1">
-        <GlitchText glitchText="T" secondaryText="he" />
+        <GlitchText glitchText="The" />
       </div>
       <div className="grid_box2">
-        <GlitchText glitchText="B" secondaryText="ounce" />
+        <GlitchText glitchText="Bounce" />
       </div>
       {/* <div className="grid_center"> */}
       <img src={Logo} className="grid_center_image" />
       {/* </div> */}
       <div className="grid_box3">
-        <GlitchText glitchText="F" secondaryText="unktion" />
-        {/* <GlitchText glitchText="Funktion"/> */}
+        {/* <GlitchText glitchText="F" secondaryText="unktion" /> */}
+        <GlitchText glitchText="Funktion" />
       </div>
       <Link
         activeClass="active"
