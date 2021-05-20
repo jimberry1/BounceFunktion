@@ -11,13 +11,25 @@ import GlobalStyles from './Components/Theme/GlobalStyles';
 import { useDarkMode } from './Components/Theme/useDarkMode';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './Components/Theme/Themes';
-import { Switch, Route } from 'react-router';
+import { Switch, Route, Redirect } from 'react-router';
 import Login from './Auth/Login';
 import { useStateValue } from './Store/StateProvider';
+import { useLocation } from 'react-router';
 
 function App() {
+  console.log('Rendering App.js');
+  const [redirectTo, setRedirectTo] = useState('');
   const [theme, themeToggler, mountedComponent] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
+  const location = useLocation();
+
+  useEffect(() => {
+    const queryString = require('query-string');
+    const parsed = queryString.parse(location.search);
+    if (parsed.redirectTo) {
+      setRedirectTo(parsed.redirectTo);
+    }
+  }, [location]);
 
   const [{ user }, dispatch] = useStateValue();
 
@@ -25,7 +37,16 @@ function App() {
   return (
     <>
       {!user ? (
-        <Login />
+        <Switch>
+          <Route path="/signin" component={Login} />
+          <Route
+            path="/"
+            render={() => (
+              <Homepage theme={theme} themeToggler={themeToggler} />
+            )}
+          />
+          <Redirect to="/" />
+        </Switch>
       ) : (
         <ThemeProvider theme={themeMode}>
           <>
@@ -68,12 +89,12 @@ function App() {
                     <FeedbackPage theme={theme} themeToggler={themeToggler} />
                   )}
                 />
-                {/* <Route
+                <Route
                   path="/test"
                   render={() => (
                     <TestPage theme={theme} themeToggler={themeToggler} />
                   )}
-                /> */}
+                />
                 <Route
                   path="/"
                   exact
@@ -81,6 +102,7 @@ function App() {
                     <Homepage theme={theme} themeToggler={themeToggler} />
                   )}
                 />
+                <Redirect to={`/${redirectTo}`} />
               </Switch>
             </div>
           </>

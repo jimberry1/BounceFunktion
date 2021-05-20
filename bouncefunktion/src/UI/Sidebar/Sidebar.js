@@ -2,30 +2,35 @@ import './Sidebar.css';
 import { useState } from 'react';
 import { slide as Menu } from 'react-burger-menu';
 import { Redirect } from 'react-router';
+import { useStateValue } from '../../Store/StateProvider';
+import { useHistory } from 'react-router';
 
 const Sidebar = (props) => {
-  const [redirectLink, setRedirectLink] = useState(null);
+  // const [redirectLink, setRedirectLink] = useState(null);
+  const [{ user }, dispatch] = useStateValue();
+  const history = useHistory();
 
   const linkRedirect = (e, direct) => {
     e.preventDefault();
-    setRedirectLink(direct);
+    user ? history.push(direct) : history.push(`/signin?redirectTo=${direct}`);
+    // setRedirectLink(direct);
   };
 
-  let redirect = null;
+  // let redirect = null;
 
-  if (redirectLink) {
-    redirect = <Redirect to={redirectLink} />;
-  }
+  // if (redirectLink) {
+  //   redirect = <Redirect to={redirectLink} />;
+  // }
 
   return (
     <div>
-      {redirect}
+      {/* {redirect} */}
       <Menu isOpen={props.isOpen}>
         <a
           id="home"
           className="menu-item"
           href="/"
-          onClick={(e) => linkRedirect(e, '/')}
+          onClick={(e) => linkRedirect(e, '')}
         >
           Home
         </a>
@@ -33,7 +38,7 @@ const Sidebar = (props) => {
           id="about"
           className="menu-item"
           href="/feed"
-          onClick={(e) => linkRedirect(e, '/feed')}
+          onClick={(e) => linkRedirect(e, 'feed')}
         >
           Feed
         </a>
@@ -41,7 +46,7 @@ const Sidebar = (props) => {
           id="about"
           className="menu-item"
           href="/mixes"
-          onClick={(e) => linkRedirect(e, '/mixes')}
+          onClick={(e) => linkRedirect(e, 'mixes')}
         >
           Mixes
         </a>
@@ -49,7 +54,7 @@ const Sidebar = (props) => {
           id="contact"
           className="menu-item"
           href="/events"
-          onClick={(e) => linkRedirect(e, '/events')}
+          onClick={(e) => linkRedirect(e, 'events')}
         >
           Events
         </a>
@@ -57,7 +62,7 @@ const Sidebar = (props) => {
           id="community"
           className="menu-item"
           href="/community"
-          onClick={(e) => linkRedirect(e, '/community')}
+          onClick={(e) => linkRedirect(e, 'community')}
         >
           Members
         </a>
@@ -65,14 +70,14 @@ const Sidebar = (props) => {
           id="profile"
           className="menu-item--small"
           href="/profile"
-          onClick={(e) => linkRedirect(e, '/profile')}
+          onClick={(e) => linkRedirect(e, 'profile')}
         >
           Profile
         </a>
         <a
           className="menu-item--small"
           href="/feedback"
-          onClick={(e) => linkRedirect(e, '/feedback')}
+          onClick={(e) => linkRedirect(e, 'feedback')}
         >
           Feedback
         </a>
