@@ -7,6 +7,7 @@ import BounceFBgroup from '../Components/BounceFunktionPlaylist/BounceFBgroup/Bo
 import GlitchLandingPage from '../Components/LandingPage/GlitchLandingPage';
 import { Element } from 'react-scroll';
 import styled from 'styled-components';
+import TestNewLandingPage from '../Components/LandingPage/testNewLandingPage';
 
 const Phoneheader = styled.div`
   @media (min-width: 1500px) {
@@ -17,9 +18,10 @@ const Phoneheader = styled.div`
 const Homepage = (props) => {
   return (
     <div>
-      <NavbarContainer theme={props.theme} toggleTheme={props.themeToggler} />
+      <TestNewLandingPage />
+      {/* <NavbarContainer theme={props.theme} toggleTheme={props.themeToggler} /> */}
 
-      <GlitchLandingPage />
+      {/* <GlitchLandingPage /> */}
       <Element name="test1" className="element">
         <Phoneheader>
           <HeaderImage

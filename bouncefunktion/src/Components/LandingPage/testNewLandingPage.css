@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.testNewLandingPageContainer {
+  /* background-image: url('https://images.unsplash.com/photo-1605211419780-4f71a6227d21?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fG11c2ljJTIwcHJvZHVjdGlvbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60');
+  background-size: cover;
+  background-repeat: no-repeat; */
+  height: 90vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 2fr 4fr 4fr 4fr;
+  place-items: center;
+  position: relative;
+  grid-template-areas: left right;
+  z-index: 3;
+}
+
+.LandingPagetitleText {
+  font-size: 8em;
+  font-weight: bolder;
+  color: white;
+  font-family: 'Anton', sans-serif;
+  grid-row-start: 4;
+  font-style: italic;
+  grid-column-start: 2;
+  text-align: center;
+  overflow: none;
+  position: relative;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  transition: translateY 2s;
+  padding: 30px;
+  text-shadow: 2px 2px #222;
+  /* transition: transform 2s; */
+  transition: all 0.5s ease-in-out;
+}
+
+.LetsConnectSubsectionContainerGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 3fr 1fr 3fr;
+  margin-top: 10vh;
+}
+
+.LetsConnectSubsectionContainerTitle {
+  font-size: 8em;
+  font-weight: bolder;
+  color: white;
+  font-family: 'Anton', sans-serif;
+  font-style: italic;
+
+  width: 100vw;
+  text-align: center;
+}
+
+.spotifyIcon {
+  grid-column-start: 1;
+  grid-row-start: 3;
+}
+
+@media (max-width: 1000px) {
+  .LandingPagetitleText {
+    font-size: 4em;
+  }
+}
+
+.LandingPagetitleText:hover {
+  /* transform: translateY(250px); */
+  /* top: 300px; */
+  /* background-color: yellow; */
+  box-shadow: 5px 10px 10px 10px #222;
+}
+
+.LandingPageLogoContainer {
+  grid-row-start: 2;
+  grid-column-start: 2;
+}
+
+@media (max-width: 1000px) {
+  .LandingPageLogoContainer {
+    grid-column-start: 3;
+  }
+  .LandingPageLogoContainer img {
+    position: relative;
+    right: 5vw;
+  }
+}
+
+.LandingPageLogoContainer img {
+  height: 10vh;
+  width: 10vh;
+}
+
+.LandingPageHeaderText {
+  font-size: 6em;
+  font-weight: bolder;
+  color: white;
+  font-family: 'Anton', sans-serif;
+  animation: 1s ease-out 0s 1 textLoadPop;
+}
+
+@keyframes textLoadPop {
+  0% {
+    opacity: 0;
+    top: -30px;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    top: 0;
+  }
+}
+.HamburgerContainer {
+  grid-row-start: 2;
+  grid-column-start: 1;
+  justify-self: self-start;
+  position: relative;
+  left: 5vw;
+  font-family: 'Anton', sans-serif;
+  /* margin-left: 20px; */
+}

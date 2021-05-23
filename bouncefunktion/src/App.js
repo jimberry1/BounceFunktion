@@ -48,6 +48,12 @@ function App() {
                   <Homepage theme={theme} themeToggler={themeToggler} />
                 )}
               />
+              <Route
+                path="/test"
+                render={() => (
+                  <TestPage theme={theme} themeToggler={themeToggler} />
+                )}
+              />
               <Redirect to="/" />
             </Switch>
           </>
